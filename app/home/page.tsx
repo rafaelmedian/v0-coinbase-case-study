@@ -1,14 +1,22 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import Navigation from "@/components/navigation"
 
 export default function HomePage() {
-  const [expandedSection, setExpandedSection] = useState<string | null>(null)
+  const router = useRouter()
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [transitionColor, setTransitionColor] = useState("")
 
-  const toggleSection = (section: string) => {
-    setExpandedSection(expandedSection === section ? null : section)
+  const handleNavigation = (href: string, color: string) => {
+    setTransitionColor(color)
+    setIsTransitioning(true)
+
+    // Wait for animation to complete before navigating
+    setTimeout(() => {
+      router.push(href)
+    }, 800)
   }
 
   return (
@@ -37,8 +45,8 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-6 pb-20">
         <div className="space-y-4">
           {/* DEX Trading Section */}
-          <Link
-            href="/retail-dex"
+          <button
+            onClick={() => handleNavigation("/retail-dex", "#c8d4fa")}
             className="group relative flex w-full items-center justify-between bg-[#c8d4fa] p-8 transition-all hover:bg-[#b8c4ea]"
           >
             <div className="flex items-center gap-4">
@@ -55,11 +63,11 @@ export default function HomePage() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </button>
 
           {/* Base App Section */}
-          <Link
-            href="/base-app"
+          <button
+            onClick={() => handleNavigation("/base-app", "#0052ff")}
             className="group relative flex w-full items-center justify-between bg-[#0052ff] p-8 transition-all hover:bg-[#0048dd]"
           >
             <div className="flex items-center gap-4">
@@ -76,11 +84,11 @@ export default function HomePage() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </button>
 
           {/* Developer Platform Section */}
-          <Link
-            href="/developer-platform"
+          <button
+            onClick={() => handleNavigation("/developer-platform", "#1d1d1d")}
             className="group relative flex w-full items-center justify-between bg-[#1d1d1d] p-8 transition-all hover:bg-[#2d2d2d]"
           >
             <div className="flex items-center gap-4">
@@ -97,9 +105,13 @@ export default function HomePage() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </button>
         </div>
       </section>
+
+      {isTransitioning && (
+        <div className="fixed inset-0 z-50 animate-expand-overlay" style={{ backgroundColor: transitionColor }} />
+      )}
     </div>
   )
 }
