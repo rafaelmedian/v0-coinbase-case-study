@@ -10,13 +10,19 @@ export default function HomePage() {
   const [transitionColor, setTransitionColor] = useState("")
 
   const handleNavigation = (href: string, color: string) => {
-    setTransitionColor(color)
-    setIsTransitioning(true)
+    // Scroll to top first
+    window.scrollTo({ top: 0, behavior: "smooth" })
 
-    // Wait for animation to complete before navigating
+    // Small delay to let scroll complete
     setTimeout(() => {
-      router.push(href)
-    }, 800)
+      setTransitionColor(color)
+      setIsTransitioning(true)
+
+      // Wait for animation to complete before navigating
+      setTimeout(() => {
+        router.push(href)
+      }, 800)
+    }, 300)
   }
 
   return (
@@ -110,7 +116,7 @@ export default function HomePage() {
       </section>
 
       {isTransitioning && (
-        <div className="fixed inset-0 z-50 animate-expand-overlay" style={{ backgroundColor: transitionColor }} />
+        <div className="fixed inset-0 z-40 animate-expand-from-bottom" style={{ backgroundColor: transitionColor }} />
       )}
     </div>
   )
