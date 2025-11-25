@@ -49,7 +49,7 @@ export default function HomePage() {
       </section>
 
       <section className="pb-20">
-        <div className="space-y-4">
+        <div>
           {/* DEX Trading Section */}
           <button
             onClick={() => handleNavigation("/retail-dex", "#c8d4fa")}
