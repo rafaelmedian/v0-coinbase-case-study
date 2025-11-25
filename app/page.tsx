@@ -48,7 +48,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 pb-20">
+      <section className="pb-20">
         <div className="space-y-4">
           {/* DEX Trading Section */}
           <button
