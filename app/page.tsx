@@ -80,7 +80,7 @@ export default function HomePage() {
               textColor: "#1d1d1d",
             })
           }
-          className="group relative flex w-full items-center justify-between bg-[#c8d4fa] p-8 transition-all hover:bg-[#b8c4ea]"
+          className="group relative flex w-full items-center justify-between rounded-tl-[40px] rounded-tr-[40px] bg-[#c8d4fa] p-8 transition-all hover:bg-[#b8c4ea]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0052ff]">
