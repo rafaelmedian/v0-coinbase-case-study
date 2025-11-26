@@ -80,7 +80,7 @@ export default function HomePage() {
               textColor: "#1d1d1d",
             })
           }
-          className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#c8d4fa] px-8 py-16 transition-all hover:bg-[#b8c4ea] pt-10"
+          className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#c8d4fa] px-8 py-16 transition-all hover:bg-[#b8c4ea] pt-10 pb-12"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0052ff]">
@@ -109,7 +109,7 @@ export default function HomePage() {
               textColor: "white",
             })
           }
-          className="group relative z-20 -mt-6 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#0052ff] px-8 py-16 transition-all hover:bg-[#0048dd]"
+          className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#0052ff] px-8 py-16 transition-all hover:bg-[#0048dd] pb-12"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
@@ -138,7 +138,7 @@ export default function HomePage() {
               textColor: "white",
             })
           }
-          className="group relative z-30 -mt-6 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#1d1d1d] px-8 py-24 transition-all hover:bg-[#2d2d2d] pt-[60px] pb-24 pl-8"
+          className="group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#1d1d1d] px-8 pt-[60px] pb-24 transition-all hover:bg-[#2d2d2d]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d]">
