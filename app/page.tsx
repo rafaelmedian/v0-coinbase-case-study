@@ -4,21 +4,27 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Navigation from "@/components/navigation"
 
+type TransitionContent = {
+  title: string
+  bgColor: string
+  iconBg: string
+  iconBorder?: string
+  iconFill?: string
+  textColor: string
+}
+
 export default function HomePage() {
   const router = useRouter()
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [transitionColor, setTransitionColor] = useState("")
+  const [transitionContent, setTransitionContent] = useState<TransitionContent | null>(null)
 
-  const handleNavigation = (href: string, color: string) => {
-    // Scroll to top first
+  const handleNavigation = (href: string, content: TransitionContent) => {
     window.scrollTo({ top: 0, behavior: "smooth" })
 
-    // Small delay to let scroll complete
     setTimeout(() => {
-      setTransitionColor(color)
+      setTransitionContent(content)
       setIsTransitioning(true)
 
-      // Wait for animation to complete before navigating
       setTimeout(() => {
         router.push(href)
       }, 800)
@@ -52,7 +58,15 @@ export default function HomePage() {
         <div>
           {/* DEX Trading Section */}
           <button
-            onClick={() => handleNavigation("/retail-dex", "#c8d4fa")}
+            onClick={() =>
+              handleNavigation("/retail-dex", {
+                title: "DEX Trading",
+                bgColor: "#c8d4fa",
+                iconBg: "#0052ff",
+                iconBorder: "white",
+                textColor: "#1d1d1d",
+              })
+            }
             className="group relative flex w-full items-center justify-between bg-[#c8d4fa] p-8 transition-all hover:bg-[#b8c4ea]"
           >
             <div className="flex items-center gap-4">
@@ -73,7 +87,15 @@ export default function HomePage() {
 
           {/* Base App Section */}
           <button
-            onClick={() => handleNavigation("/base-app", "#0052ff")}
+            onClick={() =>
+              handleNavigation("/base-app", {
+                title: "Base App",
+                bgColor: "#0052ff",
+                iconBg: "white",
+                iconFill: "#0052ff",
+                textColor: "white",
+              })
+            }
             className="group relative flex w-full items-center justify-between bg-[#0052ff] p-8 transition-all hover:bg-[#0048dd]"
           >
             <div className="flex items-center gap-4">
@@ -94,7 +116,15 @@ export default function HomePage() {
 
           {/* Developer Platform Section */}
           <button
-            onClick={() => handleNavigation("/developer-platform", "#1d1d1d")}
+            onClick={() =>
+              handleNavigation("/developer-platform", {
+                title: "Developer Platform",
+                bgColor: "#1d1d1d",
+                iconBg: "#2d2d2d",
+                iconBorder: "#0052ff",
+                textColor: "white",
+              })
+            }
             className="group relative flex w-full items-center justify-between bg-[#1d1d1d] p-8 transition-all hover:bg-[#2d2d2d]"
           >
             <div className="flex items-center gap-4">
@@ -115,8 +145,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {isTransitioning && (
-        <div className="fixed inset-0 z-40 animate-expand-from-bottom" style={{ backgroundColor: transitionColor }} />
+      {isTransitioning && transitionContent && (
+        <div
+          className="fixed inset-0 z-40 animate-expand-from-bottom flex items-end pb-8 px-8"
+          style={{ backgroundColor: transitionContent.bgColor }}
+        >
+          <div className="flex items-center gap-4">
+            <div
+              className="flex h-12 w-12 items-center justify-center rounded-full"
+              style={{ backgroundColor: transitionContent.iconBg }}
+            >
+              {transitionContent.iconFill ? (
+                <div className="h-6 w-6" style={{ backgroundColor: transitionContent.iconFill }}></div>
+              ) : (
+                <div
+                  className="h-6 w-6 rounded-full border-4"
+                  style={{ borderColor: transitionContent.iconBorder }}
+                ></div>
+              )}
+            </div>
+            <h3 className="text-3xl font-normal" style={{ color: transitionContent.textColor }}>
+              {transitionContent.title}
+            </h3>
+          </div>
+        </div>
       )}
     </div>
   )
