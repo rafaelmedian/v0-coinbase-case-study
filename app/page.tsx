@@ -36,7 +36,7 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="mx-auto max-w-7xl px-6 py-12 md:py-20">
+      <section className="px-6 py-12 md:py-20">
         <div>
           <h1 className="mb-8 text-5xl font-normal leading-tight tracking-tight md:text-6xl lg:text-7xl">
             <span className="text-[#1d1d1d]">Delivering end-to-end</span>
