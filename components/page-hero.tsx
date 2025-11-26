@@ -15,7 +15,7 @@ export default function PageHero({ title, quote, bgColor, textColor, icon, stats
   return (
     <div className="py-12" style={{ backgroundColor: bgColor }}>
       <main className="px-6">
-        <div className="p-8 md:p-12 lg:p-16">
+        <div className="p-8 md:p-12 lg:p-16 lg:px-0 lg:py-0">
           <div className="mb-8 flex items-center gap-4">
             {icon}
             <h1 className="text-4xl font-normal md:text-5xl" style={{ color: textColor }}>
