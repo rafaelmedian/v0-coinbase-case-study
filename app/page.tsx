@@ -260,6 +260,71 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Key Opportunities Section */}
+      <section className="px-6 py-16">
+        <div className="max-w-3xl space-y-12">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-normal mb-4">
+              <span className="text-[#0052ff]">1. Expand access to millions of tokens</span>
+            </h3>
+            <p className="text-xl md:text-2xl text-[#5d5d5d] leading-relaxed">
+              by bringing DEX trading to the Coinbase App, allowing users to swap any token instantly from within a
+              unified interface.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-2xl md:text-3xl font-normal mb-4">
+              <span className="text-[#0052ff]">2. Reimagine the onchain experience</span>
+            </h3>
+            <p className="text-xl md:text-2xl text-[#5d5d5d] leading-relaxed">
+              through the Base App - an all-in-one platform uniting social, payments, and DeFi activity, where every
+              post and creator becomes a tradable asset.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-2xl md:text-3xl font-normal mb-4">
+              <span className="text-[#0052ff]">3. Empower builders</span>
+            </h3>
+            <p className="text-xl md:text-2xl text-[#5d5d5d] leading-relaxed">
+              via the Coinbase Developer Platform (CDP), providing developers with everything they need to build great
+              apps on Base.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Closing Paragraphs Section */}
+      <section className="px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div></div>
+          <div className="space-y-6">
+            <p className="text-base leading-relaxed text-[#5d5d5d]">
+              And what unites all of these initiatives is tokens. No matter what you're building onchain, sooner or
+              later you'll need to swap tokens. Swaps are the foundation of the onchain economy, from simple trades
+              within wallets to powering more advanced functionality within DeFi apps.
+            </p>
+            <p className="text-base leading-relaxed text-[#5d5d5d]">
+              But building enterprise-grade swaps is hard. This explosion of tokens and DEXs has brought complexity to
+              DEX routing, with a vast array of different token behaviors, liquidity models, and chain architectures to
+              solve for. Delivering swaps at enterprise-scale and reliability requires deep expertise in DEX routing,
+              liquidity and aggregation.
+            </p>
+            <p className="text-base leading-relaxed text-[#5d5d5d]">
+              With nearly a decade of experience building DEX infrastructure, Coinbase partnered with 0x to meet this
+              challenge - helping power its onchain expansion with end-to-end onchain trading infrastructure at every
+              layer of the stack; from DEX trading for millions of tokens in the Coinbase App to custom integrations to
+              power an all-new social experience in the Base App.
+            </p>
+            <p className="text-base leading-relaxed text-[#5d5d5d]">
+              In this case study, we will dive deep into how Coinbase is bridging the gap from CeFi to DeFi and
+              unlocking a new onchain era for its users and developer network.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {isTransitioning && transitionContent && (
         <div
           className="fixed inset-0 z-40 animate-expand-from-bottom flex items-end pb-8 px-8"
