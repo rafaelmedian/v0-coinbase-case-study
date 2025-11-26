@@ -9,7 +9,7 @@ export default function Navigation({ activePage }: NavigationProps) {
   return (
     <header className="relative z-50 border-b bg-white px-6 py-4" style={{ borderColor: "#e5e5e5" }}>
       <div className="flex items-center justify-between">
-        <Link href="/home" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold" style={{ color: "#000000" }}>
             0x
           </span>

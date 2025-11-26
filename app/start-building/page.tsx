@@ -1,47 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import Link from "next/link"
+import Navigation from "@/components/navigation"
 
 export default function StartBuildingPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#ffffff" }}>
-      <header className="border-b px-6 py-4" style={{ borderColor: "#e5e5e5" }}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold" style={{ color: "#000000" }}>
-              0x
-            </span>
-            <span style={{ color: "#d9d9d9" }}>|</span>
-            <span className="text-2xl font-semibold" style={{ color: "#0052ff" }}>
-              coinbase
-            </span>
-          </Link>
-
-          <nav className="flex items-center gap-8">
-            <Link href="/retail-dex" className="text-sm font-medium" style={{ color: "#5d5d5d" }}>
-              RETAIL DEX
-            </Link>
-            <Link href="/base-app" className="text-sm font-medium" style={{ color: "#5d5d5d" }}>
-              BASE APP
-            </Link>
-            <Link href="/developer-platform" className="text-sm font-medium" style={{ color: "#5d5d5d" }}>
-              DEVELOPER PLATFORM
-            </Link>
-          </nav>
-
-          <Button
-            variant="outline"
-            className="border text-sm font-medium bg-transparent"
-            style={{ borderColor: "#1d1d1d", color: "#1d1d1d" }}
-          >
-            START BUILDING
-          </Button>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <h1 className="mb-16 text-6xl font-normal leading-tight tracking-tight">
+      <section className="px-6 py-20">
+        <h1 className="mb-16 text-5xl md:text-6xl font-normal leading-tight tracking-tight">
           <span style={{ color: "#1d1d1d" }}>Delivering end-to-end</span>
           <br />
           <span style={{ color: "#0052ff" }}>onchain swap infrastructure</span>
@@ -50,13 +18,13 @@ export default function StartBuildingPage() {
         </h1>
 
         {/* Sign up form placeholder */}
-        <div className="mb-20 flex h-48 items-center justify-center" style={{ backgroundColor: "#d9d9d9" }}>
+        <div className="mb-20 flex h-48 max-w-4xl items-center justify-center" style={{ backgroundColor: "#d9d9d9" }}>
           <p className="text-3xl" style={{ color: "#ffffff" }}>
             Sign up form
           </p>
         </div>
 
-        {/* Two column cards */}
+        {/* Two column cards - full width */}
         <div className="grid grid-cols-1 gap-0 md:grid-cols-2">
           {/* Left Card - Build onchain */}
           <div className="flex min-h-[340px] flex-col justify-between p-10" style={{ backgroundColor: "#c8d4fa" }}>
