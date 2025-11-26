@@ -109,7 +109,7 @@ export default function HomePage() {
               textColor: "white",
             })
           }
-          className="group relative flex w-full items-center justify-between bg-[#0052ff] p-8 transition-all hover:bg-[#0048dd]"
+          className="group relative flex w-full items-center justify-between rounded-tl-[40px] rounded-tr-[40px] bg-[#0052ff] p-8 transition-all hover:bg-[#0048dd]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
@@ -138,7 +138,7 @@ export default function HomePage() {
               textColor: "white",
             })
           }
-          className="group relative flex w-full items-center justify-between bg-[#1d1d1d] p-8 transition-all hover:bg-[#2d2d2d]"
+          className="group relative flex w-full items-center justify-between rounded-tl-[40px] rounded-tr-[40px] bg-[#1d1d1d] p-8 transition-all hover:bg-[#2d2d2d]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d]">
