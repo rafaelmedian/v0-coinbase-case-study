@@ -24,14 +24,14 @@ export default function DeveloperPlatformPage() {
       />
 
       {/* Content Sections */}
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main className="px-6 py-12">
         <div className="mt-12 space-y-12">
           <hr className="border-t border-[#1d1d1d]/20" />
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div>
               <div className="mb-2 flex items-center gap-2">
-                <div className="h-1 w-8 bg-[#0052ff]"></div>
+                <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
                 <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">INTRODUCTION</span>
               </div>
             </div>
@@ -48,7 +48,7 @@ export default function DeveloperPlatformPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div>
               <div className="mb-2 flex items-center gap-2">
-                <div className="h-1 w-8 bg-[#0052ff]"></div>
+                <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
                 <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">THE CHALLENGE</span>
               </div>
             </div>

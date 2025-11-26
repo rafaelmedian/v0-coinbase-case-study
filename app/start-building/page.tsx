@@ -50,12 +50,12 @@ export default function StartBuildingPage() {
 
       {/* Footer */}
       <footer className="py-16" style={{ backgroundColor: "#1d1d1d" }}>
-        <div className="mx-auto max-w-2xl px-6">
-          <h3 className="mb-8 text-center text-xl font-medium" style={{ color: "#ffffff" }}>
+        <div className="px-6">
+          <h3 className="mb-8 text-xl font-medium" style={{ color: "#ffffff" }}>
             Start building with 0x
           </h3>
 
-          <div className="relative mb-8 rounded-lg p-6" style={{ backgroundColor: "#2d2d2d" }}>
+          <div className="relative mb-8 max-w-xl rounded-lg p-6" style={{ backgroundColor: "#2d2d2d" }}>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-4">
               <div className="flex-1">
                 <label htmlFor="email" className="sr-only">
@@ -78,7 +78,7 @@ export default function StartBuildingPage() {
             </div>
           </div>
 
-          <p className="text-center text-xs" style={{ color: "#5d5d5d" }}>
+          <p className="text-xs" style={{ color: "#5d5d5d" }}>
             © Zerohx Holdings, Inc. All rights reserved.
           </p>
         </div>
