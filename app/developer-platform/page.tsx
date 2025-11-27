@@ -1,5 +1,6 @@
 import Navigation from "@/components/navigation"
 import PageHero from "@/components/page-hero"
+import { ContentSection } from "@/components/ui/content-section"
 
 export default function DeveloperPlatformPage() {
   return (
@@ -23,41 +24,18 @@ export default function DeveloperPlatformPage() {
         ]}
       />
 
-      {/* Content Sections */}
-      <main className="px-6 py-12">
-        <div className="mt-12 space-y-12">
-          <hr className="border-t border-[#1d1d1d]/20" />
+      {/* Introduction Section */}
+      <ContentSection label="Introduction" className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+        <p>Developer Platform content goes here with relevant information about developer tools and APIs.</p>
+        <p>
+          Additional information about how developers can leverage the platform to build onchain applications.
+        </p>
+      </ContentSection>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <div className="mb-2 flex items-center gap-2">
-                <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
-                <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">INTRODUCTION</span>
-              </div>
-            </div>
-            <div className="space-y-4 text-[#1d1d1d] md:col-span-2">
-              <p>Developer Platform content goes here with relevant information about developer tools and APIs.</p>
-              <p>
-                Additional information about how developers can leverage the platform to build onchain applications.
-              </p>
-            </div>
-          </div>
-
-          <hr className="border-t border-[#1d1d1d]/20" />
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <div className="mb-2 flex items-center gap-2">
-                <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
-                <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">THE CHALLENGE</span>
-              </div>
-            </div>
-            <div className="text-[#1d1d1d] md:col-span-2">
-              <p>Description of the challenges developers face and how the Developer Platform addresses them.</p>
-            </div>
-          </div>
-        </div>
-      </main>
+      {/* The Challenge Section */}
+      <ContentSection label="The Challenge" className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+        <p>Description of the challenges developers face and how the Developer Platform addresses them.</p>
+      </ContentSection>
     </div>
   )
 }

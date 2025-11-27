@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Navigation from "@/components/navigation"
+import { ContentSection } from "@/components/ui/content-section"
 
 type TransitionContent = {
   title: string
@@ -13,44 +14,94 @@ type TransitionContent = {
   textColor: string
 }
 
+type CardRect = {
+  top: number
+  height: number
+  left: number
+  width: number
+}
+
 export default function HomePage() {
   const router = useRouter()
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [transitionPhase, setTransitionPhase] = useState<"initial" | "expanding" | "collapsing">("initial")
+  const [transitionPhase, setTransitionPhase] = useState<"initial" | "expanding" | "repositioning">("initial")
   const [transitionContent, setTransitionContent] = useState<TransitionContent | null>(null)
-  const [buttonRect, setButtonRect] = useState<DOMRect | null>(null)
+  const [cardRect, setCardRect] = useState<CardRect | null>(null)
+  const [contentFading, setContentFading] = useState(false)
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
+
+  // Prefetch routes on mount for faster navigation
+  useEffect(() => {
+    router.prefetch("/retail-dex")
+    router.prefetch("/base-app")
+    router.prefetch("/developer-platform")
+  }, [router])
+
+  // Prefetch on hover for even faster loads
+  const handleHover = (href: string) => {
+    router.prefetch(href)
+  }
 
   const handleNavigation = (href: string, content: TransitionContent, buttonKey: string) => {
     const button = buttonRefs.current[buttonKey]
-    if (button) {
-      setButtonRect(button.getBoundingClientRect())
-    }
+    if (!button) return
 
+    // Store transition content for later
+    setTransitionContent(content)
+    
+    // Smooth scroll to top with easing
     window.scrollTo({ top: 0, behavior: "smooth" })
-
+    
+    // Wait for scroll to complete, then start animation
+    const scrollDelay = 350
+    
     setTimeout(() => {
-      setTransitionContent(content)
+      // Recalculate card position after scroll completes
+      const scrolledRect = button.getBoundingClientRect()
+      
+      setCardRect({
+        top: scrolledRect.top,
+        height: scrolledRect.height,
+        left: scrolledRect.left,
+        width: scrolledRect.width,
+      })
+
+      // Start transition
       setTransitionPhase("initial")
       setIsTransitioning(true)
+
+      // Timeline (after scroll):
+      // 0ms: Setup - position overlay at card location
+      // 50ms: Start expansion animation (700ms duration)
+      // 400ms: Navigate early so page loads underneath
+      // 500ms: Start content repositioning  
+      // 600ms: Fade out background content
 
       setTimeout(() => {
         setTransitionPhase("expanding")
       }, 50)
 
-      setTimeout(() => {
-        setTransitionPhase("collapsing")
-      }, 300)
-
+      // Navigate earlier - page loads while animation continues
       setTimeout(() => {
         router.push(href)
-      }, 900)
-    }, 300)
+      }, 400)
+
+      setTimeout(() => {
+        setTransitionPhase("repositioning")
+      }, 500)
+
+      setTimeout(() => {
+        setContentFading(true)
+      }, 600)
+    }, scrollDelay)
   }
 
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
+      
+      {/* Main content wrapper - fades during transition */}
+      <div className={contentFading ? "animate-fade-out" : ""}>
 
       {/* Hero Section */}
       <section className="px-6 py-12 md:py-20">
@@ -63,7 +114,7 @@ export default function HomePage() {
             <span className="text-[#1d1d1d]">with Coinbase</span>
           </h1>
 
-          <p className="max-w-lg text-base leading-relaxed text-[#5d5d5d]">
+          <p className="max-w-lg text-[22px] leading-[1.3] text-[#5e5e5e]">
             Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
             experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
             Platform.
@@ -91,6 +142,7 @@ export default function HomePage() {
           ref={(el) => {
             buttonRefs.current["dex"] = el
           }}
+          onMouseEnter={() => handleHover("/retail-dex")}
           onClick={() =>
             handleNavigation(
               "/retail-dex",
@@ -110,7 +162,7 @@ export default function HomePage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0052ff]">
               <div className="h-6 w-6 rounded-full border-4 border-white"></div>
             </div>
-            <h3 className="text-3xl font-normal text-[#1d1d1d]">DEX Trading</h3>
+            <h2 className="text-4xl font-normal text-[#1d1d1d] md:text-5xl">DEX Trading</h2>
           </div>
           <svg
             className="h-6 w-6 text-[#1d1d1d] transition-transform group-hover:translate-x-1"
@@ -127,6 +179,7 @@ export default function HomePage() {
           ref={(el) => {
             buttonRefs.current["base"] = el
           }}
+          onMouseEnter={() => handleHover("/base-app")}
           onClick={() =>
             handleNavigation(
               "/base-app",
@@ -146,7 +199,7 @@ export default function HomePage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
               <div className="h-6 w-6 bg-[#0052ff]"></div>
             </div>
-            <h3 className="text-3xl font-normal text-white">Base App</h3>
+            <h2 className="text-4xl font-normal text-white md:text-5xl">Base App</h2>
           </div>
           <svg
             className="h-6 w-6 text-white transition-transform group-hover:translate-x-1"
@@ -163,6 +216,7 @@ export default function HomePage() {
           ref={(el) => {
             buttonRefs.current["dev"] = el
           }}
+          onMouseEnter={() => handleHover("/developer-platform")}
           onClick={() =>
             handleNavigation(
               "/developer-platform",
@@ -182,7 +236,7 @@ export default function HomePage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d]">
               <div className="h-6 w-6 rounded-full border-4 border-[#0052ff]"></div>
             </div>
-            <h3 className="text-3xl font-normal text-white">Developer Platform</h3>
+            <h2 className="text-4xl font-normal text-white md:text-5xl">Developer Platform</h2>
           </div>
           <svg
             className="h-6 w-6 text-white transition-transform group-hover:translate-x-1"
@@ -196,46 +250,36 @@ export default function HomePage() {
       </section>
 
       {/* About Coinbase Section */}
-      <section className="px-6 py-16 border-t border-[#f2f2f2]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="flex items-start gap-2">
-            <span className="inline-block h-3 w-3 mt-1 bg-[#0052ff]"></span>
-            <span className="text-sm font-medium text-[#5d5d5d] uppercase tracking-wide">About Coinbase</span>
-          </div>
-          <div className="space-y-6">
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              Founded in 2012, Coinbase is a U.S.-based cryptocurrency exchange and custodian that has grown into one of
-              the world's leading digital asset platforms. Publicly listed and operating in over 100 countries, Coinbase
-              serves as a key platform for both retail and institutional participants in crypto.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              With over 120 million total users and 8.7 million monthly transacting users, Coinbase has become an
-              industry leader in Web3 by building products with real-world utility and best-in-class user experience.
-              Coinbase offers a wide portfolio of cryptocurrency products and services - including DEX trading through
-              its retail app, an all-new onchain experience with the Base App, and an all-in-one developer toolkit for
-              builders.
-            </p>
-          </div>
-        </div>
-      </section>
+      <ContentSection label="About Coinbase" className="space-y-6 text-[22px] leading-[1.3] text-[#5e5e5e]">
+        <p>
+          Founded in 2012, Coinbase is a U.S.-based cryptocurrency exchange and custodian that has grown into one of
+          the world's leading digital asset platforms. Publicly listed and operating in over 100 countries, Coinbase
+          serves as a key platform for both retail and institutional participants in crypto.
+        </p>
+        <p>
+          With over 120 million total users and 8.7 million monthly transacting users, Coinbase has become an
+          industry leader in Web3 by building products with real-world utility and best-in-class user experience.
+          Coinbase offers a wide portfolio of cryptocurrency products and services - including DEX trading through
+          its retail app, an all-new onchain experience with the Base App, and an all-in-one developer toolkit for
+          builders.
+        </p>
+      </ContentSection>
 
       {/* Quote Section */}
-      <section className="px-6 py-16">
-        <div className="max-w-3xl">
-          <div className="text-6xl text-[#c2c2c2] leading-none mb-4">"</div>
-          <h2 className="text-3xl md:text-4xl font-normal text-[#1d1d1d] leading-tight mb-8">
-            Quote from team. 0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
-          </h2>
-          <div className="w-12 h-1 bg-[#0052ff] mb-4"></div>
-          <p className="text-sm text-[#5d5d5d]">Name and role</p>
-        </div>
-      </section>
+      <ContentSection showBorder={false}>
+        <div className="text-6xl text-[#c2c2c2] leading-none mb-4">"</div>
+        <h2 className="text-[30px] leading-[1.2] font-normal text-[#1d1d1d] mb-8">
+          Quote from team. 0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
+        </h2>
+        <div className="w-12 h-1 bg-[#0052ff] mb-4"></div>
+        <p className="text-sm text-[#5d5d5d]">Name and role</p>
+      </ContentSection>
 
       {/* Enterprise-grade infrastructure Section */}
-      <section className="px-6 py-16">
-        <h3 className="text-lg font-medium text-[#1d1d1d] mb-8">Enterprise-grade infrastructure</h3>
+      <ContentSection label="Infrastructure" showBorder={false}>
+        <h3 className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d] mb-8">Enterprise-grade infrastructure</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-[#f2f2f2] p-8">
+          <div className="bg-[#f2f2f2] p-8 rounded-[15px]">
             <div className="h-3 w-3 bg-[#0052ff] mb-6"></div>
             <p className="text-4xl md:text-5xl font-normal text-[#5d5d5d]">
               {"<500"}
@@ -243,159 +287,172 @@ export default function HomePage() {
             </p>
             <p className="text-sm text-[#a0a0ab] mt-2">median response rate</p>
           </div>
-          <div className="bg-[#f2f2f2] p-8">
+          <div className="bg-[#f2f2f2] p-8 rounded-[15px]">
             <div className="h-3 w-full bg-gradient-to-r from-[#0052ff] via-[#00cc88] to-[#00cc88] mb-6 rounded-full"></div>
             <p className="text-4xl md:text-5xl font-normal text-[#5d5d5d]">99.9%</p>
             <p className="text-sm text-[#a0a0ab] mt-2">uptime</p>
           </div>
-          <div className="bg-[#f2f2f2] p-8">
+          <div className="bg-[#f2f2f2] p-8 rounded-[15px]">
             <div className="h-3 mb-6"></div>
             <p className="text-4xl md:text-5xl font-normal text-[#5d5d5d]">4.4%</p>
             <p className="text-sm text-[#a0a0ab] mt-2">revert rates</p>
           </div>
         </div>
-      </section>
+      </ContentSection>
 
       {/* The Story Section */}
-      <section className="px-6 py-16 border-t border-[#f2f2f2]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="flex items-start gap-2">
-            <span className="inline-block h-3 w-3 mt-1 bg-[#0052ff]"></span>
-            <span className="text-sm font-medium text-[#5d5d5d] uppercase tracking-wide">The Story</span>
-          </div>
-          <div className="space-y-6">
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              When Coinbase launched in 2012, its mission was bold but simple: create an open financial system for the
-              world. What began as an exchange for buying and selling Bitcoin quickly grew to become one of the world's
-              leading digital asset platforms. Over the next decade, it expanded its reach - adding new assets,
-              improving fiat rails, and building one of the industry's most recognizable brands around ease-of-use,
-              safety, and compliance.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              As a result, Coinbase rapidly scaled to over 120 million users, becoming the #1 exchange in the U.S. But
-              over that time, the market has evolved. Tokenization exploded - from a few hundred tokens in 2017 to tens
-              of millions across dozens of networks now - fueled first by ICOs and more recently by stablecoins and
-              memecoins. Users began moving onchain to access new assets and experiences, with monthly DEX volume
-              surging to $500 billion.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              With onchain activity surging, a new challenge emerged. Coinbase's success was built on being a trusted
-              custodian and regulated exchange - but that same model constrained its ability to list and support new
-              tokens at onchain speed.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              As users increasingly turned to DEX platforms to access new tokens and DeFi tools, Coinbase needed to
-              offer the same availability and speed of newly launched tokens as onchain venues, as well as a low-cost,
-              developer-friendly platform for its onchain products. To serve them, Coinbase evolved again: bringing the
-              power of onchain markets directly into its ecosystem.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              This evolution marks a broader shift happening across the industry, with centralized exchanges beginning
-              to bridge the gap with DeFi.
-            </p>
-            <p className="text-base leading-relaxed text-[#1d1d1d] font-medium">Three key opportunities emerged:</p>
-          </div>
-        </div>
-      </section>
+      <ContentSection label="The Story" className="space-y-6 text-[22px] leading-[1.3] text-[#5e5e5e]">
+        <p>
+          When Coinbase launched in 2012, its mission was bold but simple: create an open financial system for the
+          world. What began as an exchange for buying and selling Bitcoin quickly grew to become one of the world's
+          leading digital asset platforms. Over the next decade, it expanded its reach - adding new assets,
+          improving fiat rails, and building one of the industry's most recognizable brands around ease-of-use,
+          safety, and compliance.
+        </p>
+        <p>
+          As a result, Coinbase rapidly scaled to over 120 million users, becoming the #1 exchange in the U.S. But
+          over that time, the market has evolved. Tokenization exploded - from a few hundred tokens in 2017 to tens
+          of millions across dozens of networks now - fueled first by ICOs and more recently by stablecoins and
+          memecoins. Users began moving onchain to access new assets and experiences, with monthly DEX volume
+          surging to $500 billion.
+        </p>
+        <p>
+          With onchain activity surging, a new challenge emerged. Coinbase's success was built on being a trusted
+          custodian and regulated exchange - but that same model constrained its ability to list and support new
+          tokens at onchain speed.
+        </p>
+        <p>
+          As users increasingly turned to DEX platforms to access new tokens and DeFi tools, Coinbase needed to
+          offer the same availability and speed of newly launched tokens as onchain venues, as well as a low-cost,
+          developer-friendly platform for its onchain products. To serve them, Coinbase evolved again: bringing the
+          power of onchain markets directly into its ecosystem.
+        </p>
+        <p>
+          This evolution marks a broader shift happening across the industry, with centralized exchanges beginning
+          to bridge the gap with DeFi.
+        </p>
+        <p className="font-medium text-[#1d1d1d]">Three key opportunities emerged:</p>
+      </ContentSection>
 
       {/* Key Opportunities Section */}
-      <section className="px-6 py-16">
-        <div className="max-w-3xl space-y-12">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-normal mb-4">
-              <span className="text-[#0052ff]">1. Expand access to millions of tokens</span>
-            </h3>
-            <p className="text-xl md:text-2xl text-[#5d5d5d] leading-relaxed">
-              by bringing DEX trading to the Coinbase App, allowing users to swap any token instantly from within a
-              unified interface.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl md:text-3xl font-normal mb-4">
-              <span className="text-[#0052ff]">2. Reimagine the onchain experience</span>
-            </h3>
-            <p className="text-xl md:text-2xl text-[#5d5d5d] leading-relaxed">
-              through the Base App - an all-in-one platform uniting social, payments, and DeFi activity, where every
-              post and creator becomes a tradable asset.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl md:text-3xl font-normal mb-4">
-              <span className="text-[#0052ff]">3. Empower builders</span>
-            </h3>
-            <p className="text-xl md:text-2xl text-[#5d5d5d] leading-relaxed">
-              via the Coinbase Developer Platform (CDP), providing developers with everything they need to build great
-              apps on Base.
-            </p>
-          </div>
+      <ContentSection showBorder={false} className="space-y-12">
+        <div>
+          <h3 className="text-[30px] leading-[1.2] font-normal mb-4">
+            <span className="text-[#0052ff]">1. Expand access to millions of tokens</span>
+          </h3>
+          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+            by bringing DEX trading to the Coinbase App, allowing users to swap any token instantly from within a
+            unified interface.
+          </p>
         </div>
-      </section>
+
+        <div>
+          <h3 className="text-[30px] leading-[1.2] font-normal mb-4">
+            <span className="text-[#0052ff]">2. Reimagine the onchain experience</span>
+          </h3>
+          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+            through the Base App - an all-in-one platform uniting social, payments, and DeFi activity, where every
+            post and creator becomes a tradable asset.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="text-[30px] leading-[1.2] font-normal mb-4">
+            <span className="text-[#0052ff]">3. Empower builders</span>
+          </h3>
+          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+            via the Coinbase Developer Platform (CDP), providing developers with everything they need to build great
+            apps on Base.
+          </p>
+        </div>
+      </ContentSection>
 
       {/* Closing Paragraphs Section */}
-      <section className="px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div></div>
-          <div className="space-y-6">
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              And what unites all of these initiatives is tokens. No matter what you're building onchain, sooner or
-              later you'll need to swap tokens. Swaps are the foundation of the onchain economy, from simple trades
-              within wallets to powering more advanced functionality within DeFi apps.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              But building enterprise-grade swaps is hard. This explosion of tokens and DEXs has brought complexity to
-              DEX routing, with a vast array of different token behaviors, liquidity models, and chain architectures to
-              solve for. Delivering swaps at enterprise-scale and reliability requires deep expertise in DEX routing,
-              liquidity and aggregation.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              With nearly a decade of experience building DEX infrastructure, Coinbase partnered with 0x to meet this
-              challenge - helping power its onchain expansion with end-to-end onchain trading infrastructure at every
-              layer of the stack; from DEX trading for millions of tokens in the Coinbase App to custom integrations to
-              power an all-new social experience in the Base App.
-            </p>
-            <p className="text-base leading-relaxed text-[#5d5d5d]">
-              In this case study, we will dive deep into how Coinbase is bridging the gap from CeFi to DeFi and
-              unlocking a new onchain era for its users and developer network.
-            </p>
-          </div>
-        </div>
-      </section>
+      <ContentSection showBorder={false} className="space-y-6 text-[22px] leading-[1.3] text-[#5e5e5e]">
+        <p>
+          And what unites all of these initiatives is tokens. No matter what you're building onchain, sooner or
+          later you'll need to swap tokens. Swaps are the foundation of the onchain economy, from simple trades
+          within wallets to powering more advanced functionality within DeFi apps.
+        </p>
+        <p>
+          But building enterprise-grade swaps is hard. This explosion of tokens and DEXs has brought complexity to
+          DEX routing, with a vast array of different token behaviors, liquidity models, and chain architectures to
+          solve for. Delivering swaps at enterprise-scale and reliability requires deep expertise in DEX routing,
+          liquidity and aggregation.
+        </p>
+        <p>
+          With nearly a decade of experience building DEX infrastructure, Coinbase partnered with 0x to meet this
+          challenge - helping power its onchain expansion with end-to-end onchain trading infrastructure at every
+          layer of the stack; from DEX trading for millions of tokens in the Coinbase App to custom integrations to
+          power an all-new social experience in the Base App.
+        </p>
+        <p>
+          In this case study, we will dive deep into how Coinbase is bridging the gap from CeFi to DeFi and
+          unlocking a new onchain era for its users and developer network.
+        </p>
+      </ContentSection>
 
-      {isTransitioning && transitionContent && (
+      </div>{/* End of fade wrapper */}
+
+      {/* Transition Overlay */}
+      {isTransitioning && transitionContent && cardRect && (
         <div
-          className={`fixed inset-x-0 z-40 flex items-end pb-8 px-8 transition-all ${
+          className={`transition-overlay fixed inset-x-0 z-40 ${
             transitionPhase === "initial"
-              ? "bottom-0 top-auto"
-              : transitionPhase === "expanding"
-                ? "animate-expand-top"
-                : "animate-collapse-bottom"
+              ? ""
+              : transitionPhase === "expanding" || transitionPhase === "repositioning"
+                ? "animate-card-expand"
+                : ""
           }`}
           style={{
             backgroundColor: transitionContent.bgColor,
-            height: transitionPhase === "initial" ? buttonRect?.height || 120 : undefined,
-            top: transitionPhase !== "initial" ? 0 : undefined,
-            bottom: 0,
-          }}
+            top: transitionPhase === "initial" ? cardRect.top : undefined,
+            height: transitionPhase === "initial" ? cardRect.height : undefined,
+            borderRadius: "40px 40px 0 0",
+            // Pass card position as CSS custom properties for the animation
+            "--card-start-top": `${cardRect.top}px`,
+            "--card-start-height": `${cardRect.height}px`,
+            "--nav-height": "61px",
+          } as React.CSSProperties}
         >
-          <div className="flex items-center gap-4">
+          {/* Card Content - matches PageHero positioning exactly */}
+          {/* PageHero: py-12, px-6, then p-8 inner = roughly 48px top, 24px + 32px left */}
+          <div 
+            className={`flex items-center gap-4 ${
+              transitionPhase === "repositioning" ? "animate-content-to-hero" : ""
+            }`}
+            style={{
+              paddingTop: transitionPhase === "initial" || transitionPhase === "expanding" ? 40 : undefined,
+              paddingLeft: 24,
+              paddingBottom: 40,
+            }}
+          >
             <div
-              className="flex h-12 w-12 items-center justify-center rounded-full"
-              style={{ backgroundColor: transitionContent.iconBg }}
+              className={`flex items-center justify-center rounded-full ${
+                transitionPhase === "repositioning" ? "animate-icon-scale" : ""
+              }`}
+              style={{ 
+                backgroundColor: transitionContent.iconBg,
+                width: 64,
+                height: 64,
+              }}
             >
               {transitionContent.iconFill ? (
-                <div className="h-6 w-6" style={{ backgroundColor: transitionContent.iconFill }}></div>
+                <div className="h-8 w-8" style={{ backgroundColor: transitionContent.iconFill }}></div>
               ) : (
                 <div
-                  className="h-6 w-6 rounded-full border-4"
+                  className="h-8 w-8 rounded-full border-4"
                   style={{ borderColor: transitionContent.iconBorder }}
                 ></div>
               )}
             </div>
-            <h3 className="text-3xl font-normal" style={{ color: transitionContent.textColor }}>
+            <h2 
+              style={{ 
+                color: transitionContent.textColor,
+              }}
+            >
               {transitionContent.title}
-            </h3>
+            </h2>
           </div>
         </div>
       )}
