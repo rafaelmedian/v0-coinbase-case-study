@@ -62,7 +62,7 @@ export default function StyleguidePage() {
       <Navigation />
 
       {/* Header */}
-      <div className="border-b border-[#1d1d1d]/10 bg-[#f4f4f5] px-6 py-16 lg:px-20">
+      <div className="border-b border-[#f2f2f2] bg-[#f4f4f5] px-6 py-16 lg:px-20">
         <div className="mx-auto max-w-[1440px]">
           <h1 className="mb-4 text-[64px] font-thin leading-none text-[#26272b]">Styleguide</h1>
           <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
@@ -150,7 +150,7 @@ export default function StyleguidePage() {
           </section>
 
           {/* ==================== FONTS ==================== */}
-          <section className="border-t border-[#1d1d1d]/10 pt-16">
+          <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Fonts" className="mb-8" />
             
             <div className="mb-8 rounded-lg bg-[#f4f4f5] p-6">
@@ -162,7 +162,7 @@ export default function StyleguidePage() {
 
             <div className="space-y-6">
               {fonts.map((font) => (
-                <div key={font.name} className="rounded-lg border border-[#1d1d1d]/10 p-6">
+                <div key={font.name} className="rounded-lg border border-[#f2f2f2] p-6">
                   <div className="mb-4 flex items-center justify-between">
                     <div>
                       <h3 className="text-[24px] font-medium text-[#26272b]">{font.name}</h3>
@@ -184,12 +184,12 @@ export default function StyleguidePage() {
           </section>
 
           {/* ==================== TYPOGRAPHY ==================== */}
-          <section className="border-t border-[#1d1d1d]/10 pt-16">
+          <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Typography Scale" className="mb-8" />
             
             <div className="space-y-8">
               {typography.map((item) => (
-                <div key={item.size} className="flex items-baseline gap-8 border-b border-[#1d1d1d]/10 pb-8">
+                <div key={item.size} className="flex items-baseline gap-8 border-b border-[#f2f2f2] pb-8">
                   <div className="w-32 shrink-0">
                     <p className="text-sm font-medium text-[#26272b]">{item.size}</p>
                     <p className="text-sm text-[#5e5e5e]">{item.name}</p>
@@ -206,7 +206,7 @@ export default function StyleguidePage() {
           </section>
 
           {/* ==================== SPACING ==================== */}
-          <section className="border-t border-[#1d1d1d]/10 pt-16">
+          <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Spacing" className="mb-8" />
             
             <div className="flex flex-wrap items-end gap-4">
@@ -223,7 +223,7 @@ export default function StyleguidePage() {
           </section>
 
           {/* ==================== COMPONENTS ==================== */}
-          <section className="border-t border-[#1d1d1d]/10 pt-16">
+          <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Components" className="mb-12" />
             
             <div className="space-y-20">
@@ -363,7 +363,7 @@ export default function StyleguidePage() {
           </section>
 
           {/* ==================== FOOTER COMPONENT ==================== */}
-          <section className="border-t border-[#1d1d1d]/10 pt-16">
+          <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Footer" className="mb-8" />
             <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
               Dark footer with newsletter signup section.
