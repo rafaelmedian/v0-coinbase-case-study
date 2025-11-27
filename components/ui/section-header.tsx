@@ -7,9 +7,9 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ label, className }: SectionHeaderProps) {
   return (
-    <div className={cn("flex items-center gap-3", className)}>
-      <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
-      <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">
+    <div className={cn("flex items-start gap-2", className)}>
+      <span className="mt-1 inline-block h-3 w-3 bg-[#0052ff]"></span>
+      <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">
         {label}
       </span>
     </div>
