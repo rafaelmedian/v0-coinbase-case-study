@@ -1,6 +1,34 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* PolySans Font Family - 0x Brand Font */
+@font-face {
+  font-family: 'PolySans';
+  src: url('/fonts/PolySans-Slim.woff2') format('woff2'),
+       url('/fonts/PolySans-Slim.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PolySans';
+  src: url('/fonts/PolySans-Neutral.woff2') format('woff2'),
+       url('/fonts/PolySans-Neutral.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PolySans';
+  src: url('/fonts/PolySans-Median.woff2') format('woff2'),
+       url('/fonts/PolySans-Median.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -75,7 +103,7 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
+  --font-sans: "PolySans", "Geist", system-ui, -apple-system, sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
