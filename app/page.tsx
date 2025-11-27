@@ -37,6 +37,15 @@ export default function HomePage() {
     router.prefetch("/developer-platform")
   }, [router])
 
+  // Reset transition state when component unmounts or if navigation fails
+  useEffect(() => {
+    return () => {
+      setContentFading(false)
+      setIsTransitioning(false)
+      setTransitionPhase("initial")
+    }
+  }, [])
+
   // Prefetch on hover for even faster loads
   const handleHover = (href: string) => {
     router.prefetch(href)
@@ -93,6 +102,16 @@ export default function HomePage() {
       setTimeout(() => {
         setContentFading(true)
       }, 600)
+
+      // Failsafe: Reset states after animation should be complete
+      // This handles cases where navigation fails or is very slow
+      setTimeout(() => {
+        setContentFading(false)
+        setIsTransitioning(false)
+        setTransitionPhase("initial")
+        setTransitionContent(null)
+        setCardRect(null)
+      }, 1500)
     }, scrollDelay)
   }
 
