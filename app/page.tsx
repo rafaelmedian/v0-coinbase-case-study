@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Navigation from "@/components/navigation"
 
@@ -16,18 +16,35 @@ type TransitionContent = {
 export default function HomePage() {
   const router = useRouter()
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [transitionPhase, setTransitionPhase] = useState<"initial" | "expanding" | "collapsing">("initial")
   const [transitionContent, setTransitionContent] = useState<TransitionContent | null>(null)
+  const [buttonRect, setButtonRect] = useState<DOMRect | null>(null)
+  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
 
-  const handleNavigation = (href: string, content: TransitionContent) => {
+  const handleNavigation = (href: string, content: TransitionContent, buttonKey: string) => {
+    const button = buttonRefs.current[buttonKey]
+    if (button) {
+      setButtonRect(button.getBoundingClientRect())
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" })
 
     setTimeout(() => {
       setTransitionContent(content)
+      setTransitionPhase("initial")
       setIsTransitioning(true)
 
       setTimeout(() => {
+        setTransitionPhase("expanding")
+      }, 50)
+
+      setTimeout(() => {
+        setTransitionPhase("collapsing")
+      }, 300)
+
+      setTimeout(() => {
         router.push(href)
-      }, 800)
+      }, 900)
     }, 300)
   }
 
@@ -71,14 +88,21 @@ export default function HomePage() {
       <section className="pb-20">
         {/* DEX Trading Section */}
         <button
+          ref={(el) => {
+            buttonRefs.current["dex"] = el
+          }}
           onClick={() =>
-            handleNavigation("/retail-dex", {
-              title: "DEX Trading",
-              bgColor: "#c8d4fa",
-              iconBg: "#0052ff",
-              iconBorder: "white",
-              textColor: "#1d1d1d",
-            })
+            handleNavigation(
+              "/retail-dex",
+              {
+                title: "DEX Trading",
+                bgColor: "#c8d4fa",
+                iconBg: "#0052ff",
+                iconBorder: "white",
+                textColor: "#1d1d1d",
+              },
+              "dex",
+            )
           }
           className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#c8d4fa] px-8 py-16 transition-all hover:bg-[#b8c4ea] pt-10 pb-12"
         >
@@ -100,14 +124,21 @@ export default function HomePage() {
 
         {/* Base App Section */}
         <button
+          ref={(el) => {
+            buttonRefs.current["base"] = el
+          }}
           onClick={() =>
-            handleNavigation("/base-app", {
-              title: "Base App",
-              bgColor: "#0052ff",
-              iconBg: "white",
-              iconFill: "#0052ff",
-              textColor: "white",
-            })
+            handleNavigation(
+              "/base-app",
+              {
+                title: "Base App",
+                bgColor: "#0052ff",
+                iconBg: "white",
+                iconFill: "#0052ff",
+                textColor: "white",
+              },
+              "base",
+            )
           }
           className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#0052ff] px-8 py-16 transition-all hover:bg-[#0048dd] pb-12"
         >
@@ -129,14 +160,21 @@ export default function HomePage() {
 
         {/* Developer Platform Section */}
         <button
+          ref={(el) => {
+            buttonRefs.current["dev"] = el
+          }}
           onClick={() =>
-            handleNavigation("/developer-platform", {
-              title: "Developer Platform",
-              bgColor: "#1d1d1d",
-              iconBg: "#2d2d2d",
-              iconBorder: "#0052ff",
-              textColor: "white",
-            })
+            handleNavigation(
+              "/developer-platform",
+              {
+                title: "Developer Platform",
+                bgColor: "#1d1d1d",
+                iconBg: "#2d2d2d",
+                iconBorder: "#0052ff",
+                textColor: "white",
+              },
+              "dev",
+            )
           }
           className="group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#1d1d1d] px-8 pt-[60px] pb-24 transition-all hover:bg-[#2d2d2d]"
         >
@@ -327,8 +365,19 @@ export default function HomePage() {
 
       {isTransitioning && transitionContent && (
         <div
-          className="fixed inset-0 z-40 animate-expand-from-bottom flex items-end pb-8 px-8"
-          style={{ backgroundColor: transitionContent.bgColor }}
+          className={`fixed inset-x-0 z-40 flex items-end pb-8 px-8 transition-all ${
+            transitionPhase === "initial"
+              ? "bottom-0 top-auto"
+              : transitionPhase === "expanding"
+                ? "animate-expand-top"
+                : "animate-collapse-bottom"
+          }`}
+          style={{
+            backgroundColor: transitionContent.bgColor,
+            height: transitionPhase === "initial" ? buttonRect?.height || 120 : undefined,
+            top: transitionPhase !== "initial" ? 0 : undefined,
+            bottom: 0,
+          }}
         >
           <div className="flex items-center gap-4">
             <div

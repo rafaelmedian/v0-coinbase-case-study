@@ -124,16 +124,38 @@
   }
 }
 
-/* Replaced center scale animation with bottom-to-top slide animation */
-@keyframes expand-from-bottom {
+/* Multi-phase page transition animations with smooth easing */
+
+/* Phase 1: Expand from bottom to top */
+@keyframes expand-top {
   0% {
-    transform: translateY(100%);
+    top: auto;
+    height: 120px;
   }
   100% {
-    transform: translateY(0);
+    top: 0;
+    height: 100vh;
   }
 }
 
-.animate-expand-from-bottom {
-  animation: expand-from-bottom 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+/* Phase 2: Collapse bottom upward to match hero height */
+@keyframes collapse-bottom {
+  0% {
+    top: 0;
+    bottom: 0;
+  }
+  100% {
+    top: 0;
+    bottom: calc(100vh - 400px);
+  }
+}
+
+.animate-expand-top {
+  animation: expand-top 0.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.animate-collapse-bottom {
+  top: 0;
+  bottom: 0;
+  animation: collapse-bottom 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
