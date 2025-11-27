@@ -42,15 +42,17 @@ const fonts = [
 
 // Typography scale data
 const typography = [
-  { size: "76px", weight: "font-thin", name: "Stat Numbers", example: "20M+" },
-  { size: "45px", weight: "font-normal", name: "Section Headings", example: "Section Heading" },
-  { size: "40px", weight: "font-normal", name: "Hero Text", example: "Hero Text" },
-  { size: "36px", weight: "font-normal", name: "Page Titles", example: "Page Title" },
-  { size: "30px", weight: "font-normal", name: "Card Headings", example: "Card Heading" },
-  { size: "24px", weight: "font-normal", name: "Section Labels", example: "SECTION LABEL" },
-  { size: "22px", weight: "font-normal", name: "Body Text", example: "Body text for paragraphs and descriptions" },
-  { size: "18px", weight: "font-semibold", name: "Navigation", example: "NAVIGATION ITEM" },
-  { size: "14px", weight: "font-normal", name: "Small Text", example: "Small text and captions" },
+  { size: "140px", weight: "font-normal", name: "Hero Stats", example: "$XB", description: "PageHero stat values" },
+  { size: "76px", weight: "font-thin", name: "Stat Card Numbers", example: "20M+", description: "StatCard component values" },
+  { size: "64px", weight: "font-normal", name: "H1 / Hero Quote", example: "Hero Quote", description: "Main page headings, PageHero quote" },
+  { size: "48px", weight: "font-normal", name: "H2 / Page Title", example: "Page Title", description: "PageHero title, section titles" },
+  { size: "45px", weight: "font-normal", name: "Section Headings", example: "Section Heading", description: "Large section headings" },
+  { size: "36px", weight: "font-normal", name: "H3", example: "Heading 3", description: "Tertiary headings" },
+  { size: "30px", weight: "font-normal", name: "H4 / Card Headings", example: "Card Heading", description: "FeatureCard titles, list items" },
+  { size: "24px", weight: "font-normal", name: "H5 / Labels", example: "SECTION LABEL", description: "Uppercase section labels" },
+  { size: "22px", weight: "font-normal", name: "Body / Paragraphs", example: "Body text for paragraphs and descriptions", description: "Primary body copy" },
+  { size: "18px", weight: "font-medium", name: "H6 / Navigation", example: "NAVIGATION ITEM", description: "Navigation links, small headings" },
+  { size: "14px", weight: "font-normal", name: "Small / Captions", example: "Small text and captions", description: "Labels, captions, metadata" },
 ]
 
 // Spacing scale
@@ -189,17 +191,19 @@ export default function StyleguidePage() {
             
             <div className="space-y-8">
               {typography.map((item) => (
-                <div key={item.size} className="flex items-baseline gap-8 border-b border-[#f2f2f2] pb-8">
-                  <div className="w-32 shrink-0">
-                    <p className="text-sm font-medium text-[#26272b]">{item.size}</p>
-                    <p className="text-sm text-[#5e5e5e]">{item.name}</p>
+                <div key={item.size} className="border-b border-[#f2f2f2] pb-8">
+                  <div className="mb-2 flex items-center gap-4">
+                    <span className="rounded bg-[#0052ff] px-2 py-1 text-xs font-medium text-white">{item.size}</span>
+                    <span className="text-sm font-medium text-[#26272b]">{item.name}</span>
+                    <span className="text-sm text-[#898e99]">{item.weight}</span>
                   </div>
                   <p
-                    className={`${item.weight} text-[#26272b]`}
-                    style={{ fontSize: item.size, lineHeight: 1.2 }}
+                    className={`${item.weight} mb-2 text-[#26272b]`}
+                    style={{ fontSize: item.size, lineHeight: 1.1 }}
                   >
                     {item.example}
                   </p>
+                  <p className="text-sm text-[#5e5e5e]">{item.description}</p>
                 </div>
               ))}
             </div>

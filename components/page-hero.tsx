@@ -30,9 +30,9 @@ export default function PageHero({ title, quote, bgColor, textColor, icon, stats
           <div className="mb-12 grid max-w-2xl grid-cols-1 gap-8 md:grid-cols-2">
             {stats.map((stat, index) => (
               <div key={index} className="flex flex-col">
-                <h1 className="font-bold" style={{ color: textColor }}>
+                <span className="text-[140px] leading-[1] font-normal" style={{ color: textColor }}>
                   {stat.value}
-                </h1>
+                </span>
                 <small style={{ color: textColor, opacity: 0.7 }}>
                   {stat.label}
                 </small>
