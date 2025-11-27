@@ -63,6 +63,82 @@ export default function RetailDexPage() {
               </p>
             </div>
           </div>
+
+          <div className="bg-[#f4f4f5] p-8 text-center">
+            <p className="font-medium text-[#5d5d5d]">
+              [TOKEN GRAPHIC: TOPLINE MONTHLY TOKENS ISSUED # WITH LOTS OF TOKENS AROUND IT]
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div></div>
+            <div className="space-y-4 text-[#1d1d1d] md:col-span-2">
+              <p>
+                These assets are spread across dozens of chains and can be traded on hundreds of different decentralized
+                exchanges.
+              </p>
+              <p>
+                With this explosion of tokens has come the rise in decentralized exchanges (DEXs), with users and
+                activity moving onchain and away from centralized venues. Starting at $666 million in January 2020,
+                monthly trading volume on decentralized exchanges has exploded to $500 billion. DEXs have now settled
+                more than $4 trillion in onchain transactions.{" "}
+                <a href="#" className="underline">
+                  [Source]
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-[#f4f4f5] p-8 text-center">
+            <p className="font-medium text-[#5d5d5d]">
+              [LINE CHART: MONTHLY DEX VOLUME, STARTING IN JULY 2020 - DATA{" "}
+              <a href="#" className="underline">
+                HERE
+              </a>
+              ]
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div></div>
+            <div className="space-y-4 text-[#1d1d1d] md:col-span-2">
+              <p>
+                The vast majority of tokens are not available on centralized exchanges, where due to regulatory
+                compliance, CEX token offerings require complicated and lengthy listing processes. This model has kept
+                Coinbase from matching the speed of onchain trading, where new tokens can come and go in a matter of
+                hours. By the time tokens have been approved for listing, they are often already irrelevant.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-[#f4f4f5] p-8 text-center">
+            <p className="font-medium text-[#0052ff]">
+              [LINE CHART: DEX TO CEX SPOT TRADE VOLUME, STARTING IN JULY 2023 - DATA{" "}
+              <a href="#" className="underline">
+                HERE
+              </a>
+              ]
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div></div>
+            <div className="space-y-4 text-[#1d1d1d] md:col-span-2">
+              <p>
+                As a result, crypto traders are increasingly turning to DEX platforms for their trading, with users
+                leaving Coinbase's trading platform in search of trending tokens elsewhere in the onchain ecosystem.
+              </p>
+              <p>
+                Monthly DEX volume has grown to 20% of CEX volume, up from just 10% in 2024. In Q2, CEXs recorded $3.9
+                trillion in spot trading volume, a decrease of 27.7% QoQ, while DEX trading volume rose to $876.3
+                billion, an increase of 25.3% over the same period.{" "}
+                <a href="#" className="underline">
+                  [Source]
+                </a>
+              </p>
+              <p>This represents both a major challenge and opportunity for Coinbase.</p>
+            </div>
+          </div>
         </div>
       </main>
     </div>
