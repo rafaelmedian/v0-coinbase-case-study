@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 type NavigationProps = {
-  activePage?: "retail-dex" | "base-app" | "developer-platform"
+  activePage?: "retail-dex" | "base-app" | "developer-platform" | "styleguide"
 }
 
 export default function Navigation({ activePage }: NavigationProps) {
@@ -41,6 +41,17 @@ export default function Navigation({ activePage }: NavigationProps) {
               <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
             )}
             DEVELOPER PLATFORM
+          </Link>
+          <span className="text-[#d9d9d9]">|</span>
+          <Link
+            href="/styleguide"
+            className="flex items-center gap-2 text-sm font-medium"
+            style={{ color: "#898e99" }}
+          >
+            {activePage === "styleguide" && (
+              <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
+            )}
+            STYLEGUIDE
           </Link>
         </nav>
 
