@@ -23,48 +23,460 @@ export default function RetailDexPage() {
       />
 
       {/* Content Sections */}
-      <main className="px-6 py-12">
-        <div className="mt-12 space-y-12">
-          <hr className="border-t border-[#1d1d1d]/20" />
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <div className="mb-2 flex items-center gap-2">
-                <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
-                <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">INTRODUCTION</span>
+      <main className="mx-auto max-w-[1440px] px-6 py-16 lg:px-20">
+        <div className="space-y-20">
+          {/* Introduction Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">Introduction</span>
+                </div>
               </div>
-            </div>
-            <div className="space-y-4 text-[#1d1d1d] md:col-span-2">
-              <p>
-                With over 120 million total users and 8.7 million monthly transacting users, Coinbase is one of the
-                world's leading crypto exchanges.
-              </p>
-              <p>
-                Through Coinbase's app, users can buy, store, and trade more than 300 different cryptocurrencies.
-                Coinbase also offers additional services, including a fee-based plan with Coinbase One and professional
-                asset trading with Coinbase Advanced, in total serving over 120 million users.
-              </p>
+              <div className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+                <p>
+                  With over 120 million total users and 8.7 million monthly transacting users, Coinbase is one of the
+                  world&apos;s leading crypto exchanges.
+                </p>
+                <p>
+                  Through Coinbase&apos;s app, users can buy, store, and trade more than 300 different cryptocurrencies.
+                  Coinbase also offers additional services, including a fee-based plan with Coinbase One and professional
+                  asset trading with Coinbase Advanced, in total serving over 120 million users.
+                </p>
+              </div>
             </div>
           </div>
 
-          <hr className="border-t border-[#1d1d1d]/20" />
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <div className="mb-2 flex items-center gap-2">
-                <span className="inline-block h-2 w-2" style={{ backgroundColor: "#0052ff" }}></span>
-                <span className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d]">THE CHALLENGE</span>
+          {/* The Challenge Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">The Challenge</span>
+                </div>
+              </div>
+              <div className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+                <p>
+                  As the crypto ecosystem has grown, millions of new assets are launching onchain every day as the barrier
+                  to entry for launching new tokens has been eliminated, creating a flourishing onchain token ecosystem.
+                </p>
+                <p>
+                  These assets are spread across dozens of chains and can be traded on hundreds of different decentralized exchanges.
+                </p>
+                <p>
+                  With this explosion of tokens has come the rise in decentralized exchanges (DEXs), with users and activity moving onchain and away from centralized venues. Starting at $666 million in January 2020, monthly trading volume on decentralized exchanges has exploded to $500 billion. DEXs have now settled more than $4 trillion in onchain transactions. [<a href="https://www.theblock.co/data/decentralized-finance/dex-non-custodial" className="underline">Source</a>]
+                </p>
+                <p>
+                  The vast majority of tokens are not available on centralized exchanges, where due to regulatory compliance, CEX token offerings require complicated and lengthy listing processes. This model has kept Coinbase from matching the speed of onchain trading, where new tokens can come and go in a matter of hours. By the time tokens have been approved for listing, they are often already irrelevant.
+                </p>
+                <p>
+                  As a result, crypto traders are increasingly turning to DEX platforms for their trading, with users leaving Coinbase&apos;s trading platform in search of trending tokens elsewhere in the onchain ecosystem.
+                </p>
+                <p>
+                  Monthly DEX volume has grown to 20% of CEX volume, up from just 10% in 2024. In Q2, CEXs recorded $3.9 trillion in spot trading volume, a decrease of 27.7% QoQ, while DEX trading volume rose to $876.3 billion, an increase of 25.3% over the same period. [<a href="https://www.coingecko.com/research/publications/2025-q2-crypto-report" className="underline">Source</a>]
+                </p>
+                <p>This represents both a major challenge and opportunity for Coinbase.</p>
               </div>
             </div>
-            <div className="text-[#1d1d1d] md:col-span-2">
-              <p>
-                As the crypto ecosystem has grown, millions of new assets are launching onchain every day as the barrier
-                to entry for launching new tokens has been eliminated, creating a flourishing onchain token ecosystem.
-              </p>
+          </div>
+
+          {/* Coverage Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">Coverage</span>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <h2 className="text-[45px] leading-[1.2] text-[#26272b]">
+                  Coverage for millions of tokens across dozens of chains
+                </h2>
+                <div className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+                  <p>
+                    In an effort to capture this activity and bridge the gap with DeFi, Coinbase launched its Wallet in 2021. A core component of the Coinbase Wallet is DEX swaps. Coinbase chose 0x to power this critical functionality as part of their expansion onchain.
+                  </p>
+                  <p>
+                    However, millions of users still trade directly from the Coinbase App, and Coinbase aimed to bridge that gap by giving users the ability to interact directly with tokens on DEXs without moving funds off-platform.
+                  </p>
+                </div>
+
+                {/* Coverage Feature Cards */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Expand coverage and provide instant access</h3>
+                        <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+                          Reviewing and adding new tokens for listing on Coinbase&apos;s platform is a slow and time consuming process. DEX trading provided an opportunity to give users access to millions of new assets directly onchain within moments of being indexed onchain, helping keep users on platform and capture onchain trading activity.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">One unified experience:</h3>
+                        <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+                          DEX trading on Coinbase offered the opportunity to provide a simple yet powerful gateway to onchain markets by abstracting away the complexities of navigating decentralized protocols. Users need to be able to fund trades seamlessly with their Coinbase balance or USDC, track performance, and manage their portfolio — all within one unified interface.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Transparent and safe trading</h3>
+                        <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+                          With millions of new tokens has come new and more sophisticated exploits that target users. Trading long-tail tokens on DEXs presents risks for users. Coinbase could offer a safer, more transparent trading experience by surfacing key market data and risks insights pulled directly from onchain data, differentiating them from many onchain venues.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">More networks, more assets, and more markets</h3>
+                        <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+                          DEX trading would enable Coinbase to rapidly expand to support new chains, while at the same time bring DEX trading to more countries and expand access to the global community.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Execution Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">Execution</span>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+                  <p>
+                    At the same time, Coinbase has come to be known for the power of its trading experience. Historically, trade execution in DeFi has never been able to match the power and quality of tooling that is commonplace on CeFi exchanges and prime brokers.
+                  </p>
+                  <p>
+                    In order to both retain and bring new DEX users on-platform, Coinbase required the ability to deliver reliable, high-quality DEX execution for millions of tokens.
+                  </p>
+                  <p>
+                    Delivering the best trade execution in DeFi is a multi-faceted challenge that demands a number of sophisticated capabilities, including inspecting onchain liquidity conditions for slippage and price impact, controlling execution costs such as gas fees, and bundling it all up for execution that is reliable and fast. To solve this challenge requires deep expertise in DEX routing and aggregation.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-[45px] leading-[1.2] text-[#26272b]">The challenges of DEX execution:</h3>
+                  <div className="space-y-0">
+                    <div className="flex items-start gap-4 border-b border-[#1d1d1d]/10 py-6">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0052ff]"></div>
+                      <div className="flex-1">
+                        <h4 className="mb-2 text-[30px] leading-[1.2] text-black">&quot;All-in&quot; prices</h4>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 border-b border-[#1d1d1d]/10 py-6">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0052ff]"></div>
+                      <div className="flex-1">
+                        <h4 className="mb-2 text-[30px] leading-[1.2] text-black">Deep liquidity</h4>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 border-b border-[#1d1d1d]/10 py-6">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0052ff]"></div>
+                      <div className="flex-1">
+                        <h4 className="mb-2 text-[30px] leading-[1.2] text-black">Advanced routing</h4>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 border-b border-[#1d1d1d]/10 py-6">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0052ff]"></div>
+                      <div className="flex-1">
+                        <h4 className="mb-2 text-[30px] leading-[1.2] text-black">Reliability</h4>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 border-b border-[#1d1d1d]/10 py-6">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0052ff]"></div>
+                      <div className="flex-1">
+                        <h4 className="mb-2 text-[30px] leading-[1.2] text-black">Latency</h4>
+                        <p className="text-[24px] leading-[1.3] text-[#aaaaaa]">
+                          DEX trading can be slow, requiring routing through hundreds of different pools and sources. Swaps need to be lightning fast for users, with very quick latency across a number of chains that have different architectures, block times, and more.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* The Solution Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">The Solution</span>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <h2 className="text-[45px] leading-[1.2] text-[#26272b]">
+                  Coinbase&apos;s drive to deliver best-in-class swaps with the widest token coverage led them to 0x.
+                </h2>
+                <div className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+                  <p>
+                    Having been strategic partners since 2021, the Coinbase team trusted 0x&apos;s reliable, battle-tested DEX API infrastructure. Secure contracts, time-in-market, a professional and responsive team, and market-leading DEX execution were all important factors in the Coinbase team&apos;s decision to have 0x help power their DEX trading.
+                  </p>
+                  <p>
+                    0x empowers hundreds of developers with essential Web3 tools to enable faster trading, better prices, and superior UX. Our suite of APIs has processed over 60 million transactions and $154 billion in volume from more than 9 million users.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Wide Token Coverage Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <h2 className="mb-12 text-[45px] leading-[1.2] text-[#26272b]">Wide token coverage for users</h2>
+            
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="rounded-[15px] bg-neutral-100 p-8">
+                <div className="mb-4 flex items-start gap-3">
+                  <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                  <div className="flex-1">
+                    <h3 className="mb-4 text-[30px] leading-[1.2] text-black">16 EVM networks</h3>
+                    <p className="mb-6 text-[30px] leading-[1.2] text-[#5e5e5e]">
+                      Access to tokens on the largest chains, including Base, BNB Chain, Ethereum, and many more.
+                    </p>
+                    <div className="grid grid-cols-4 gap-3">
+                      {[...Array(16)].map((_, i) => (
+                        <div key={i} className="aspect-square rounded-lg bg-white/50"></div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[15px] bg-neutral-100 p-8">
+                <div className="mb-4 flex items-start gap-3">
+                  <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                  <div className="flex-1">
+                    <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Millions of tokens</h3>
+                    <p className="mb-6 text-[30px] leading-[1.2] text-[#5e5e5e]">
+                      Support for 20M+ tokens with unrivaled liquidity from 130+ exchanges.
+                    </p>
+                    <div className="grid grid-cols-4 gap-3">
+                      {[...Array(16)].map((_, i) => (
+                        <div key={i} className="aspect-square rounded-lg bg-white/50"></div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[15px] bg-neutral-100 p-8">
+                <div className="mb-4 flex items-start gap-3">
+                  <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                  <div className="flex-1">
+                    <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Exclusive RFQ liquidity</h3>
+                    <p className="text-[30px] leading-[1.2] text-[#5e5e5e]">
+                      Top-tier liquidity from sophisticated market makers. 0x RFQ outperforms AMMs on price 46% of the time where available.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[15px] bg-neutral-100 p-8">
+                <div className="mb-4 flex items-start gap-3">
+                  <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                  <div className="flex-1">
+                    <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Buy/sell tax token support</h3>
+                    <p className="text-[30px] leading-[1.2] text-[#5e5e5e]">
+                      Real-time buy/sell tax detection and intelligent trade routing, minimizing error rates and enhancing the swap experience for your users.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Advanced DEX Routing Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">Advanced DEX routing</span>
+                </div>
+              </div>
+              <div>
+                <div className="rounded-[15px] bg-[#f2f2f2] p-12">
+                  <p className="text-center text-[30px] leading-[1.2] text-black">SANKEY</p>
+                  <div className="mt-8 flex items-center justify-center">
+                    <div className="h-64 w-full rounded-lg bg-white/50"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Institutional-grade Infrastructure Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">Institutional-grade infrastructure</span>
+                </div>
+              </div>
+              <div>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Reliability</h3>
+                        <p className="text-[30px] leading-[1.2] text-[#5e5e5e]">
+                          Placeholder text. Access to tokens on the largest chains, including Base, BNB Chain, Ethereum, and many more.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Latency</h3>
+                        <p className="text-[30px] leading-[1.2] text-[#5e5e5e]">
+                          Placeholder text. Support for 20M+ tokens with unrivaled liquidity from 130+ exchanges.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Serious security</h3>
+                        <p className="text-[30px] leading-[1.2] text-[#5e5e5e]">
+                          0x v2&apos;s new smart contracts are fully audited, with <a href="https://go.0x.org/0x-v2-audits" className="underline">four audits</a> from three separate firms, including Ourovoros, Trail of Bits, OpenZeppelin, and Trail of Bits a second time. 0x also leverages Dedaub&apos;s industry-leading security suite to continuously analyze our contracts as we develop them.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[15px] bg-neutral-100 p-8">
+                    <div className="mb-4 flex items-start gap-3">
+                      <span className="mt-1.5 inline-block h-5 w-5 rounded-sm bg-[#0052ff]"></span>
+                      <div>
+                        <h3 className="mb-4 text-[30px] leading-[1.2] text-black">Low error rates</h3>
+                        <p className="text-[30px] leading-[1.2] text-[#5e5e5e]">
+                          Reliable quotes with accurate gas estimates, every time with Smart Validation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* The Results Section */}
+          <div className="border-t border-[#1d1d1d]/20 pt-16">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-3.5 w-3.5 rounded-sm bg-[#0052ff]"></span>
+                  <span className="text-lg font-normal uppercase tracking-wide text-[#898e99]">The Results</span>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div className="rounded-[15px] bg-neutral-100 p-12">
+                  <p className="mb-8 text-center text-[22px] text-[#5e5e5e]">
+                    APP UI, with a before and after (showing available DEX tokens)
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <div className="h-64 w-full max-w-2xl rounded-lg bg-white/50"></div>
+                  </div>
+                </div>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                  <div className="rounded-[42px] bg-zinc-100 px-8 py-12 text-center">
+                    <p className="mb-2 text-[76px] font-thin leading-none text-[#26272b]">20M+</p>
+                    <p className="text-[24px] leading-[1.4] text-[#70707b]">tokens supported</p>
+                  </div>
+                  <div className="rounded-[42px] bg-zinc-100 px-8 py-12 text-center">
+                    <p className="mb-2 text-[76px] font-thin leading-none text-[#26272b]">99%</p>
+                    <p className="text-[24px] leading-[1.4] text-[#70707b]">uptime</p>
+                  </div>
+                  <div className="rounded-[42px] bg-zinc-100 px-8 py-12 text-center">
+                    <p className="mb-2 text-[76px] font-thin leading-none text-[#26272b]">&lt;500ms</p>
+                    <p className="text-[24px] leading-[1.4] text-[#70707b]">median response time</p>
+                  </div>
+                </div>
+
+                <div className="rounded-[42px] bg-zinc-100 px-8 py-12 text-center">
+                  <p className="mb-2 text-[76px] font-thin leading-none text-[#26272b]">$B</p>
+                  <p className="text-[24px] leading-[1.4] text-[#70707b]">in trading volume</p>
+                </div>
+
+                <div className="space-y-6 text-[#5e5e5e] text-[22px] leading-[1.3]">
+                  <p>
+                    With DEX trading directly in-app, new assets become available to trade within moments of creation, helping Coinbase both retain users and tap into the growing onchain economy. And issuers no longer have to wait days, weeks or months for a traditional listing to get access to Coinbase&apos;s distribution.
+                  </p>
+                  <p>
+                    With DEX trading powered by 0x, Coinbase has unlocked a new era of access, going from just 300 assets to millions with just one integration, all tradable through the simple and familiar interface Coinbase users have come to trust. As a result, in Q4, Coinbase saw a 24% increase in total trading volume.
+                  </p>
+                  <p>
+                    DEX trading reinforces Coinbase&apos;s commitment to support the fast-evolving needs of the crypto trading community - moving Coinbase closer to its vision of becoming an &quot;everything&quot; app for crypto.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="mt-20 bg-zinc-900 pb-16 pt-20">
+        <div className="mx-auto max-w-[1440px] px-6 lg:px-20">
+          <div className="mb-16 space-y-12">
+            <p className="text-center text-[24px] text-white">Start building with 0x</p>
+            <div className="rounded-[16px] bg-[#26272b] px-12 py-9">
+              <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
+                <div className="w-full space-y-6 lg:w-auto">
+                  <p className="text-[40px] leading-[1.2] text-white opacity-50">Enter your email</p>
+                  <p className="text-[18px] leading-[1.6] text-white opacity-90">Sign up for our newsletter</p>
+                </div>
+                <button className="rounded-[12px] border border-zinc-200 bg-white px-6 py-4 text-[18px] font-semibold text-zinc-900">
+                  Button
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-12">
+            <div className="h-px bg-zinc-100 opacity-10"></div>
+            <p className="text-center text-[14px] text-zinc-200 opacity-60">
+              © ZeroEx Holdings, Inc. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
