@@ -76,18 +76,18 @@ export default function Navigation({ activePage }: NavigationProps) {
             <Link
               key={link.id}
               href={link.href}
-              className={`text-sm tracking-wide transition-all duration-200 text-[var(--text-secondary)] hover:text-[var(--text-primary)] ${
-                activePage === link.id ? 'font-semibold text-[var(--text-primary)]' : 'font-medium'
+              className={`text-sm font-medium tracking-wide transition-all duration-200 hover:text-[var(--text-secondary)] ${
+                activePage === link.id ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
               }`}
             >
               {link.label}
             </Link>
           ))}
-          <span className="text-[#e5e5e5]">|</span>
+          <span className="text-[#e5e5e5] flex items-center">|</span>
           <Link
             href="/styleguide"
-            className={`text-sm tracking-wide transition-all duration-200 text-[var(--text-secondary)] hover:text-[var(--text-primary)] ${
-              activePage === "styleguide" ? 'font-semibold text-[var(--text-primary)]' : 'font-medium'
+            className={`text-sm font-medium tracking-wide transition-all duration-200 hover:text-[var(--text-secondary)] ${
+              activePage === "styleguide" ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
             }`}
           >
             STYLEGUIDE
@@ -98,7 +98,7 @@ export default function Navigation({ activePage }: NavigationProps) {
         <Link href="/start-building" className="hidden md:block">
           <Button
             variant="outline"
-            className="border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--text-primary)] hover:text-white hover:border-[var(--text-primary)]"
+            className="border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--bg-surface)] hover:border-transparent"
             style={{ borderColor: "var(--text-primary)", color: "var(--text-primary)" }}
           >
             START BUILDING
@@ -139,8 +139,8 @@ export default function Navigation({ activePage }: NavigationProps) {
                 key={link.id}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`border-b py-4 text-base transition-colors duration-200 text-[var(--text-secondary)] hover:text-[var(--text-primary)] ${
-                  activePage === link.id ? 'font-semibold text-[var(--text-primary)]' : 'font-medium'
+                className={`border-b py-4 text-base font-medium transition-colors duration-200 hover:text-[var(--text-secondary)] ${
+                  activePage === link.id ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
                 }`}
                 style={{ 
                   borderColor: "var(--border-subtle)",
@@ -153,8 +153,8 @@ export default function Navigation({ activePage }: NavigationProps) {
             <Link
               href="/styleguide"
               onClick={() => setIsMenuOpen(false)}
-              className={`border-b py-4 text-base transition-colors duration-200 text-[var(--text-secondary)] hover:text-[var(--text-primary)] ${
-                activePage === "styleguide" ? 'font-semibold text-[var(--text-primary)]' : 'font-medium'
+              className={`border-b py-4 text-base font-medium transition-colors duration-200 hover:text-[var(--text-secondary)] ${
+                activePage === "styleguide" ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
               }`}
               style={{ borderColor: "var(--border-subtle)" }}
             >
@@ -163,7 +163,7 @@ export default function Navigation({ activePage }: NavigationProps) {
             <Link href="/start-building" onClick={() => setIsMenuOpen(false)} className="mt-6">
               <Button
                 variant="outline"
-                className="w-full border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--text-primary)] hover:text-white hover:border-[var(--text-primary)]"
+                className="w-full border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--bg-surface)] hover:border-transparent"
                 style={{ borderColor: "var(--text-primary)", color: "var(--text-primary)" }}
               >
                 START BUILDING
