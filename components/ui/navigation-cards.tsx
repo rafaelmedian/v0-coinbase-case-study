@@ -6,10 +6,11 @@ interface NavigationCardsProps {
 
 export function NavigationCards({ className }: NavigationCardsProps) {
   return (
-    <section className={className}>
+    <nav className={className} aria-label="Case study sections">
       {/* DEX Trading Section */}
       <Link
         href="/retail-dex"
+        aria-label="Learn about DEX Trading integration"
         className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand-light)] px-8 py-16 pt-10 pb-12 transition-all duration-300 hover:bg-[#b8c4ea] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]"
       >
         <div className="flex items-center gap-4">
@@ -31,6 +32,7 @@ export function NavigationCards({ className }: NavigationCardsProps) {
       {/* Base App Section */}
       <Link
         href="/base-app"
+        aria-label="Learn about Base App integration"
         className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand)] px-8 py-16 pb-12 transition-all duration-300 hover:bg-[var(--color-brand-hover)] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]"
       >
         <div className="flex items-center gap-4">
@@ -52,6 +54,7 @@ export function NavigationCards({ className }: NavigationCardsProps) {
       {/* Developer Platform Section */}
       <Link
         href="/developer-platform"
+        aria-label="Learn about Developer Platform integration"
         className="dev-platform-card group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] px-8 pt-[60px] pb-24 transition-all duration-300 hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
       >
         <div className="flex items-center gap-4">
@@ -69,7 +72,6 @@ export function NavigationCards({ className }: NavigationCardsProps) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </Link>
-    </section>
+    </nav>
   )
 }
-
