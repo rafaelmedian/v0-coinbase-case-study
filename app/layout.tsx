@@ -7,25 +7,23 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'ZeroEx | Coinbase Case Study',
+  description: 'Discover how 0x has become a major strategic partner with Coinbase, powering end-to-end onchain swap infrastructure from DEX trading to the Coinbase Developer Platform.',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
+  openGraph: {
+    title: 'ZeroEx | Coinbase Case Study',
+    description: 'Discover how 0x has become a major strategic partner with Coinbase, powering end-to-end onchain swap infrastructure.',
+    images: ['/og-image.svg'],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ZeroEx | Coinbase Case Study',
+    description: 'Discover how 0x has become a major strategic partner with Coinbase, powering end-to-end onchain swap infrastructure.',
+    images: ['/og-image.svg'],
   },
 }
 

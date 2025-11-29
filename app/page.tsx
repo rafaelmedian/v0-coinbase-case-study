@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Navigation from "@/components/navigation"
 import { ContentSection } from "@/components/ui/content-section"
+import { Footer } from "@/components/ui/footer"
 
 type TransitionContent = {
   title: string
@@ -29,6 +30,7 @@ export default function HomePage() {
   const [cardRect, setCardRect] = useState<CardRect | null>(null)
   const [contentFading, setContentFading] = useState(false)
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
+  const timeoutRefs = useRef<NodeJS.Timeout[]>([])
 
   // Prefetch routes on mount for faster navigation
   useEffect(() => {
@@ -37,12 +39,11 @@ export default function HomePage() {
     router.prefetch("/developer-platform")
   }, [router])
 
-  // Reset transition state when component unmounts or if navigation fails
+  // Reset transition state and clean up timeouts when component unmounts
   useEffect(() => {
     return () => {
-      setContentFading(false)
-      setIsTransitioning(false)
-      setTransitionPhase("initial")
+      timeoutRefs.current.forEach(timeout => clearTimeout(timeout))
+      timeoutRefs.current = []
     }
   }, [])
 
@@ -51,225 +52,113 @@ export default function HomePage() {
     router.prefetch(href)
   }
 
+  // Helper to create a managed timeout that gets cleaned up on unmount
+  const createTimeout = (callback: () => void, delay: number) => {
+    const timeout = setTimeout(callback, delay)
+    timeoutRefs.current.push(timeout)
+    return timeout
+  }
+
   const handleNavigation = (href: string, content: TransitionContent, buttonKey: string) => {
     const button = buttonRefs.current[buttonKey]
-    if (!button) return
+    if (!button || isTransitioning) return
 
-    // Store transition content for later
     setTransitionContent(content)
     
-    // Smooth scroll to top with easing
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    // Get card position immediately (no scroll needed)
+    const rect = button.getBoundingClientRect()
     
-    // Wait for scroll to complete, then start animation
-    const scrollDelay = 350
-    
-    setTimeout(() => {
-      // Recalculate card position after scroll completes
-      const scrolledRect = button.getBoundingClientRect()
-      
-      setCardRect({
-        top: scrolledRect.top,
-        height: scrolledRect.height,
-        left: scrolledRect.left,
-        width: scrolledRect.width,
-      })
+    setCardRect({
+      top: rect.top,
+      height: rect.height,
+      left: rect.left,
+      width: rect.width,
+    })
 
-      // Start transition
+    setTransitionPhase("initial")
+    setIsTransitioning(true)
+
+    // Animation timeline (immediate start):
+    // 50ms: Begin expansion animation
+    // 400ms: Navigate to destination page
+    // 500ms: Start content repositioning
+    // 600ms: Fade out background content
+
+    createTimeout(() => {
+      setTransitionPhase("expanding")
+    }, 50)
+
+    createTimeout(() => {
+      router.push(href)
+    }, 400)
+
+    createTimeout(() => {
+      setTransitionPhase("repositioning")
+    }, 500)
+
+    createTimeout(() => {
+      setContentFading(true)
+    }, 600)
+
+    // Failsafe: Reset states after animation completes
+    createTimeout(() => {
+      setContentFading(false)
+      setIsTransitioning(false)
       setTransitionPhase("initial")
-      setIsTransitioning(true)
-
-      // Timeline (after scroll):
-      // 0ms: Setup - position overlay at card location
-      // 50ms: Start expansion animation (700ms duration)
-      // 400ms: Navigate early so page loads underneath
-      // 500ms: Start content repositioning  
-      // 600ms: Fade out background content
-
-      setTimeout(() => {
-        setTransitionPhase("expanding")
-      }, 50)
-
-      // Navigate earlier - page loads while animation continues
-      setTimeout(() => {
-        router.push(href)
-      }, 400)
-
-      setTimeout(() => {
-        setTransitionPhase("repositioning")
-      }, 500)
-
-      setTimeout(() => {
-        setContentFading(true)
-      }, 600)
-
-      // Failsafe: Reset states after animation should be complete
-      // This handles cases where navigation fails or is very slow
-      setTimeout(() => {
-        setContentFading(false)
-        setIsTransitioning(false)
-        setTransitionPhase("initial")
-        setTransitionContent(null)
-        setCardRect(null)
-      }, 1500)
-    }, scrollDelay)
+      setTransitionContent(null)
+      setCardRect(null)
+    }, 1500)
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white grain-overlay">
       <Navigation />
       
       {/* Main content wrapper - fades during transition */}
       <div className={contentFading ? "animate-fade-out" : ""}>
 
-      {/* Hero Section */}
-      <section className="px-6 py-12 md:py-20">
-        <div>
-          <h1 className="mb-8 text-5xl font-normal leading-tight tracking-tight md:text-6xl lg:text-7xl">
-            <span className="text-[#1d1d1d]">Delivering end-to-end</span>
-            <br />
-            <span className="text-[#0052ff]">onchain swap infrastructure</span>
-            <br />
-            <span className="text-[#1d1d1d]">with Coinbase</span>
-          </h1>
+      {/* Hero Section - Full width, aligned left */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] md:py-[var(--section-padding)]">
+        <h1 className="mb-12 text-[clamp(3rem,8vw,5.5rem)] font-normal leading-[var(--leading-tight)] tracking-[var(--tracking-tighter)] text-headline">
+          <span className="text-[var(--text-primary)]">Delivering end-to-end</span>
+          <br />
+          <span className="text-[var(--color-brand)]">onchain swap infrastructure</span>
+          <br />
+          <span className="text-[var(--text-primary)]">with Coinbase</span>
+        </h1>
 
-          <p className="max-w-lg text-[22px] leading-[1.3] text-[#5e5e5e]">
-            Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
-            experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
-            Platform.
-          </p>
-        </div>
+        <p className="max-w-xl text-[var(--text-lg)] leading-[var(--leading-normal)] text-[var(--text-secondary)] text-body">
+          Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
+          experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
+          Platform.
+        </p>
       </section>
 
-      {/* Stats Section */}
-      <section className="px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-[#f2f2f2] p-8 md:p-12">
-            <p className="text-6xl md:text-7xl lg:text-8xl font-normal text-[#1d1d1d]">$8B</p>
-            <p className="text-lg text-[#a0a0ab] mt-2">in onchain volume</p>
-          </div>
-          <div className="bg-[#f2f2f2] p-8 md:p-12">
-            <p className="text-6xl md:text-7xl lg:text-8xl font-normal text-[#1d1d1d]">422m</p>
-            <p className="text-lg text-[#a0a0ab] mt-2">total transactions</p>
+      {/* Stats Section - Full width */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
+        <div className="relative">
+          {/* Subtle divider line between cards on desktop */}
+          <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-[var(--border-light)] to-transparent" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="group relative bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] transition-all duration-300 hover:bg-[var(--bg-surface-hover)] hover:shadow-xl hover:shadow-black/[0.04] hover:-translate-y-1">
+              {/* Brand accent dot */}
+              <div className="absolute top-8 right-8 h-2.5 w-2.5 rounded-full bg-[var(--color-brand)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)] transition-transform duration-300 group-hover:translate-x-1">$8B</p>
+              <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">in onchain volume</p>
+            </div>
+            <div className="group relative bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] transition-all duration-300 hover:bg-[var(--bg-surface-hover)] hover:shadow-xl hover:shadow-black/[0.04] hover:-translate-y-1">
+              {/* Brand accent dot */}
+              <div className="absolute top-8 right-8 h-2.5 w-2.5 rounded-full bg-[var(--color-brand)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)] transition-transform duration-300 group-hover:translate-x-1">422m</p>
+              <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">total transactions</p>
+            </div>
           </div>
         </div>
-      </section>
-
-      <section className="pb-20">
-        {/* DEX Trading Section */}
-        <button
-          ref={(el) => {
-            buttonRefs.current["dex"] = el
-          }}
-          onMouseEnter={() => handleHover("/retail-dex")}
-          onClick={() =>
-            handleNavigation(
-              "/retail-dex",
-              {
-                title: "DEX Trading",
-                bgColor: "#c8d4fa",
-                iconBg: "#0052ff",
-                iconBorder: "white",
-                textColor: "#1d1d1d",
-              },
-              "dex",
-            )
-          }
-          className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#c8d4fa] px-8 py-16 transition-all hover:bg-[#b8c4ea] pt-10 pb-12"
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0052ff]">
-              <div className="h-6 w-6 rounded-full border-4 border-white"></div>
-            </div>
-            <h2 className="text-4xl font-normal text-[#1d1d1d] md:text-5xl">DEX Trading</h2>
-          </div>
-          <svg
-            className="h-6 w-6 text-[#1d1d1d] transition-transform group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </button>
-
-        {/* Base App Section */}
-        <button
-          ref={(el) => {
-            buttonRefs.current["base"] = el
-          }}
-          onMouseEnter={() => handleHover("/base-app")}
-          onClick={() =>
-            handleNavigation(
-              "/base-app",
-              {
-                title: "Base App",
-                bgColor: "#0052ff",
-                iconBg: "white",
-                iconFill: "#0052ff",
-                textColor: "white",
-              },
-              "base",
-            )
-          }
-          className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#0052ff] px-8 py-16 transition-all hover:bg-[#0048dd] pb-12"
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
-              <div className="h-6 w-6 bg-[#0052ff]"></div>
-            </div>
-            <h2 className="text-4xl font-normal text-white md:text-5xl">Base App</h2>
-          </div>
-          <svg
-            className="h-6 w-6 text-white transition-transform group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </button>
-
-        {/* Developer Platform Section */}
-        <button
-          ref={(el) => {
-            buttonRefs.current["dev"] = el
-          }}
-          onMouseEnter={() => handleHover("/developer-platform")}
-          onClick={() =>
-            handleNavigation(
-              "/developer-platform",
-              {
-                title: "Developer Platform",
-                bgColor: "#1d1d1d",
-                iconBg: "#2d2d2d",
-                iconBorder: "#0052ff",
-                textColor: "white",
-              },
-              "dev",
-            )
-          }
-          className="group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#1d1d1d] px-8 pt-[60px] pb-24 transition-all hover:bg-[#2d2d2d]"
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d]">
-              <div className="h-6 w-6 rounded-full border-4 border-[#0052ff]"></div>
-            </div>
-            <h2 className="text-4xl font-normal text-white md:text-5xl">Developer Platform</h2>
-          </div>
-          <svg
-            className="h-6 w-6 text-white transition-transform group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </button>
       </section>
 
       {/* About Coinbase Section */}
-      <ContentSection label="About Coinbase" className="space-y-6 text-[22px] leading-[1.3] text-[#5e5e5e]">
+      <ContentSection label="About Coinbase" className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
         <p>
           Founded in 2012, Coinbase is a U.S.-based cryptocurrency exchange and custodian that has grown into one of
           the world's leading digital asset platforms. Publicly listed and operating in over 100 countries, Coinbase
@@ -286,41 +175,51 @@ export default function HomePage() {
 
       {/* Quote Section */}
       <ContentSection showBorder={false}>
-        <div className="text-6xl text-[#c2c2c2] leading-none mb-4">"</div>
-        <h2 className="text-[30px] leading-[1.2] font-normal text-[#1d1d1d] mb-8">
-          Quote from team. 0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
-        </h2>
-        <div className="w-12 h-1 bg-[#0052ff] mb-4"></div>
-        <p className="text-sm text-[#5d5d5d]">Name and role</p>
+        <div className="relative">
+          {/* Large decorative quote mark */}
+          <span className="quote-mark">"</span>
+          <blockquote className="relative">
+            <p className="text-[var(--text-2xl)] md:text-[var(--text-3xl)] leading-[var(--leading-snug)] font-normal text-[var(--text-primary)] mb-10">
+              0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
+            </p>
+            <footer>
+              <div className="w-16 h-1 bg-[var(--color-brand)] mb-5 rounded-full"></div>
+              <cite className="not-italic">
+                <span className="block text-[var(--text-base)] font-medium text-[var(--text-primary)]">Name</span>
+                <span className="block text-[var(--text-sm)] text-[var(--text-muted)] mt-1">Role at Company</span>
+              </cite>
+            </footer>
+          </blockquote>
+        </div>
       </ContentSection>
 
       {/* Enterprise-grade infrastructure Section */}
       <ContentSection label="Infrastructure" showBorder={false}>
-        <h3 className="text-sm font-medium uppercase tracking-wide text-[#5d5d5d] mb-8">Enterprise-grade infrastructure</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-[#f2f2f2] p-8 rounded-[15px]">
-            <div className="h-3 w-3 bg-[#0052ff] mb-6"></div>
-            <p className="text-4xl md:text-5xl font-normal text-[#5d5d5d]">
+        <h3 className="text-caption text-[var(--text-muted)] mb-10">Enterprise-grade infrastructure</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="h-3 w-3 bg-[var(--color-brand)] mb-8 rounded-sm"></div>
+            <p className="text-[var(--text-4xl)] text-display text-[var(--text-primary)]">
               {"<500"}
-              <span className="text-2xl">ms</span>
+              <span className="text-[var(--text-xl)]">ms</span>
             </p>
-            <p className="text-sm text-[#a0a0ab] mt-2">median response rate</p>
+            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">median response rate</p>
           </div>
-          <div className="bg-[#f2f2f2] p-8 rounded-[15px]">
-            <div className="h-3 w-full bg-gradient-to-r from-[#0052ff] via-[#00cc88] to-[#00cc88] mb-6 rounded-full"></div>
-            <p className="text-4xl md:text-5xl font-normal text-[#5d5d5d]">99.9%</p>
-            <p className="text-sm text-[#a0a0ab] mt-2">uptime</p>
+          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="h-3 w-full bg-gradient-to-r from-[var(--color-brand)] via-[#00cc88] to-[#00cc88] mb-8 rounded-full"></div>
+            <p className="text-[var(--text-4xl)] text-display text-[var(--text-primary)]">99.9%</p>
+            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">uptime</p>
           </div>
-          <div className="bg-[#f2f2f2] p-8 rounded-[15px]">
-            <div className="h-3 mb-6"></div>
-            <p className="text-4xl md:text-5xl font-normal text-[#5d5d5d]">4.4%</p>
-            <p className="text-sm text-[#a0a0ab] mt-2">revert rates</p>
+          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div className="h-3 mb-8"></div>
+            <p className="text-[var(--text-4xl)] text-display text-[var(--text-primary)]">4.4%</p>
+            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">revert rates</p>
           </div>
         </div>
       </ContentSection>
 
       {/* The Story Section */}
-      <ContentSection label="The Story" className="space-y-6 text-[22px] leading-[1.3] text-[#5e5e5e]">
+      <ContentSection label="The Story" className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
         <p>
           When Coinbase launched in 2012, its mission was bold but simple: create an open financial system for the
           world. What began as an exchange for buying and selling Bitcoin quickly grew to become one of the world's
@@ -350,36 +249,36 @@ export default function HomePage() {
           This evolution marks a broader shift happening across the industry, with centralized exchanges beginning
           to bridge the gap with DeFi.
         </p>
-        <p className="font-medium text-[#1d1d1d]">Three key opportunities emerged:</p>
+        <p className="font-medium text-[var(--text-primary)]">Three key opportunities emerged:</p>
       </ContentSection>
 
       {/* Key Opportunities Section */}
       <ContentSection showBorder={false} className="space-y-12">
         <div>
-          <h3 className="text-[30px] leading-[1.2] font-normal mb-4">
-            <span className="text-[#0052ff]">1. Expand access to millions of tokens</span>
+          <h3 className="text-[30px] leading-[1.25] font-normal mb-4">
+            <span className="text-[var(--color-brand)]">1. Expand access to millions of tokens</span>
           </h3>
-          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+          <p className="text-[22px] leading-[1.4] text-[var(--text-secondary)]">
             by bringing DEX trading to the Coinbase App, allowing users to swap any token instantly from within a
             unified interface.
           </p>
         </div>
 
         <div>
-          <h3 className="text-[30px] leading-[1.2] font-normal mb-4">
-            <span className="text-[#0052ff]">2. Reimagine the onchain experience</span>
+          <h3 className="text-[30px] leading-[1.25] font-normal mb-4">
+            <span className="text-[var(--color-brand)]">2. Reimagine the onchain experience</span>
           </h3>
-          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+          <p className="text-[22px] leading-[1.4] text-[var(--text-secondary)]">
             through the Base App - an all-in-one platform uniting social, payments, and DeFi activity, where every
             post and creator becomes a tradable asset.
           </p>
         </div>
 
         <div>
-          <h3 className="text-[30px] leading-[1.2] font-normal mb-4">
-            <span className="text-[#0052ff]">3. Empower builders</span>
+          <h3 className="text-[30px] leading-[1.25] font-normal mb-4">
+            <span className="text-[var(--color-brand)]">3. Empower builders</span>
           </h3>
-          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+          <p className="text-[22px] leading-[1.4] text-[var(--text-secondary)]">
             via the Coinbase Developer Platform (CDP), providing developers with everything they need to build great
             apps on Base.
           </p>
@@ -387,7 +286,7 @@ export default function HomePage() {
       </ContentSection>
 
       {/* Closing Paragraphs Section */}
-      <ContentSection showBorder={false} className="space-y-6 text-[22px] leading-[1.3] text-[#5e5e5e]">
+      <ContentSection showBorder={false} className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
         <p>
           And what unites all of these initiatives is tokens. No matter what you're building onchain, sooner or
           later you'll need to swap tokens. Swaps are the foundation of the onchain economy, from simple trades
@@ -413,6 +312,123 @@ export default function HomePage() {
 
       </div>{/* End of fade wrapper */}
 
+      {/* Navigation Cards Section - positioned right above footer */}
+      <section className="pb-0">
+        {/* DEX Trading Section */}
+        <button
+          ref={(el) => {
+            buttonRefs.current["dex"] = el
+          }}
+          onMouseEnter={() => handleHover("/retail-dex")}
+          onClick={() =>
+            handleNavigation(
+              "/retail-dex",
+              {
+                title: "DEX Trading",
+                bgColor: "#c8d4fa",
+                iconBg: "#0052ff",
+                iconBorder: "white",
+                textColor: "#1d1d1d",
+              },
+              "dex",
+            )
+          }
+          className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand-light)] px-8 py-16 pt-10 pb-12 transition-all duration-300 hover:bg-[#b8c4ea] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]"
+        >
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:scale-110">
+              <div className="h-6 w-6 rounded-full border-4 border-white"></div>
+            </div>
+            <h2 className="text-4xl font-normal text-[var(--text-primary)] md:text-5xl">DEX Trading</h2>
+          </div>
+          <svg
+            className="h-6 w-6 text-[var(--text-primary)] transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+
+        {/* Base App Section */}
+        <button
+          ref={(el) => {
+            buttonRefs.current["base"] = el
+          }}
+          onMouseEnter={() => handleHover("/base-app")}
+          onClick={() =>
+            handleNavigation(
+              "/base-app",
+              {
+                title: "Base App",
+                bgColor: "#0052ff",
+                iconBg: "white",
+                iconFill: "#0052ff",
+                textColor: "white",
+              },
+              "base",
+            )
+          }
+          className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand)] px-8 py-16 pb-12 transition-all duration-300 hover:bg-[var(--color-brand-hover)] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]"
+        >
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-110">
+              <div className="h-6 w-6 bg-[var(--color-brand)]"></div>
+            </div>
+            <h2 className="text-4xl font-normal text-white md:text-5xl">Base App</h2>
+          </div>
+          <svg
+            className="h-6 w-6 text-white transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+
+        {/* Developer Platform Section */}
+        <button
+          ref={(el) => {
+            buttonRefs.current["dev"] = el
+          }}
+          onMouseEnter={() => handleHover("/developer-platform")}
+          onClick={() =>
+            handleNavigation(
+              "/developer-platform",
+              {
+                title: "Developer Platform",
+                bgColor: "#1d1d1d",
+                iconBg: "#2d2d2d",
+                iconBorder: "#0052ff",
+                textColor: "white",
+              },
+              "dev",
+            )
+          }
+          className="group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#18181b] px-8 pt-[60px] pb-24 transition-all duration-300 hover:bg-[#2d2d2d] hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
+        >
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#3d3d3d]">
+              <div className="h-6 w-6 rounded-full border-4 border-[var(--color-brand)]"></div>
+            </div>
+            <h2 className="text-4xl font-normal text-white md:text-5xl">Developer Platform</h2>
+          </div>
+          <svg
+            className="h-6 w-6 text-white transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+      </section>
+
+      {/* Footer - seamlessly connected to Developer Platform card */}
+      <Footer className="-mt-8" />
+
       {/* Transition Overlay */}
       {isTransitioning && transitionContent && cardRect && (
         <div
@@ -428,14 +444,11 @@ export default function HomePage() {
             top: transitionPhase === "initial" ? cardRect.top : undefined,
             height: transitionPhase === "initial" ? cardRect.height : undefined,
             borderRadius: "40px 40px 0 0",
-            // Pass card position as CSS custom properties for the animation
             "--card-start-top": `${cardRect.top}px`,
             "--card-start-height": `${cardRect.height}px`,
             "--nav-height": "61px",
           } as React.CSSProperties}
         >
-          {/* Card Content - matches PageHero positioning exactly */}
-          {/* PageHero: py-12, px-6, then p-8 inner = roughly 48px top, 24px + 32px left */}
           <div 
             className={`flex items-center gap-4 ${
               transitionPhase === "repositioning" ? "animate-content-to-hero" : ""
@@ -447,9 +460,7 @@ export default function HomePage() {
             }}
           >
             <div
-              className={`flex items-center justify-center rounded-full ${
-                transitionPhase === "repositioning" ? "animate-icon-scale" : ""
-              }`}
+              className="flex items-center justify-center rounded-full"
               style={{ 
                 backgroundColor: transitionContent.iconBg,
                 width: 64,
