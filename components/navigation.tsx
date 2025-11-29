@@ -45,10 +45,10 @@ export default function Navigation({ activePage }: NavigationProps) {
         }`} 
         style={{ borderColor: isScrolled ? "var(--border-light)" : "transparent" }}
       >
-      {/* Scroll Progress Bar */}
+      {/* Scroll Progress Bar - positioned absolutely within sticky header */}
       <div 
-        className="scroll-progress"
-        style={{ width: `${scrollProgress}%` }}
+        className="absolute top-0 left-0 h-[2px] bg-[var(--color-brand)] z-[60]"
+        style={{ width: `${scrollProgress}%`, transition: 'width 0.1s linear' }}
       />
       <div className="flex items-center justify-between">
         {/* Logo */}

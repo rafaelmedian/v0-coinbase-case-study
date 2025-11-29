@@ -325,18 +325,6 @@
   font-size: var(--text-sm);
 }
 
-/* Scroll Progress Indicator */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: var(--color-brand);
-  z-index: 9999;
-  transition: width 0.1s linear;
-}
-
 /* Developer Platform Card */
 .dev-platform-card {
   background: linear-gradient(to bottom, #1d1d1d 0%, #151515 100%);
