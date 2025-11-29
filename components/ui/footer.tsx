@@ -1,6 +1,3 @@
-"use client"
-
-import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
@@ -40,8 +37,6 @@ const footerLinks = {
 }
 
 export function Footer({ className }: FooterProps) {
-  const [email, setEmail] = useState("")
-
   return (
     <footer className={cn(
       "relative bg-[#18181b] overflow-hidden",
@@ -121,8 +116,6 @@ export function Footer({ className }: FooterProps) {
             <div className="flex items-center gap-2 rounded-[12px] bg-[#26272b] px-3 py-2">
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="flex-1 bg-transparent text-[16px] text-white placeholder:text-white/50 focus:outline-none min-w-0"
               />
