@@ -1,29 +1,40 @@
-import Link from "next/link"
 import Navigation from "@/components/navigation"
 import { ContentSection } from "@/components/ui/content-section"
 import { Footer } from "@/components/ui/footer"
+import { HeroNavigationCards } from "@/components/ui/hero-nav-cards"
+import { DottedPattern } from "@/components/ui/dotted-pattern"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section - Full width, aligned left */}
-      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] md:py-[var(--section-padding)]">
-        <h1 className="mb-12 text-[clamp(3rem,8vw,5.5rem)] font-normal leading-[var(--leading-tight)] tracking-[var(--tracking-tighter)] text-headline">
-          <span className="text-[var(--text-primary)]">Delivering end-to-end</span>
-          <br />
-          <span className="text-[var(--color-brand)]">onchain swap infrastructure</span>
-          <br />
-          <span className="text-[var(--text-primary)]">with Coinbase</span>
-        </h1>
+      {/* Hero Section - Two column layout with dotted pattern on right */}
+      <section className="relative px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] md:py-[var(--section-padding)] overflow-hidden">
+        {/* Dotted Pattern - positioned on the right */}
+        <div className="hidden lg:block absolute top-[50px] right-[-200px] xl:right-[-100px] w-[700px] xl:w-[900px] h-[700px] xl:h-[900px]">
+          <DottedPattern className="w-full h-full" />
+        </div>
 
-        <p className="max-w-xl text-[var(--text-lg)] leading-[var(--leading-normal)] text-[var(--text-secondary)] text-body">
-          Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
-          experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
-          Platform.
-        </p>
+        <div className="relative z-10">
+          <h1 className="mb-12 text-[clamp(3rem,8vw,5.5rem)] font-normal leading-[var(--leading-tight)] tracking-[var(--tracking-tighter)] text-headline">
+            <span className="text-[var(--text-primary)]">Delivering end-to-end</span>
+            <br />
+            <span className="text-[var(--color-brand)]">onchain swap infrastructure</span>
+            <br />
+            <span className="text-[var(--text-primary)]">with Coinbase</span>
+          </h1>
+
+          <p className="max-w-[750px] text-[var(--text-lg)] leading-[var(--leading-normal)] text-[var(--text-secondary)] text-body">
+            Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
+            experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
+            Platform.
+          </p>
+        </div>
       </section>
+
+      {/* Hero Navigation Cards - Full width */}
+      <HeroNavigationCards className="w-full" />
 
       {/* Stats Section - Full width */}
       <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
@@ -84,22 +95,22 @@ export default function HomePage() {
       <ContentSection label="Infrastructure" showBorder={false}>
         <h3 className="text-caption text-[var(--text-muted)] mb-10">Enterprise-grade infrastructure</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
             <div className="h-3 w-3 bg-[var(--color-brand)] mb-8 rounded-sm"></div>
-            <p className="text-[var(--text-4xl)] text-display text-[var(--text-primary)]">
+            <p className="text-[var(--text-5xl)] text-display text-[var(--text-primary)]">
               {"<500"}
-              <span className="text-[var(--text-xl)]">ms</span>
+              <span className="text-[var(--text-2xl)]">ms</span>
             </p>
             <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">median response rate</p>
           </div>
-          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
             <div className="h-3 w-full bg-gradient-to-r from-[var(--color-brand)] via-[#00cc88] to-[#00cc88] mb-8 rounded-full"></div>
-            <p className="text-[var(--text-4xl)] text-display text-[var(--text-primary)]">99.9%</p>
+            <p className="text-[var(--text-5xl)] text-display text-[var(--text-primary)]">99.9%</p>
             <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">uptime</p>
           </div>
-          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
             <div className="h-3 mb-8"></div>
-            <p className="text-[var(--text-4xl)] text-display text-[var(--text-primary)]">4.4%</p>
+            <p className="text-[var(--text-5xl)] text-display text-[var(--text-primary)]">4.4%</p>
             <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">revert rates</p>
           </div>
         </div>
@@ -198,73 +209,10 @@ export default function HomePage() {
       </ContentSection>
 
       {/* Navigation Cards Section - positioned right above footer */}
-      <section className="pb-0">
-        {/* DEX Trading Section */}
-        <Link
-          href="/retail-dex"
-          className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand-light)] px-8 py-16 pt-10 pb-12 transition-all duration-300 hover:bg-[#b8c4ea] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]"
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:scale-110">
-              <div className="h-6 w-6 rounded-full border-4 border-white"></div>
-            </div>
-            <h2 className="text-4xl font-normal text-[var(--text-primary)] md:text-5xl">DEX Trading</h2>
-          </div>
-          <svg
-            className="h-6 w-6 text-[var(--text-primary)] transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
-
-        {/* Base App Section */}
-        <Link
-          href="/base-app"
-          className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand)] px-8 py-16 pb-12 transition-all duration-300 hover:bg-[var(--color-brand-hover)] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]"
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-110">
-              <div className="h-6 w-6 bg-[var(--color-brand)]"></div>
-            </div>
-            <h2 className="text-4xl font-normal text-white md:text-5xl">Base App</h2>
-          </div>
-          <svg
-            className="h-6 w-6 text-white transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
-
-        {/* Developer Platform Section */}
-        <Link
-          href="/developer-platform"
-          className="dev-platform-card group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] px-8 pt-[60px] pb-24 transition-all duration-300 hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#3d3d3d]">
-              <div className="h-6 w-6 rounded-full border-4 border-[var(--color-brand)]"></div>
-            </div>
-            <h2 className="text-4xl font-normal text-white md:text-5xl">Developer Platform</h2>
-          </div>
-          <svg
-            className="h-6 w-6 text-white transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
-      </section>
+      <HeroNavigationCards className="w-full" />
 
       {/* Footer - seamlessly connected to Developer Platform card */}
-      <Footer className="-mt-8" />
+      <Footer className="-mt-10" />
     </div>
   )
 }
