@@ -1,9 +1,15 @@
+import type { Metadata } from 'next'
 import Navigation from "@/components/navigation"
 import PageHero from "@/components/page-hero"
 import { ContentSection } from "@/components/ui/content-section"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { Footer } from "@/components/ui/footer"
 import { StatCard } from "@/components/ui/stat-card"
+
+export const metadata: Metadata = {
+  title: 'Base App | 0x Coinbase Case Study',
+  description: 'How 0x powers the Base App social trading experience, enabling seamless token swaps within Coinbase\'s onchain social platform.',
+}
 
 export default function BaseAppPage() {
   return (

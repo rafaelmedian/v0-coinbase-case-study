@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import Navigation from "@/components/navigation"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { Footer } from "@/components/ui/footer"
+
+export const metadata: Metadata = {
+  title: 'Start Building | 0x Coinbase Case Study',
+  description: 'Get started with 0x APIs and build enterprise-grade swap experiences like Coinbase. Sign up for access to our DEX aggregation infrastructure.',
+}
 
 export default function StartBuildingPage() {
   return (

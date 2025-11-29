@@ -1,8 +1,14 @@
+import type { Metadata } from 'next'
 import Navigation from "@/components/navigation"
 import PageHero from "@/components/page-hero"
 import { ContentSection } from "@/components/ui/content-section"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { Footer } from "@/components/ui/footer"
+
+export const metadata: Metadata = {
+  title: 'DEX Trading | 0x Coinbase Case Study',
+  description: 'How 0x powers DEX trading for Coinbase, enabling access to millions of tokens across 16 EVM networks with institutional-grade infrastructure.',
+}
 
 export default function RetailDexPage() {
   return (
