@@ -1,121 +1,12 @@
-"use client"
-
-import { useState, useRef, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import Navigation from "@/components/navigation"
 import { ContentSection } from "@/components/ui/content-section"
 import { Footer } from "@/components/ui/footer"
 
-type TransitionContent = {
-  title: string
-  bgColor: string
-  iconBg: string
-  iconBorder?: string
-  iconFill?: string
-  textColor: string
-}
-
-type CardRect = {
-  top: number
-  height: number
-  left: number
-  width: number
-}
-
 export default function HomePage() {
-  const router = useRouter()
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [transitionPhase, setTransitionPhase] = useState<"initial" | "expanding" | "repositioning">("initial")
-  const [transitionContent, setTransitionContent] = useState<TransitionContent | null>(null)
-  const [cardRect, setCardRect] = useState<CardRect | null>(null)
-  const [contentFading, setContentFading] = useState(false)
-  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
-  const timeoutRefs = useRef<NodeJS.Timeout[]>([])
-
-  // Prefetch routes on mount for faster navigation
-  useEffect(() => {
-    router.prefetch("/retail-dex")
-    router.prefetch("/base-app")
-    router.prefetch("/developer-platform")
-  }, [router])
-
-  // Reset transition state and clean up timeouts when component unmounts
-  useEffect(() => {
-    return () => {
-      timeoutRefs.current.forEach(timeout => clearTimeout(timeout))
-      timeoutRefs.current = []
-    }
-  }, [])
-
-  // Prefetch on hover for even faster loads
-  const handleHover = (href: string) => {
-    router.prefetch(href)
-  }
-
-  // Helper to create a managed timeout that gets cleaned up on unmount
-  const createTimeout = (callback: () => void, delay: number) => {
-    const timeout = setTimeout(callback, delay)
-    timeoutRefs.current.push(timeout)
-    return timeout
-  }
-
-  const handleNavigation = (href: string, content: TransitionContent, buttonKey: string) => {
-    const button = buttonRefs.current[buttonKey]
-    if (!button || isTransitioning) return
-
-    setTransitionContent(content)
-    
-    // Get card position immediately (no scroll needed)
-    const rect = button.getBoundingClientRect()
-    
-    setCardRect({
-      top: rect.top,
-      height: rect.height,
-      left: rect.left,
-      width: rect.width,
-    })
-
-    setTransitionPhase("initial")
-    setIsTransitioning(true)
-
-    // Animation timeline (immediate start):
-    // 50ms: Begin expansion animation
-    // 400ms: Navigate to destination page
-    // 500ms: Start content repositioning
-    // 600ms: Fade out background content
-
-    createTimeout(() => {
-      setTransitionPhase("expanding")
-    }, 50)
-
-    createTimeout(() => {
-      router.push(href)
-    }, 400)
-
-    createTimeout(() => {
-      setTransitionPhase("repositioning")
-    }, 500)
-
-    createTimeout(() => {
-      setContentFading(true)
-    }, 600)
-
-    // Failsafe: Reset states after animation completes
-    createTimeout(() => {
-      setContentFading(false)
-      setIsTransitioning(false)
-      setTransitionPhase("initial")
-      setTransitionContent(null)
-      setCardRect(null)
-    }, 1500)
-  }
-
   return (
-    <div className="min-h-screen bg-white grain-overlay">
+    <div className="min-h-screen bg-white">
       <Navigation />
-      
-      {/* Main content wrapper - fades during transition */}
-      <div className={contentFading ? "animate-fade-out" : ""}>
 
       {/* Hero Section - Full width, aligned left */}
       <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] md:py-[var(--section-padding)]">
@@ -310,29 +201,11 @@ export default function HomePage() {
         </p>
       </ContentSection>
 
-      </div>{/* End of fade wrapper */}
-
       {/* Navigation Cards Section - positioned right above footer */}
       <section className="pb-0">
         {/* DEX Trading Section */}
-        <button
-          ref={(el) => {
-            buttonRefs.current["dex"] = el
-          }}
-          onMouseEnter={() => handleHover("/retail-dex")}
-          onClick={() =>
-            handleNavigation(
-              "/retail-dex",
-              {
-                title: "DEX Trading",
-                bgColor: "#c8d4fa",
-                iconBg: "#0052ff",
-                iconBorder: "white",
-                textColor: "#1d1d1d",
-              },
-              "dex",
-            )
-          }
+        <Link
+          href="/retail-dex"
           className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand-light)] px-8 py-16 pt-10 pb-12 transition-all duration-300 hover:bg-[#b8c4ea] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]"
         >
           <div className="flex items-center gap-4">
@@ -349,27 +222,11 @@ export default function HomePage() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </button>
+        </Link>
 
         {/* Base App Section */}
-        <button
-          ref={(el) => {
-            buttonRefs.current["base"] = el
-          }}
-          onMouseEnter={() => handleHover("/base-app")}
-          onClick={() =>
-            handleNavigation(
-              "/base-app",
-              {
-                title: "Base App",
-                bgColor: "#0052ff",
-                iconBg: "white",
-                iconFill: "#0052ff",
-                textColor: "white",
-              },
-              "base",
-            )
-          }
+        <Link
+          href="/base-app"
           className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand)] px-8 py-16 pb-12 transition-all duration-300 hover:bg-[var(--color-brand-hover)] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]"
         >
           <div className="flex items-center gap-4">
@@ -386,27 +243,11 @@ export default function HomePage() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </button>
+        </Link>
 
         {/* Developer Platform Section */}
-        <button
-          ref={(el) => {
-            buttonRefs.current["dev"] = el
-          }}
-          onMouseEnter={() => handleHover("/developer-platform")}
-          onClick={() =>
-            handleNavigation(
-              "/developer-platform",
-              {
-                title: "Developer Platform",
-                bgColor: "#1d1d1d",
-                iconBg: "#2d2d2d",
-                iconBorder: "#0052ff",
-                textColor: "white",
-              },
-              "dev",
-            )
-          }
+        <Link
+          href="/developer-platform"
           className="dev-platform-card group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] px-8 pt-[60px] pb-24 transition-all duration-300 hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
         >
           <div className="flex items-center gap-4">
@@ -423,69 +264,11 @@ export default function HomePage() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </button>
+        </Link>
       </section>
 
       {/* Footer - seamlessly connected to Developer Platform card */}
       <Footer className="-mt-8" />
-
-      {/* Transition Overlay */}
-      {isTransitioning && transitionContent && cardRect && (
-        <div
-          className={`transition-overlay fixed inset-x-0 z-40 ${
-            transitionPhase === "initial"
-              ? ""
-              : transitionPhase === "expanding" || transitionPhase === "repositioning"
-                ? "animate-card-expand"
-                : ""
-          }`}
-          style={{
-            backgroundColor: transitionContent.bgColor,
-            top: transitionPhase === "initial" ? cardRect.top : undefined,
-            height: transitionPhase === "initial" ? cardRect.height : undefined,
-            borderRadius: "40px 40px 0 0",
-            "--card-start-top": `${cardRect.top}px`,
-            "--card-start-height": `${cardRect.height}px`,
-            "--nav-height": "61px",
-          } as React.CSSProperties}
-        >
-          <div 
-            className={`flex items-center gap-4 ${
-              transitionPhase === "repositioning" ? "animate-content-to-hero" : ""
-            }`}
-            style={{
-              paddingTop: transitionPhase === "initial" || transitionPhase === "expanding" ? 40 : undefined,
-              paddingLeft: 24,
-              paddingBottom: 40,
-            }}
-          >
-            <div
-              className="flex items-center justify-center rounded-full"
-              style={{ 
-                backgroundColor: transitionContent.iconBg,
-                width: 64,
-                height: 64,
-              }}
-            >
-              {transitionContent.iconFill ? (
-                <div className="h-8 w-8" style={{ backgroundColor: transitionContent.iconFill }}></div>
-              ) : (
-                <div
-                  className="h-8 w-8 rounded-full border-4"
-                  style={{ borderColor: transitionContent.iconBorder }}
-                ></div>
-              )}
-            </div>
-            <h2 
-              style={{ 
-                color: transitionContent.textColor,
-              }}
-            >
-              {transitionContent.title}
-            </h2>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
