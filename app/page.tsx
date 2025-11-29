@@ -407,7 +407,7 @@ export default function HomePage() {
               "dev",
             )
           }
-          className="group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[#18181b] px-8 pt-[60px] pb-24 transition-all duration-300 hover:bg-[#2d2d2d] hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
+          className="dev-platform-card group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] px-8 pt-[60px] pb-24 transition-all duration-300 hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#3d3d3d]">

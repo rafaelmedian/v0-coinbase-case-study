@@ -523,6 +523,19 @@
 }
 
 /* ============================================
+   Developer Platform Card Gradient
+   ============================================ */
+
+.dev-platform-card {
+  background: linear-gradient(to bottom, #1d1d1d 0%, #151515 100%);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dev-platform-card:hover {
+  background: linear-gradient(to bottom, #2d2d2d 0%, #1d1d1d 100%);
+}
+
+/* ============================================
    Subtle Grain Texture Overlay
    ============================================ */
 
