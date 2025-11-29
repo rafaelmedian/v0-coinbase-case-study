@@ -32,16 +32,12 @@ export default function HomePage() {
           <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-[var(--border-light)] to-transparent" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="group relative bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] transition-all duration-300 hover:bg-[var(--bg-surface-hover)] hover:shadow-xl hover:shadow-black/[0.04] hover:-translate-y-1">
-              {/* Brand accent dot */}
-              <div className="absolute top-8 right-8 h-2.5 w-2.5 rounded-full bg-[var(--color-brand)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)] transition-transform duration-300 group-hover:translate-x-1">$8B</p>
+            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px]">
+              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">$8B</p>
               <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">in onchain volume</p>
             </div>
-            <div className="group relative bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] transition-all duration-300 hover:bg-[var(--bg-surface-hover)] hover:shadow-xl hover:shadow-black/[0.04] hover:-translate-y-1">
-              {/* Brand accent dot */}
-              <div className="absolute top-8 right-8 h-2.5 w-2.5 rounded-full bg-[var(--color-brand)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)] transition-transform duration-300 group-hover:translate-x-1">422m</p>
+            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px]">
+              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">422m</p>
               <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">total transactions</p>
             </div>
           </div>
