@@ -38,7 +38,7 @@ export default function Navigation({ activePage }: NavigationProps) {
 
   return (
       <header 
-        className={`sticky top-0 z-50 border-b px-4 py-4 md:px-6 transition-all duration-300 ${
+        className={`sticky top-0 z-50 border-b px-6 py-4 md:px-[50px] transition-all duration-300 ${
           isScrolled 
             ? "bg-white/90 backdrop-blur-md shadow-sm" 
             : "bg-white/95 backdrop-blur-sm"
@@ -98,7 +98,7 @@ export default function Navigation({ activePage }: NavigationProps) {
         <Link href="/start-building" className="hidden md:block">
           <Button
             variant="outline"
-            className="border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--bg-surface)] hover:border-transparent"
+            className="border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--bg-surface)] hover:border-transparent pt-[10px] pb-[7px]"
             style={{ borderColor: "var(--text-primary)", color: "var(--text-primary)" }}
           >
             START BUILDING
@@ -163,7 +163,7 @@ export default function Navigation({ activePage }: NavigationProps) {
             <Link href="/start-building" onClick={() => setIsMenuOpen(false)} className="mt-6">
               <Button
                 variant="outline"
-                className="w-full border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--bg-surface)] hover:border-transparent"
+                className="w-full border bg-transparent text-sm font-medium tracking-wide transition-all duration-200 hover:bg-[var(--bg-surface)] hover:border-transparent pt-[10px] pb-[7px]"
                 style={{ borderColor: "var(--text-primary)", color: "var(--text-primary)" }}
               >
                 START BUILDING
