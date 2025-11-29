@@ -4,8 +4,7 @@
 /* PolySans Font Family - 0x Brand Font */
 @font-face {
   font-family: 'PolySans';
-  src: url('/fonts/PolySans-Slim.woff2') format('woff2'),
-       url('/fonts/PolySans-Slim.woff') format('woff');
+  src: url('/fonts/PolySans-Slim.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -13,8 +12,7 @@
 
 @font-face {
   font-family: 'PolySans';
-  src: url('/fonts/PolySans-Neutral.woff2') format('woff2'),
-       url('/fonts/PolySans-Neutral.woff') format('woff');
+  src: url('/fonts/PolySans-Neutral.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -22,8 +20,7 @@
 
 @font-face {
   font-family: 'PolySans';
-  src: url('/fonts/PolySans-Median.woff2') format('woff2'),
-       url('/fonts/PolySans-Median.woff') format('woff');
+  src: url('/fonts/PolySans-Median.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -66,37 +63,31 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   
-  /* ============================================
-     Semantic Color System - Consolidated Grays
-     ============================================ */
+  /* Brand Colors */
   --color-brand: #0052ff;
   --color-brand-hover: #0048dd;
   --color-brand-light: #c8d4fa;
   
-  /* Text colors - consolidated from multiple grays */
+  /* Text Colors */
   --text-primary: #1d1d1d;
-  --text-secondary: #5e5e5e;    /* Body text, descriptions */
-  --text-muted: #70707b;        /* Captions, labels */
-  --text-subtle: #a0a0ab;       /* Placeholder, disabled */
+  --text-secondary: #5e5e5e;
+  --text-muted: #70707b;
+  --text-subtle: #a0a0ab;
   
-  /* Background colors */
+  /* Background Colors */
   --bg-surface: #f4f4f5;
   --bg-surface-hover: #e8e8ea;
   --bg-card: #f2f2f2;
   --border-light: #e5e5e5;
   --border-subtle: #f2f2f2;
   
-  /* ============================================
-     Grid System - Consistent Layout Values
-     ============================================ */
+  /* Grid System */
   --grid-padding: 24px;
   --grid-padding-lg: 50px;
   --grid-gap: 24px;
   --grid-gap-lg: 32px;
   
-  /* ============================================
-     Modular Type Scale (1.25 ratio)
-     ============================================ */
+  /* Type Scale */
   --text-xs: 12px;
   --text-sm: 14px;
   --text-base: 16px;
@@ -110,23 +101,21 @@
   --text-6xl: 86px;
   --text-7xl: 108px;
   
-  /* Line heights for each scale */
+  /* Line Heights */
   --leading-tight: 0.95;
   --leading-snug: 1.1;
   --leading-normal: 1.4;
   --leading-relaxed: 1.5;
   --leading-loose: 1.65;
   
-  /* Letter spacing presets */
+  /* Letter Spacing */
   --tracking-tighter: -0.03em;
   --tracking-tight: -0.02em;
   --tracking-normal: 0;
   --tracking-wide: 0.05em;
   --tracking-wider: 0.1em;
   
-  /* ============================================
-     Spacing Scale (8px base)
-     ============================================ */
+  /* Spacing Scale */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -141,7 +130,7 @@
   --space-24: 96px;
   --space-32: 128px;
   
-  /* Section spacing */
+  /* Section Spacing */
   --section-padding: 80px;
   --section-padding-lg: 112px;
 }
@@ -230,7 +219,7 @@
     @apply bg-background text-foreground;
   }
   
-  /* Semantic Typography Heading System - Refined line-heights */
+  /* Typography */
   h1 {
     font-size: 64px;
     line-height: 1.1;
@@ -274,174 +263,26 @@
     line-height: 1.5;
   }
   
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
   
-  /* Selection styling with brand color */
   ::selection {
     background-color: var(--color-brand);
     color: white;
   }
   
-  /* Focus-visible states for accessibility */
   :focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 2px;
   }
   
-  /* Remove focus outline for mouse users */
   :focus:not(:focus-visible) {
     outline: none;
   }
 }
 
-/* ============================================
-   Card Expansion Page Transition Animations
-   ============================================ */
-
-/* Navigation height - card expands below this */
-:root {
-  --nav-height: 61px;
-}
-
-/* Phase 1: Card expands from its position to fill viewport below nav */
-@keyframes card-expand {
-  0% {
-    top: var(--card-start-top, 50%);
-    height: var(--card-start-height, 120px);
-    border-radius: 30px 30px 0 0;
-  }
-  100% {
-    top: var(--nav-height);
-    height: calc(100vh - var(--nav-height));
-    border-radius: 40px 40px 0 0;
-  }
-}
-
-/* Phase 2: Content repositions from card position to hero position */
-/* Matches PageHero: py-12 (48px), px-6 (24px), p-8 inner (32px) */
-@keyframes content-to-hero {
-  0% {
-    padding-top: 40px;
-    padding-left: 24px;
-  }
-  100% {
-    padding-top: 80px;
-    padding-left: 56px;
-  }
-}
-
-/* Fade out animation for page content behind the card */
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Animation classes */
-.animate-card-expand {
-  animation: card-expand 0.7s cubic-bezier(0.32, 0.72, 0, 1) forwards;
-  will-change: top, height, border-radius;
-}
-
-.animate-content-to-hero {
-  animation: content-to-hero 0.4s cubic-bezier(0.32, 0.72, 0, 1) forwards;
-  will-change: padding;
-}
-
-.animate-fade-out {
-  animation: fade-out 0.2s ease-out forwards;
-}
-
-/* GPU acceleration for smooth animations */
-.transition-overlay {
-  will-change: transform, top, height;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* ============================================
-   Global Micro-interactions & Utilities
-   ============================================ */
-
-/* Default transition for interactive elements */
-.interactive {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Hover lift effect */
-.hover-lift {
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.hover-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1),
-              0 4px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-/* Subtle scale on hover */
-.hover-scale {
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.hover-scale:hover {
-  transform: scale(1.02);
-}
-
-/* Nav link underline animation */
-.nav-link {
-  position: relative;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--color-brand);
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* Button glow effect */
-.btn-glow {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.btn-glow:hover {
-  box-shadow: 0 0 20px rgba(0, 82, 255, 0.3);
-}
-
-/* Card with inner shadow for depth */
-.card-depth {
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
-              0 1px 3px 0 rgba(0, 0, 0, 0.04);
-}
-
-/* Gradient overlay utility for hero sections */
-.gradient-depth {
-  position: relative;
-}
-.gradient-depth::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), transparent);
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-/* Mobile menu slide animation */
+/* Mobile Menu Animation */
 @keyframes slide-down {
   from {
     opacity: 0;
@@ -457,48 +298,25 @@
   animation: slide-down 0.2s ease-out forwards;
 }
 
-/* Fade in animation for sections */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.5s ease-out forwards;
-}
-
-/* ============================================
-   Enhanced Typography Utilities
-   ============================================ */
-
-/* Display text - thin weight for large numbers/stats */
+/* Typography Utilities */
 .text-display {
   font-weight: 100;
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-tight);
 }
 
-/* Headline text */
 .text-headline {
   font-weight: 400;
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-snug);
 }
 
-/* Body text */
 .text-body {
   font-weight: 400;
   letter-spacing: var(--tracking-normal);
   line-height: var(--leading-normal);
 }
 
-/* Caption/label text */
 .text-caption {
   font-weight: 500;
   letter-spacing: var(--tracking-wider);
@@ -507,10 +325,7 @@
   font-size: var(--text-sm);
 }
 
-/* ============================================
-   Scroll Progress Indicator
-   ============================================ */
-
+/* Scroll Progress Indicator */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -522,10 +337,7 @@
   transition: width 0.1s linear;
 }
 
-/* ============================================
-   Developer Platform Card Gradient
-   ============================================ */
-
+/* Developer Platform Card */
 .dev-platform-card {
   background: linear-gradient(to bottom, #1d1d1d 0%, #151515 100%);
   transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -535,57 +347,7 @@
   background: linear-gradient(to bottom, #2d2d2d 0%, #1d1d1d 100%);
 }
 
-/* ============================================
-   Subtle Grain Texture Overlay
-   ============================================ */
-
-.grain-overlay {
-  position: relative;
-}
-
-.grain-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.02;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.grain-overlay > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* ============================================
-   Enhanced Link Animations
-   ============================================ */
-
-.link-underline {
-  position: relative;
-  text-decoration: none;
-}
-
-.link-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: currentColor;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.link-underline:hover::after {
-  width: 100%;
-}
-
-/* ============================================
-   Quote Section Styling
-   ============================================ */
-
+/* Quote Mark */
 .quote-mark {
   position: absolute;
   font-size: 200px;
@@ -598,49 +360,3 @@
   top: -20px;
   left: -10px;
 }
-
-/* ============================================
-   Staggered Animation Delays
-   ============================================ */
-
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
-
-/* ============================================
-   Section Divider
-   ============================================ */
-
-.section-divider {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-light) 20%,
-    var(--border-light) 80%,
-    transparent
-  );
-}
-
-/* ============================================
-   Vignette Effect
-   ============================================ */
-
-.vignette {
-  position: relative;
-}
-
-.vignette::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 60%,
-    rgba(0, 0, 0, 0.02) 100%
-  );
-}
-
