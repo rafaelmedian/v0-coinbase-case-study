@@ -16,8 +16,8 @@ export default function BaseAppPage() {
         bgColor="#0052ff"
         textColor="#ffffff"
         icon={
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white">
-            <div className="h-8 w-8 bg-[#0052ff]"></div>
+          <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-white">
+            <div className="h-10 w-10 bg-[#0052ff]"></div>
           </div>
         }
         stats={[

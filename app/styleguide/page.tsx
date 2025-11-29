@@ -351,8 +351,8 @@ export default function StyleguidePage() {
                     bgColor="#c8d4fa"
                     textColor="#1d1d1d"
                     icon={
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0052ff]">
-                        <div className="h-8 w-8 rounded-full border-4 border-white"></div>
+                      <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-[#0052ff]">
+                        <div className="h-10 w-10 rounded-full border-4 border-white"></div>
                       </div>
                     }
                     stats={[

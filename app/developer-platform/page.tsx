@@ -17,8 +17,8 @@ export default function DeveloperPlatformPage() {
         bgColor="#18181b"
         textColor="#ffffff"
         icon={
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2d2d2d]">
-            <div className="h-8 w-8 rounded-full border-4 border-[#0052ff]"></div>
+          <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-[#2d2d2d]">
+            <div className="h-10 w-10 rounded-full border-4 border-[#0052ff]"></div>
           </div>
         }
         stats={[
