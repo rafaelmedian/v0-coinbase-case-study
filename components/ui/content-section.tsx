@@ -5,16 +5,22 @@ interface ContentSectionProps {
   children: React.ReactNode
   showBorder?: boolean
   className?: string
+  id?: string
 }
 
 export function ContentSection({ 
   label, 
   children, 
   showBorder = true, 
-  className 
+  className,
+  id 
 }: ContentSectionProps) {
+  const sectionId = id || label?.toLowerCase().replace(/\s+/g, '-')
+  
   return (
     <section 
+      id={sectionId}
+      aria-labelledby={label ? `${sectionId}-label` : undefined}
       className={cn(
         "px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] md:py-[var(--section-padding)]",
         showBorder && "border-t border-[var(--border-subtle)]"
@@ -25,8 +31,11 @@ export function ContentSection({
         <div>
           {label && (
             <div className="flex items-start gap-2">
-              <span className="mt-1 inline-block h-3 w-3 shrink-0 rounded-[2px] bg-[var(--color-brand)]"></span>
-              <span className="text-sm font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
+              <span className="mt-1 inline-block h-3 w-3 shrink-0 rounded-[2px] bg-[var(--color-brand)]" aria-hidden="true" />
+              <span 
+                id={`${sectionId}-label`}
+                className="text-sm font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]"
+              >
                 {label}
               </span>
             </div>
