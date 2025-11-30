@@ -1,7 +1,7 @@
 import Navigation from "@/components/navigation"
 import { ContentSection } from "@/components/ui/content-section"
 import { Footer } from "@/components/ui/footer"
-import { HeroNavigationCards } from "@/components/ui/hero-nav-cards"
+import { NavigationCards } from "@/components/ui/navigation-cards"
 import { DottedPattern } from "@/components/ui/dotted-pattern"
 import { AnimatedCounter } from "@/components/ui/animated-counter"
 
@@ -38,11 +38,11 @@ export default function HomePage() {
         <div className="hidden md:block absolute inset-x-0 -top-[400px] h-[700px] lg:h-[800px] z-0 pointer-events-none">
           <DottedPattern className="w-full h-full" corner="bottom-both" />
         </div>
-        <HeroNavigationCards className="w-full relative z-10" />
+        <NavigationCards className="w-full relative z-10" />
       </div>
 
       {/* Stats Section - Full width with animated counters */}
-      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
+      <section className="relative z-40 bg-white px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
         <div className="relative">
           {/* Subtle divider line between cards on desktop */}
           <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-[var(--border-light)] to-transparent" />
@@ -89,17 +89,21 @@ export default function HomePage() {
       {/* Quote Section */}
       <ContentSection showBorder={false}>
         <div className="relative">
-          {/* Large decorative quote mark */}
-          <span className="quote-mark">"</span>
+          {/* Large decorative quote mark SVG */}
+          <img 
+            src="/images/quote-mark.svg" 
+            alt="" 
+            className="w-[89px] h-[67px] mb-6 select-none"
+            aria-hidden="true"
+          />
           <blockquote className="relative">
-            <p className="text-[var(--text-2xl)] md:text-[var(--text-3xl)] leading-[var(--leading-snug)] font-normal text-[var(--text-primary)] mb-10">
-              0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
+            <p className="text-[clamp(1.75rem,5vw,3rem)] leading-[1.2] font-normal text-[var(--text-primary)] mb-10">
+              Quote from team. 0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
             </p>
             <footer>
               <div className="w-16 h-1 bg-[var(--color-brand)] mb-5 rounded-full"></div>
               <cite className="not-italic">
-                <span className="block text-[var(--text-base)] font-medium text-[var(--text-primary)]">Name</span>
-                <span className="block text-[var(--text-sm)] text-[var(--text-muted)] mt-1">Role at Company</span>
+                <span className="block text-[var(--text-base)] font-medium text-[var(--text-primary)]">Name and role</span>
               </cite>
             </footer>
           </blockquote>
@@ -112,20 +116,28 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
             <div className="h-3 w-3 bg-[var(--color-brand)] mb-8 rounded-sm"></div>
-            <p className="text-[var(--text-5xl)] text-display text-[var(--text-primary)]">
+            <p className="text-[clamp(3rem,8vw,5.5rem)] text-display text-[var(--text-primary)]">
               {"<500"}
-              <span className="text-[var(--text-2xl)]">ms</span>
+              <span className="text-[clamp(1.5rem,3vw,2.5rem)]">ms</span>
             </p>
             <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">median response rate</p>
           </div>
           <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
-            <div className="h-3 w-full bg-gradient-to-r from-[var(--color-brand)] via-[#00cc88] to-[#00cc88] mb-8 rounded-full"></div>
-            <p className="text-[var(--text-5xl)] text-display text-[var(--text-primary)]">99.9%</p>
+            {/* Uptime indicator dots */}
+            <div className="flex gap-1 mb-8 flex-wrap">
+              {Array.from({ length: 72 }).map((_, i) => (
+                <div 
+                  key={i} 
+                  className="w-[2px] h-[9px] rounded-sm bg-[#01a74d]"
+                />
+              ))}
+            </div>
+            <p className="text-[clamp(3rem,8vw,5.5rem)] text-display text-[var(--text-primary)]">99.9%</p>
             <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">uptime</p>
           </div>
           <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
             <div className="h-3 mb-8"></div>
-            <p className="text-[var(--text-5xl)] text-display text-[var(--text-primary)]">4.4%</p>
+            <p className="text-[clamp(3rem,8vw,5.5rem)] text-display text-[var(--text-primary)]">4.4%</p>
             <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">revert rates</p>
           </div>
         </div>
@@ -224,10 +236,10 @@ export default function HomePage() {
       </ContentSection>
 
       {/* Navigation Cards Section - positioned right above footer */}
-      <HeroNavigationCards className="w-full" />
+      <NavigationCards className="w-full" />
 
       {/* Footer - seamlessly connected to Developer Platform card */}
-      <Footer className="-mt-10" />
+      <Footer />
     </div>
   )
 }

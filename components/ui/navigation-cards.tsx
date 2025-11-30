@@ -1,90 +1,145 @@
 import Link from "next/link"
 import Image from "next/image"
 
-interface NavigationCardsProps {
+// Diagonal arrow icon pointing up-right
+function DiagonalArrow({ color = "currentColor" }: { color?: string }) {
+  return (
+    <svg
+      className="h-8 w-8 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7 17L17 7" />
+      <path d="M7 7h10v10" />
+    </svg>
+  )
+}
+
+// Variant configurations
+const variantConfig = {
+  light: {
+    bg: "bg-[#c8d4fa]",
+    bgColor: "#c8d4fa",
+    textColor: "text-[#26272b]",
+    arrowColor: "#26272b",
+    shadow: "shadow-[0_4px_20px_rgba(200,212,250,0.3),0_8px_40px_rgba(0,82,255,0.08)]",
+    hoverShadow: "hover:shadow-[0_8px_30px_rgba(200,212,250,0.5),0_16px_50px_rgba(0,82,255,0.15)]",
+    glow: "hover:ring-2 hover:ring-[#a8b8e8]/30",
+  },
+  blue: {
+    bg: "bg-[#0052ff]",
+    bgColor: "#0052ff",
+    textColor: "text-white",
+    arrowColor: "white",
+    shadow: "hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]",
+  },
+  dark: {
+    bg: "bg-[#26272b]",
+    bgColor: "#26272b",
+    textColor: "text-white",
+    arrowColor: "white",
+    shadow: "hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]",
+  },
+}
+
+// Card configuration interface
+export interface CardConfig {
+  href: string
+  title: string
+  variant: "light" | "blue" | "dark"
+  logo?: string
+}
+
+// Default cards configuration
+const defaultCards: CardConfig[] = [
+  { href: "/retail-dex", title: "DEX Trading", variant: "light" },
+  { href: "/base-app", title: "Base App", variant: "blue", logo: "/images/base-app-icon.svg" },
+  { href: "/developer-platform", title: "Developer Platform", variant: "dark" },
+]
+
+interface ProductCardProps {
+  href: string
+  title: string
+  variant: "light" | "blue" | "dark"
+  logo?: string
+  zIndex?: number
+  isLast?: boolean
   className?: string
 }
 
-export function NavigationCards({ className }: NavigationCardsProps) {
+export function ProductCard({ 
+  href, 
+  title, 
+  variant, 
+  logo = "/images/coinbase-icon.svg",
+  zIndex = 10, 
+  isLast = false,
+  className = "" 
+}: ProductCardProps) {
+  const config = variantConfig[variant]
+  
   return (
-    <nav className={className} aria-label="Case study sections">
-      {/* DEX Trading Section */}
-      <Link
-        href="/retail-dex"
-        aria-label="Learn about DEX Trading integration"
-        className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand-light)] px-8 py-16 pt-10 pb-12 transition-all duration-300 hover:bg-[#b8c4ea] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]"
-      >
-        <div className="flex items-center gap-4">
-          <Image
-            src="/images/coinbase-icon.svg"
-            alt="Coinbase"
-            width={48}
-            height={48}
-            className="rounded-full transition-transform duration-300 group-hover:scale-110"
-          />
-          <h2 className="text-4xl font-normal text-[var(--text-primary)] md:text-5xl">DEX Trading</h2>
-        </div>
-        <svg
-          className="h-6 w-6 text-[var(--text-primary)] transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </Link>
+    <Link
+      href={href}
+      aria-label={`Learn about ${title} integration`}
+      className={`
+        group relative flex w-full items-center justify-between 
+        rounded-tl-[30px] rounded-tr-[30px] 
+        px-8 pt-10
+        ${isLast ? "pb-[76px]" : "pb-[100px]"}
+        transition-all duration-300 ease-out
+        hover:-translate-y-3
+        ${config.bg} ${config.shadow}
+        ${className}
+      `}
+      style={{ zIndex }}
+    >
+      {/* Background extension to fill gap when card lifts on hover */}
+      <div 
+        className="absolute inset-x-0 bottom-0 h-8 translate-y-full -z-10"
+        style={{ backgroundColor: config.bgColor }}
+      />
+      <div className="flex items-center gap-6">
+        <Image
+          src={logo}
+          alt={title}
+          width={85}
+          height={85}
+          className="rounded-full"
+        />
+        <h2 className={`text-[32px] md:text-[36px] font-normal ${config.textColor}`}>
+          {title}
+        </h2>
+      </div>
+      <DiagonalArrow color={config.arrowColor} />
+    </Link>
+  )
+}
 
-      {/* Base App Section */}
-      <Link
-        href="/base-app"
-        aria-label="Learn about Base App integration"
-        className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand)] px-8 py-16 pb-12 transition-all duration-300 hover:bg-[var(--color-brand-hover)] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]"
-      >
-        <div className="flex items-center gap-4">
-          <Image
-            src="/images/base-app-icon.svg"
-            alt="Base App"
-            width={48}
-            height={48}
-            className="rounded-full transition-transform duration-300 group-hover:scale-110"
-          />
-          <h2 className="text-4xl font-normal text-white md:text-5xl">Base App</h2>
-        </div>
-        <svg
-          className="h-6 w-6 text-white transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </Link>
+interface NavigationCardsProps {
+  cards?: CardConfig[]
+  className?: string
+}
 
-      {/* Developer Platform Section */}
-      <Link
-        href="/developer-platform"
-        aria-label="Learn about Developer Platform integration"
-        className="dev-platform-card group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] px-8 pt-[60px] pb-24 transition-all duration-300 hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
-      >
-        <div className="flex items-center gap-4">
-          <Image
-            src="/images/coinbase-icon.svg"
-            alt="Coinbase"
-            width={48}
-            height={48}
-            className="rounded-full transition-transform duration-300 group-hover:scale-110"
-          />
-          <h2 className="text-4xl font-normal text-white md:text-5xl">Developer Platform</h2>
-        </div>
-        <svg
-          className="h-6 w-6 text-white transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </Link>
+export function NavigationCards({ cards = defaultCards, className }: NavigationCardsProps) {
+  return (
+    <nav className={className} aria-label="Product sections">
+      {cards.map((card, index) => (
+        <ProductCard
+          key={card.href}
+          href={card.href}
+          title={card.title}
+          variant={card.variant}
+          logo={card.logo}
+          zIndex={(index + 1) * 10}
+          isLast={index === cards.length - 1}
+          className={index > 0 ? "-mt-[60px]" : ""}
+        />
+      ))}
     </nav>
   )
 }

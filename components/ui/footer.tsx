@@ -39,10 +39,10 @@ const footerLinks = {
 export function Footer({ className }: FooterProps) {
   return (
     <footer className={cn(
-      "relative bg-[#18181b] overflow-hidden",
+      "relative z-40 bg-[#18181b] overflow-hidden",
       className
     )}>
-      {/* Colorful gradient bar */}
+      {/* Colorful gradient divider - positioned above footer content */}
       <div className="flex h-[3px] w-full">
         <div className="flex-1 bg-[#1e54ff]" />
         <div className="flex-1 bg-[#8f5af4]" />
@@ -51,7 +51,7 @@ export function Footer({ className }: FooterProps) {
         <div className="flex-1 bg-[#ca2240]" />
       </div>
 
-      <div className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-16 pb-8">
+      <div className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-12 pb-0">
         {/* Main footer content - aligned with 4-column grid */}
         <div className="grid grid-cols-1 gap-[var(--grid-gap)] lg:grid-cols-4 lg:gap-[var(--grid-gap-lg)]">
           {/* Developers column */}
@@ -128,10 +128,10 @@ export function Footer({ className }: FooterProps) {
           </div>
         </div>
 
-        {/* ZEROEX watermark - positioned at absolute bottom */}
-        <div className="relative mt-16 overflow-hidden -mb-8 translate-y-[15%]">
+        {/* ZEROEX watermark - left-aligned and extending off the bottom */}
+        <div className="relative mt-12 overflow-hidden">
           <p 
-            className="text-[clamp(80px,20vw,291px)] font-medium leading-[1] tracking-[-0.02em] text-center select-none"
+            className="text-[clamp(80px,20vw,291px)] font-medium leading-[1.1] tracking-[-0.02em] text-left select-none translate-y-[30%]"
             style={{
               background: 'linear-gradient(rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0) 100%)',
               backgroundClip: 'text',
