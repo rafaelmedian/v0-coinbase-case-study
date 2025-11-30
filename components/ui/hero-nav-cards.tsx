@@ -1,30 +1,5 @@
 import Link from "next/link"
-
-// Coinbase "C" logo component
-function CoinbaseLogo({ variant = "blue" }: { variant?: "blue" | "white" | "outline" }) {
-  if (variant === "white") {
-    return (
-      <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-white">
-        <div className="h-[42px] w-[42px] rounded-sm bg-[#0052ff]" />
-      </div>
-    )
-  }
-  
-  if (variant === "outline") {
-    return (
-      <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-[#2d2d2d]">
-        <div className="h-[42px] w-[42px] rounded-full border-[5px] border-[#0052ff]" />
-      </div>
-    )
-  }
-  
-  // Default blue variant
-  return (
-    <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-[#0052ff]">
-      <div className="h-[42px] w-[42px] rounded-full border-[5px] border-white" />
-    </div>
-  )
-}
+import Image from "next/image"
 
 // Diagonal arrow icon pointing up-right
 function DiagonalArrow({ color = "currentColor" }: { color?: string }) {
@@ -48,23 +23,25 @@ function DiagonalArrow({ color = "currentColor" }: { color?: string }) {
 const variantConfig = {
   light: {
     bg: "bg-[#c8d4fa]",
+    bgColor: "#c8d4fa",
     textColor: "text-[#26272b]",
     arrowColor: "#26272b",
-    logoVariant: "blue" as const,
-    shadow: "hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]",
+    shadow: "shadow-[0_4px_20px_rgba(200,212,250,0.3),0_8px_40px_rgba(0,82,255,0.08)]",
+    hoverShadow: "hover:shadow-[0_8px_30px_rgba(200,212,250,0.5),0_16px_50px_rgba(0,82,255,0.15)]",
+    glow: "hover:ring-2 hover:ring-[#a8b8e8]/30",
   },
   blue: {
     bg: "bg-[#0052ff]",
+    bgColor: "#0052ff",
     textColor: "text-white",
     arrowColor: "white",
-    logoVariant: "white" as const,
     shadow: "hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]",
   },
   dark: {
     bg: "bg-[#26272b]",
+    bgColor: "#26272b",
     textColor: "text-white",
     arrowColor: "white",
-    logoVariant: "outline" as const,
     shadow: "hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]",
   },
 }
@@ -73,6 +50,7 @@ interface ProductCardProps {
   href: string
   title: string
   variant: "light" | "blue" | "dark"
+  logo?: string
   zIndex?: number
   isLast?: boolean
   className?: string
@@ -82,6 +60,7 @@ export function ProductCard({
   href, 
   title, 
   variant, 
+  logo = "/images/coinbase-icon.svg",
   zIndex = 10, 
   isLast = false,
   className = "" 
@@ -95,17 +74,28 @@ export function ProductCard({
       className={`
         group relative flex w-full items-center justify-between 
         rounded-tl-[30px] rounded-tr-[30px] 
-        px-8 pt-10 pb-[52px]
+        px-8 pt-10
         ${isLast ? "pb-[76px]" : "pb-[52px]"}
-        transition-all duration-300 
+        transition-all duration-300 ease-out
         hover:-translate-y-3
         ${config.bg} ${config.shadow}
         ${className}
       `}
       style={{ zIndex }}
     >
+      {/* Background extension to fill gap when card lifts on hover */}
+      <div 
+        className="absolute inset-x-0 bottom-0 h-8 translate-y-full -z-10"
+        style={{ backgroundColor: config.bgColor }}
+      />
       <div className="flex items-center gap-6">
-        <CoinbaseLogo variant={config.logoVariant} />
+        <Image
+          src={logo}
+          alt={title}
+          width={85}
+          height={85}
+          className="rounded-full"
+        />
         <h2 className={`text-[32px] md:text-[36px] font-normal ${config.textColor}`}>
           {title}
         </h2>
@@ -132,6 +122,7 @@ export function HeroNavigationCards({ className }: HeroNavigationCardsProps) {
         href="/base-app"
         title="Base App"
         variant="blue"
+        logo="/images/base-app-icon.svg"
         zIndex={20}
         className="-mt-6"
       />

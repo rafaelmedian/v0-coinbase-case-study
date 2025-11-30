@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from "next/image"
 import Navigation from "@/components/navigation"
 import PageHero from "@/components/page-hero"
 import { ContentSection } from "@/components/ui/content-section"
@@ -23,9 +24,13 @@ export default function DeveloperPlatformPage() {
         bgColor="#18181b"
         textColor="#ffffff"
         icon={
-          <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-[#2d2d2d]">
-            <div className="h-10 w-10 rounded-full border-4 border-[#0052ff]"></div>
-          </div>
+          <Image
+            src="/images/coinbase-icon.svg"
+            alt="Coinbase"
+            width={85}
+            height={85}
+            className="rounded-full"
+          />
         }
         stats={[
           { value: "$XB", label: "in onchain volume" },

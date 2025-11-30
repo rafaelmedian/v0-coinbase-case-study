@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 interface NavigationCardsProps {
   className?: string
@@ -14,9 +15,13 @@ export function NavigationCards({ className }: NavigationCardsProps) {
         className="group relative z-10 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand-light)] px-8 py-16 pt-10 pb-12 transition-all duration-300 hover:bg-[#b8c4ea] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.15)]"
       >
         <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-brand)] transition-transform duration-300 group-hover:scale-110">
-            <div className="h-6 w-6 rounded-full border-4 border-white"></div>
-          </div>
+          <Image
+            src="/images/coinbase-icon.svg"
+            alt="Coinbase"
+            width={48}
+            height={48}
+            className="rounded-full transition-transform duration-300 group-hover:scale-110"
+          />
           <h2 className="text-4xl font-normal text-[var(--text-primary)] md:text-5xl">DEX Trading</h2>
         </div>
         <svg
@@ -36,9 +41,13 @@ export function NavigationCards({ className }: NavigationCardsProps) {
         className="group relative z-20 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] bg-[var(--color-brand)] px-8 py-16 pb-12 transition-all duration-300 hover:bg-[var(--color-brand-hover)] hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]"
       >
         <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-110">
-            <div className="h-6 w-6 bg-[var(--color-brand)]"></div>
-          </div>
+          <Image
+            src="/images/base-app-icon.svg"
+            alt="Base App"
+            width={48}
+            height={48}
+            className="rounded-full transition-transform duration-300 group-hover:scale-110"
+          />
           <h2 className="text-4xl font-normal text-white md:text-5xl">Base App</h2>
         </div>
         <svg
@@ -58,9 +67,13 @@ export function NavigationCards({ className }: NavigationCardsProps) {
         className="dev-platform-card group relative z-30 -mt-8 flex w-full items-center justify-between rounded-tl-[30px] rounded-tr-[30px] px-8 pt-[60px] pb-24 transition-all duration-300 hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]"
       >
         <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#3d3d3d]">
-            <div className="h-6 w-6 rounded-full border-4 border-[var(--color-brand)]"></div>
-          </div>
+          <Image
+            src="/images/coinbase-icon.svg"
+            alt="Coinbase"
+            width={48}
+            height={48}
+            className="rounded-full transition-transform duration-300 group-hover:scale-110"
+          />
           <h2 className="text-4xl font-normal text-white md:text-5xl">Developer Platform</h2>
         </div>
         <svg

@@ -217,6 +217,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "zero" 1;
   }
   
   /* Typography */
@@ -301,26 +302,32 @@
 /* Typography Utilities */
 .text-display {
   font-weight: 100;
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
 }
 
 .text-headline {
   font-weight: 400;
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-snug);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.text-subhead {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .text-body {
   font-weight: 400;
-  letter-spacing: var(--tracking-normal);
-  line-height: var(--leading-normal);
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .text-caption {
   font-weight: 500;
-  letter-spacing: var(--tracking-wider);
-  line-height: var(--leading-relaxed);
+  letter-spacing: 0.05em;
+  line-height: 1.5;
   text-transform: uppercase;
   font-size: var(--text-sm);
 }

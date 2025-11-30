@@ -3,29 +3,28 @@ import { ContentSection } from "@/components/ui/content-section"
 import { Footer } from "@/components/ui/footer"
 import { HeroNavigationCards } from "@/components/ui/hero-nav-cards"
 import { DottedPattern } from "@/components/ui/dotted-pattern"
+import { AnimatedCounter } from "@/components/ui/animated-counter"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section - Two column layout with dotted pattern on right */}
-      <section className="relative px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] md:py-[var(--section-padding)] overflow-hidden">
-        {/* Dotted Pattern - positioned on the right */}
-        <div className="hidden lg:block absolute top-[50px] right-[-200px] xl:right-[-100px] w-[700px] xl:w-[900px] h-[700px] xl:h-[900px]">
-          <DottedPattern className="w-full h-full" />
+      {/* Hero Section with subtle corner grid patterns */}
+      <section className="relative px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-[var(--space-20)] pb-[var(--space-24)] md:pt-[120px] md:pb-[140px]">
+        {/* Unified grid spanning full width with both bottom corners */}
+        <div className="hidden md:block absolute inset-x-0 bottom-0 h-[500px] lg:h-[600px]">
+          <DottedPattern className="w-full h-full" corner="bottom-both" />
         </div>
 
-        <div className="relative z-10">
-          <h1 className="mb-12 text-[clamp(3rem,8vw,5.5rem)] font-normal leading-[var(--leading-tight)] tracking-[var(--tracking-tighter)] text-headline">
-            <span className="text-[var(--text-primary)]">Delivering end-to-end</span>
-            <br />
-            <span className="text-[var(--color-brand)]">onchain swap infrastructure</span>
-            <br />
-            <span className="text-[var(--text-primary)]">with Coinbase</span>
+        <div className="relative z-10 pointer-events-none">
+          <h1 className="mb-12 text-[clamp(3.5rem,8vw,6rem)] leading-[1.1] tracking-[-0.02em] text-headline font-normal">
+            <span className="block text-[var(--text-primary)]">0x + Coinbase:</span>
+            <span className="block text-[var(--text-primary)]">Powering the next billion</span>
+            <span className="block text-[var(--color-brand)]">onchain users</span>
           </h1>
 
-          <p className="max-w-[750px] text-[var(--text-lg)] leading-[var(--leading-normal)] text-[var(--text-secondary)] text-body">
+          <p className="max-w-[750px] text-[var(--text-lg)] leading-[1.4] text-[var(--text-secondary)] text-body">
             Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
             experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
             Platform.
@@ -33,23 +32,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Hero Navigation Cards - Full width */}
-      <HeroNavigationCards className="w-full" />
+      {/* Hero Navigation Cards with grid bleeding behind */}
+      <div className="relative">
+        {/* Grid pattern that bleeds from hero into cards */}
+        <div className="hidden md:block absolute inset-x-0 -top-[400px] h-[700px] lg:h-[800px] z-0 pointer-events-none">
+          <DottedPattern className="w-full h-full" corner="bottom-both" />
+        </div>
+        <HeroNavigationCards className="w-full relative z-10" />
+      </div>
 
-      {/* Stats Section - Full width */}
+      {/* Stats Section - Full width with animated counters */}
       <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
         <div className="relative">
           {/* Subtle divider line between cards on desktop */}
           <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-[var(--border-light)] to-transparent" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px]">
-              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">$8B</p>
+            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] group">
+              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">
+                <AnimatedCounter value="$8B" duration={2000} />
+              </p>
               <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">in onchain volume</p>
+              <p className="text-[var(--text-xs)] text-[var(--color-brand)] mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Powered by DEX Trading infrastructure
+              </p>
             </div>
-            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px]">
-              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">422m</p>
+            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] group">
+              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">
+                <AnimatedCounter value="422m" duration={2500} />
+              </p>
               <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">total transactions</p>
+              <p className="text-[var(--text-xs)] text-[var(--color-brand)] mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Across Coinbase products
+              </p>
             </div>
           </div>
         </div>

@@ -83,15 +83,6 @@ export default function Navigation({ activePage }: NavigationProps) {
               {link.label}
             </Link>
           ))}
-          <span className="w-px h-4 bg-[var(--border-light)]" aria-hidden="true" />
-          <Link
-            href="/styleguide"
-            className={`text-sm font-medium tracking-wide transition-all duration-200 hover:text-[var(--text-secondary)] ${
-              activePage === "styleguide" ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
-            }`}
-          >
-            STYLEGUIDE
-          </Link>
         </nav>
 
         {/* Desktop CTA Button */}
@@ -150,16 +141,6 @@ export default function Navigation({ activePage }: NavigationProps) {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/styleguide"
-              onClick={() => setIsMenuOpen(false)}
-              className={`border-b py-4 text-base font-medium transition-colors duration-200 hover:text-[var(--text-secondary)] ${
-                activePage === "styleguide" ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
-              }`}
-              style={{ borderColor: "var(--border-subtle)" }}
-            >
-              STYLEGUIDE
-            </Link>
             <Link href="/start-building" onClick={() => setIsMenuOpen(false)} className="mt-6">
               <Button
                 variant="outline"

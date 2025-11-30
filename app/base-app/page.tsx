@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from "next/image"
 import Navigation from "@/components/navigation"
 import PageHero from "@/components/page-hero"
 import { ContentSection } from "@/components/ui/content-section"
@@ -22,9 +23,13 @@ export default function BaseAppPage() {
         bgColor="#0052ff"
         textColor="#ffffff"
         icon={
-          <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-white">
-            <div className="h-10 w-10 bg-[#0052ff]"></div>
-          </div>
+          <Image
+            src="/images/base-app-icon.svg"
+            alt="Base App"
+            width={85}
+            height={85}
+            className="rounded-full"
+          />
         }
         stats={[
           { value: "$XB", label: "in onchain volume" },
