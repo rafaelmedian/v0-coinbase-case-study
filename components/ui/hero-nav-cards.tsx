@@ -38,8 +38,8 @@ const variantConfig = {
     shadow: "hover:shadow-[0_-4px_20px_rgba(0,82,255,0.25)]",
   },
   dark: {
-    bg: "bg-[#26272b]",
-    bgColor: "#26272b",
+    bg: "bg-[#18181b]",
+    bgColor: "#18181b",
     textColor: "text-white",
     arrowColor: "white",
     shadow: "hover:shadow-[0_-4px_30px_rgba(0,0,0,0.3)]",

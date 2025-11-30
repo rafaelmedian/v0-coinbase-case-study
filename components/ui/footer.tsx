@@ -40,7 +40,6 @@ export function Footer({ className }: FooterProps) {
   return (
     <footer className={cn(
       "relative bg-[#18181b] overflow-hidden",
-      "before:absolute before:inset-x-0 before:top-0 before:h-24 before:bg-gradient-to-b before:from-white before:to-transparent before:-translate-y-full before:pointer-events-none",
       className
     )}>
       {/* Colorful gradient bar */}
@@ -134,10 +133,10 @@ export function Footer({ className }: FooterProps) {
           <p 
             className="text-[clamp(80px,20vw,291px)] font-medium leading-[1] tracking-[-0.02em] text-center select-none"
             style={{
-              background: 'linear-gradient(to bottom, rgba(255,255,255,0.1) 18%, rgba(255,255,255,0) 100%)',
+              background: 'linear-gradient(rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0) 100%)',
+              backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
             }}
           >
             ZEROEX
