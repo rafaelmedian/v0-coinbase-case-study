@@ -27,10 +27,10 @@ export function ContentSection({
       )}
     >
       <div className="grid grid-cols-1 gap-[var(--grid-gap)] lg:grid-cols-4 lg:gap-[var(--grid-gap-lg)]">
-        {/* Column 1 - Label */}
-        <div>
+        {/* Column 1 - Sticky Label */}
+        <div className="lg:relative">
           {label && (
-            <div className="flex items-start gap-2">
+            <div className="lg:sticky lg:top-[120px] flex items-start gap-2">
               <span className="mt-1 inline-block h-3 w-3 shrink-0 rounded-[2px] bg-[var(--color-brand)]" aria-hidden="true" />
               <span 
                 id={`${sectionId}-label`}

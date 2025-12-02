@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://0x-coinbase.vercel.app'),
   title: 'ZeroEx | Coinbase Case Study',
   description: 'Discover how 0x has become a major strategic partner with Coinbase, powering end-to-end onchain swap infrastructure from DEX trading to the Coinbase Developer Platform.',
   icons: {
@@ -12,14 +13,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ZeroEx | Coinbase Case Study',
     description: 'Discover how 0x has become a major strategic partner with Coinbase, powering end-to-end onchain swap infrastructure.',
-    images: ['/og-image.svg'],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ZeroEx | Coinbase Case Study',
     description: 'Discover how 0x has become a major strategic partner with Coinbase, powering end-to-end onchain swap infrastructure.',
-    images: ['/og-image.svg'],
   },
 }
 
