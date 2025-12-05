@@ -1,244 +1,355 @@
+import Link from "next/link"
+import Image from "next/image"
 import Navigation from "@/components/navigation"
-import { ContentSection } from "@/components/ui/content-section"
 import { Footer } from "@/components/ui/footer"
-import { NavigationCards } from "@/components/ui/navigation-cards"
-import { DottedPattern } from "@/components/ui/dotted-pattern"
-import { AnimatedCounter } from "@/components/ui/animated-counter"
+import { Button } from "@/components/ui/button"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section with subtle corner grid patterns */}
-      <section className="relative px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-[var(--space-20)] pb-[var(--space-24)] md:pt-[120px] md:pb-[140px]">
-        {/* Unified grid spanning full width with both bottom corners */}
-        <div className="hidden md:block absolute inset-x-0 bottom-0 h-[500px] lg:h-[600px]">
-          <DottedPattern className="w-full h-full" corner="bottom-both" />
-        </div>
-
-        <div className="relative z-10 pointer-events-none">
-          <h1 className="mb-12 text-[clamp(3.5rem,8vw,6rem)] leading-[1.1] tracking-[-0.02em] text-headline font-normal">
-            <span className="block text-[var(--text-primary)]">0x + Coinbase:</span>
-            <span className="block text-[var(--text-primary)]">Powering the next billion</span>
-            <span className="block text-[var(--color-brand)]">onchain users</span>
-          </h1>
-
-          <p className="max-w-[750px] text-[var(--text-lg)] leading-[1.4] text-[var(--text-secondary)] text-body">
-            Discover how 0x has become a major strategic partner with Coinbase, powering an end-to-end onchain trading
-            experience with core infrastructure at every layer of the stack - from DEX trading to the Coinbase Developer
-            Platform.
+      {/* Hero Section - Problem/Solution Focus */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-[var(--space-16)] pb-[var(--space-12)] md:pt-[100px] md:pb-[80px]">
+        <div className="max-w-[1100px]">
+          {/* Eyebrow */}
+          <p className="text-[var(--color-brand)] text-[var(--text-sm)] uppercase tracking-[0.15em] font-medium mb-6">
+            Coinbase Partnership
           </p>
-        </div>
-      </section>
-
-      {/* Hero Navigation Cards with grid bleeding behind */}
-      <div className="relative">
-        {/* Grid pattern that bleeds from hero into cards */}
-        <div className="hidden md:block absolute inset-x-0 -top-[400px] h-[700px] lg:h-[800px] z-0 pointer-events-none">
-          <DottedPattern className="w-full h-full" corner="bottom-both" />
-        </div>
-        <NavigationCards className="w-full relative z-10" />
-      </div>
-
-      {/* Stats Section - Full width with animated counters */}
-      <section className="relative z-40 bg-white px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
-        <div className="relative">
-          {/* Subtle divider line between cards on desktop */}
-          <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-[var(--border-light)] to-transparent" />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] group">
-              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">
-                <AnimatedCounter value="$8B" duration={2000} />
+          {/* Main Headline */}
+          <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] font-normal mb-8">
+            Enterprise-grade swap infrastructure for the onchain era
+          </h1>
+          
+          {/* Subheadline */}
+          <p className="text-[clamp(1.25rem,2.5vw,1.5rem)] leading-[1.4] text-[var(--text-secondary)] max-w-[800px] mb-12">
+            0x is a major strategic Coinbase partner, powering end-to-end onchain trading at every layer of the stack. 
+            Discover how your app can capture onchain demand with infrastructure that meets the standards of a regulated, enterprise-grade exchange.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 mb-16">
+            <Link href="/start-building">
+              <Button className="bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white px-8 py-6 text-[var(--text-base)] rounded-full">
+                Start Building
+              </Button>
+            </Link>
+            <Link href="/retail-dex">
+              <Button variant="outline" className="border-[var(--text-primary)] text-[var(--text-primary)] px-8 py-6 text-[var(--text-base)] rounded-full hover:bg-[var(--bg-surface)]">
+                Read Case Study
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Stats Bar */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pt-8 border-t border-[var(--border-subtle)]">
+          <div>
+            <p className="text-[clamp(2.5rem,6vw,4rem)] text-display text-[var(--text-primary)] leading-none">
+              9M+
+            </p>
+            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-2">wallets trading through 0x API</p>
+          </div>
+          <div>
+            <p className="text-[clamp(2.5rem,6vw,4rem)] text-display text-[var(--text-primary)] leading-none">
+              99.9%
+            </p>
+            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-2">uptime</p>
+          </div>
+          <div>
+            <p className="text-[clamp(2.5rem,6vw,4rem)] text-display text-[var(--text-primary)] leading-none">
+              {"<500ms"}
+            </p>
+            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-2">median response time</p>
+          </div>
+        </div>
+      </section>
+
+      {/* About Coinbase - Brief Context */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)] bg-[var(--bg-card)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+          <div className="lg:col-span-4">
+            <p className="text-[var(--text-sm)] uppercase tracking-[0.15em] text-[var(--text-muted)] font-medium mb-4">
+              About Coinbase
+            </p>
+            <p className="text-[clamp(1.5rem,3vw,2rem)] leading-[1.3] text-[var(--text-primary)]">
+              The industry leader in crypto exchange and custody.
+            </p>
+          </div>
+          <div className="lg:col-span-8">
+            <p className="text-[var(--text-lg)] leading-[1.5] text-[var(--text-secondary)] mb-6">
+              Coinbase is a U.S.-based cryptocurrency exchange and custodian that operates in 100+ countries and serves over 
+              <span className="text-[var(--text-primary)] font-medium"> 120M total users</span>, with 
+              <span className="text-[var(--text-primary)] font-medium"> 8.7M transacting each month</span>. 
+              Its reputation as the industry leader is built upon real-world utility and a trusted, easy-to-use experience.
+            </p>
+            <p className="text-[var(--text-base)] text-[var(--text-muted)]">
+              Today, Coinbase's onchain ecosystem includes three core products—all powered by 0x.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Showcase - Visual Cards */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* DEX Trading Card */}
+          <Link href="/retail-dex" className="group">
+            <div className="bg-[#c8d4fa] rounded-[24px] p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <div className="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center mb-6">
+                <Image
+                  src="/images/coinbase-icon.svg"
+                  alt="Coinbase"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <h3 className="text-[var(--text-xl)] font-normal text-[#26272b] mb-3">
+                DEX Trading
+              </h3>
+              <p className="text-[var(--text-base)] text-[#26272b]/70 mb-6 flex-grow">
+                Millions of tokens available directly inside the main Coinbase App—swap any token instantly.
               </p>
-              <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">in onchain volume</p>
-              <p className="text-[var(--text-xs)] text-[var(--color-brand)] mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Powered by DEX Trading infrastructure
+              <div className="flex items-center gap-2 text-[var(--color-brand)] text-[var(--text-sm)] font-medium group-hover:gap-3 transition-all">
+                Learn more
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M7 17L17 7M7 7h10v10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </Link>
+
+          {/* Base App Card */}
+          <Link href="/base-app" className="group">
+            <div className="bg-[#0052ff] rounded-[24px] p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-6">
+                <Image
+                  src="/images/base-app-icon.svg"
+                  alt="Base App"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <h3 className="text-[var(--text-xl)] font-normal text-white mb-3">
+                Base App
+              </h3>
+              <p className="text-[var(--text-base)] text-white/80 mb-6 flex-grow">
+                Onchain social, payments, and DeFi unified—where every post and creator becomes a tradable asset.
+              </p>
+              <div className="flex items-center gap-2 text-white text-[var(--text-sm)] font-medium group-hover:gap-3 transition-all">
+                Learn more
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M7 17L17 7M7 7h10v10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </Link>
+
+          {/* Developer Platform Card */}
+          <Link href="/developer-platform" className="group">
+            <div className="bg-[#26272b] rounded-[24px] p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-6">
+                <Image
+                  src="/images/coinbase-icon.svg"
+                  alt="CDP"
+                  width={40}
+                  height={40}
+                  className="brightness-0 invert"
+                />
+              </div>
+              <h3 className="text-[var(--text-xl)] font-normal text-white mb-3">
+                Developer Platform
+              </h3>
+              <p className="text-[var(--text-base)] text-white/70 mb-6 flex-grow">
+                The unified toolkit for builders—everything developers need to build great apps on Base.
+              </p>
+              <div className="flex items-center gap-2 text-white text-[var(--text-sm)] font-medium group-hover:gap-3 transition-all">
+                Learn more
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M7 17L17 7M7 7h10v10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* The Shift Section */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] border-t border-[var(--border-subtle)]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div>
+            <p className="text-[var(--text-sm)] uppercase tracking-[0.15em] text-[var(--text-muted)] font-medium mb-6">
+              The Shift
+            </p>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] leading-[1.15] text-[var(--text-primary)] mb-6">
+              Users are moving onchain
+            </h2>
+            <p className="text-[var(--text-lg)] leading-[1.5] text-[var(--text-secondary)]">
+              Tokenization has exploded from a few hundred tokens to tens of millions across dozens of networks. 
+              Users increasingly move onchain to:
+            </p>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center flex-shrink-0 mt-1">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[var(--text-lg)] text-[var(--text-primary)] font-medium">Find newly launched assets in seconds, not weeks</p>
+                <p className="text-[var(--text-base)] text-[var(--text-muted)] mt-1">Access tokens the moment they launch onchain</p>
+              </div>
+            </div>
+            
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center flex-shrink-0 mt-1">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[var(--text-lg)] text-[var(--text-primary)] font-medium">Access DeFi without giving up self-custody</p>
+                <p className="text-[var(--text-base)] text-[var(--text-muted)] mt-1">Full control of assets while using advanced tools</p>
+              </div>
+            </div>
+            
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center flex-shrink-0 mt-1">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[var(--text-lg)] text-[var(--text-primary)] font-medium">Participate in SocialFi and creator economies</p>
+                <p className="text-[var(--text-base)] text-[var(--text-muted)] mt-1">New economic models built on tokenization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Opportunity Section */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-20)] bg-[var(--bg-card)]">
+        <div className="max-w-[900px]">
+          <p className="text-[var(--text-sm)] uppercase tracking-[0.15em] text-[var(--text-muted)] font-medium mb-6">
+            The Opportunity
+          </p>
+          <h2 className="text-[clamp(2rem,4vw,3rem)] leading-[1.15] text-[var(--text-primary)] mb-8">
+            DEX volume is surging as users route around exchanges that can't keep up
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div className="bg-white rounded-[16px] p-6">
+              <p className="text-[var(--text-sm)] uppercase tracking-[0.1em] text-red-500 font-medium mb-3">The Challenge</p>
+              <p className="text-[var(--text-base)] text-[var(--text-secondary)]">
+                Users churn for DEXs to chase long-tail tokens that exchanges can't list or support at onchain speed.
               </p>
             </div>
-            <div className="bg-[var(--bg-card)] p-10 md:p-14 rounded-[24px] group">
-              <p className="text-[clamp(4rem,12vw,7rem)] text-display text-[var(--text-primary)]">
-                <AnimatedCounter value="422m" duration={2500} />
+            <div className="bg-white rounded-[16px] p-6">
+              <p className="text-[var(--text-sm)] uppercase tracking-[0.1em] text-[var(--color-brand)] font-medium mb-3">The Opportunity</p>
+              <p className="text-[var(--text-base)] text-[var(--text-secondary)]">
+                Bring onchain markets into your app instead of competing with them.
               </p>
-              <p className="text-[var(--text-md)] text-[var(--text-muted)] mt-2">total transactions</p>
-              <p className="text-[var(--text-xs)] text-[var(--color-brand)] mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Across Coinbase products
+            </div>
+          </div>
+          
+          <div className="border-l-4 border-[var(--color-brand)] pl-6">
+            <p className="text-[var(--text-xl)] text-[var(--text-primary)] leading-[1.4]">
+              The missing piece? <span className="font-medium">Enterprise-grade swap infrastructure</span> that keeps up with onchain markets and meets demands for reliability, speed, and security.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why 0x Section */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-24)]">
+        <div className="text-center mb-16">
+          <p className="text-[var(--text-sm)] uppercase tracking-[0.15em] text-[var(--text-muted)] font-medium mb-4">
+            Why 0x?
+          </p>
+          <h2 className="text-[clamp(2rem,4vw,3rem)] leading-[1.15] text-[var(--text-primary)]">
+            Three ways 0x powers Coinbase
+          </h2>
+        </div>
+
+        <div className="space-y-16">
+          {/* Value Prop 1 */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-2">
+              <span className="text-[clamp(4rem,10vw,8rem)] text-display text-[var(--color-brand)] leading-none">1</span>
+            </div>
+            <div className="lg:col-span-10">
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.2] text-[var(--text-primary)] mb-4">
+                Expand from hundreds to millions of tokens
+              </h3>
+              <p className="text-[var(--text-lg)] text-[var(--text-secondary)] leading-[1.5] max-w-[700px]">
+                We enabled DEX trading directly within Coinbase Exchange, allowing users to swap any token instantly from a familiar, trusted interface.
+              </p>
+            </div>
+          </div>
+
+          {/* Value Prop 2 */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-2">
+              <span className="text-[clamp(4rem,10vw,8rem)] text-display text-[var(--color-brand)] leading-none">2</span>
+            </div>
+            <div className="lg:col-span-10">
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.2] text-[var(--text-primary)] mb-4">
+                Reimagine the onchain experience
+              </h3>
+              <p className="text-[var(--text-lg)] text-[var(--text-secondary)] leading-[1.5] max-w-[700px]">
+                With 0x powering the Base App, Coinbase unites social, payments, and DeFi—so every post and creator becomes a tradable asset.
+              </p>
+            </div>
+          </div>
+
+          {/* Value Prop 3 */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-2">
+              <span className="text-[clamp(4rem,10vw,8rem)] text-display text-[var(--color-brand)] leading-none">3</span>
+            </div>
+            <div className="lg:col-span-10">
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.2] text-[var(--text-primary)] mb-4">
+                Empower builders
+              </h3>
+              <p className="text-[var(--text-lg)] text-[var(--text-secondary)] leading-[1.5] max-w-[700px]">
+                As the Swap API provider for Coinbase Developer Platform (CDP), developers get everything they need to build great apps on Base.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Coinbase Section */}
-      <ContentSection label="About Coinbase" className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
-        <p>
-          Founded in 2012, Coinbase is a U.S.-based cryptocurrency exchange and custodian that has grown into one of
-          the world's leading digital asset platforms. Publicly listed and operating in over 100 countries, Coinbase
-          serves as a key platform for both retail and institutional participants in crypto.
-        </p>
-        <p>
-          With over 120 million total users and 8.7 million monthly transacting users, Coinbase has become an
-          industry leader in Web3 by building products with real-world utility and best-in-class user experience.
-          Coinbase offers a wide portfolio of cryptocurrency products and services - including DEX trading through
-          its retail app, an all-new onchain experience with the Base App, and an all-in-one developer toolkit for
-          builders.
-        </p>
-      </ContentSection>
-
-      {/* Quote Section */}
-      <ContentSection showBorder={false}>
-        <div className="relative">
-          {/* Large decorative quote mark SVG */}
-          <img 
-            src="/images/quote-mark.svg" 
-            alt="" 
-            className="w-[89px] h-[67px] mb-6 select-none"
-            aria-hidden="true"
-          />
-          <blockquote className="relative">
-            <p className="text-[clamp(1.75rem,5vw,3rem)] leading-[1.2] font-normal text-[var(--text-primary)] mb-10">
-              Quote from team. 0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
-            </p>
-            <footer>
-              <div className="w-16 h-1 bg-[var(--color-brand)] mb-5 rounded-full"></div>
-              <cite className="not-italic">
-                <span className="block text-[var(--text-base)] font-medium text-[var(--text-primary)]">Name and role</span>
-              </cite>
-            </footer>
-          </blockquote>
-        </div>
-      </ContentSection>
-
-      {/* Enterprise-grade infrastructure Section */}
-      <ContentSection label="Infrastructure" showBorder={false}>
-        <h3 className="text-caption text-[var(--text-muted)] mb-10">Enterprise-grade infrastructure</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
-            <div className="h-3 w-3 bg-[var(--color-brand)] mb-8 rounded-sm"></div>
-            <p className="text-[clamp(3rem,8vw,5.5rem)] text-display text-[var(--text-primary)]">
-              {"<500"}
-              <span className="text-[clamp(1.5rem,3vw,2.5rem)]">ms</span>
-            </p>
-            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">median response rate</p>
-          </div>
-          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
-            {/* Uptime indicator dots */}
-            <div className="flex gap-1 mb-8 flex-wrap">
-              {Array.from({ length: 72 }).map((_, i) => (
-                <div 
-                  key={i} 
-                  className="w-[2px] h-[9px] rounded-sm bg-[#01a74d]"
-                />
-              ))}
-            </div>
-            <p className="text-[clamp(3rem,8vw,5.5rem)] text-display text-[var(--text-primary)]">99.9%</p>
-            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">uptime</p>
-          </div>
-          <div className="bg-[var(--bg-card)] p-8 md:p-10 rounded-[20px]">
-            <div className="h-3 mb-8"></div>
-            <p className="text-[clamp(3rem,8vw,5.5rem)] text-display text-[var(--text-primary)]">4.4%</p>
-            <p className="text-[var(--text-sm)] text-[var(--text-muted)] mt-4">revert rates</p>
+      {/* CTA Section */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-24)] bg-[#26272b]">
+        <div className="text-center max-w-[700px] mx-auto">
+          <h2 className="text-[clamp(2.5rem,6vw,4rem)] leading-[1.1] tracking-[-0.02em] text-white mb-6">
+            Put your app onchain
+          </h2>
+          <p className="text-[var(--text-lg)] text-white/70 mb-10">
+            Join Coinbase and hundreds of other apps using 0x to power enterprise-grade token swaps.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/start-building">
+              <Button className="bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white px-10 py-6 text-[var(--text-lg)] rounded-full">
+                Start Building
+              </Button>
+            </Link>
+            <Link href="https://0x.org/docs" target="_blank">
+              <Button variant="outline" className="border-white/30 text-white px-10 py-6 text-[var(--text-lg)] rounded-full hover:bg-white/10">
+                View Documentation
+              </Button>
+            </Link>
           </div>
         </div>
-      </ContentSection>
+      </section>
 
-      {/* The Story Section */}
-      <ContentSection label="The Story" className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
-        <p>
-          When Coinbase launched in 2012, its mission was bold but simple: create an open financial system for the
-          world. What began as an exchange for buying and selling Bitcoin quickly grew to become one of the world's
-          leading digital asset platforms. Over the next decade, it expanded its reach - adding new assets,
-          improving fiat rails, and building one of the industry's most recognizable brands around ease-of-use,
-          safety, and compliance.
-        </p>
-        <p>
-          As a result, Coinbase rapidly scaled to over 120 million users, becoming the #1 exchange in the U.S. But
-          over that time, the market has evolved. Tokenization exploded - from a few hundred tokens in 2017 to tens
-          of millions across dozens of networks now - fueled first by ICOs and more recently by stablecoins and
-          memecoins. Users began moving onchain to access new assets and experiences, with monthly DEX volume
-          surging to $500 billion.
-        </p>
-        <p>
-          With onchain activity surging, a new challenge emerged. Coinbase's success was built on being a trusted
-          custodian and regulated exchange - but that same model constrained its ability to list and support new
-          tokens at onchain speed.
-        </p>
-        <p>
-          As users increasingly turned to DEX platforms to access new tokens and DeFi tools, Coinbase needed to
-          offer the same availability and speed of newly launched tokens as onchain venues, as well as a low-cost,
-          developer-friendly platform for its onchain products. To serve them, Coinbase evolved again: bringing the
-          power of onchain markets directly into its ecosystem.
-        </p>
-        <p>
-          This evolution marks a broader shift happening across the industry, with centralized exchanges beginning
-          to bridge the gap with DeFi.
-        </p>
-        <p className="font-medium text-[var(--text-primary)]">Three key opportunities emerged:</p>
-      </ContentSection>
-
-      {/* Key Opportunities Section */}
-      <ContentSection showBorder={false} className="space-y-12">
-        <div>
-          <h3 className="text-[30px] leading-[1.25] font-normal mb-4">
-            <span className="text-[var(--color-brand)]">1. Expand access to millions of tokens</span>
-          </h3>
-          <p className="text-[22px] leading-[1.4] text-[var(--text-secondary)]">
-            by bringing DEX trading to the Coinbase App, allowing users to swap any token instantly from within a
-            unified interface.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-[30px] leading-[1.25] font-normal mb-4">
-            <span className="text-[var(--color-brand)]">2. Reimagine the onchain experience</span>
-          </h3>
-          <p className="text-[22px] leading-[1.4] text-[var(--text-secondary)]">
-            through the Base App - an all-in-one platform uniting social, payments, and DeFi activity, where every
-            post and creator becomes a tradable asset.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-[30px] leading-[1.25] font-normal mb-4">
-            <span className="text-[var(--color-brand)]">3. Empower builders</span>
-          </h3>
-          <p className="text-[22px] leading-[1.4] text-[var(--text-secondary)]">
-            via the Coinbase Developer Platform (CDP), providing developers with everything they need to build great
-            apps on Base.
-          </p>
-        </div>
-      </ContentSection>
-
-      {/* Closing Paragraphs Section */}
-      <ContentSection showBorder={false} className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
-        <p>
-          And what unites all of these initiatives is tokens. No matter what you're building onchain, sooner or
-          later you'll need to swap tokens. Swaps are the foundation of the onchain economy, from simple trades
-          within wallets to powering more advanced functionality within DeFi apps.
-        </p>
-        <p>
-          But building enterprise-grade swaps is hard. This explosion of tokens and DEXs has brought complexity to
-          DEX routing, with a vast array of different token behaviors, liquidity models, and chain architectures to
-          solve for. Delivering swaps at enterprise-scale and reliability requires deep expertise in DEX routing,
-          liquidity and aggregation.
-        </p>
-        <p>
-          With nearly a decade of experience building DEX infrastructure, Coinbase partnered with 0x to meet this
-          challenge - helping power its onchain expansion with end-to-end onchain trading infrastructure at every
-          layer of the stack; from DEX trading for millions of tokens in the Coinbase App to custom integrations to
-          power an all-new social experience in the Base App.
-        </p>
-        <p>
-          In this case study, we will dive deep into how Coinbase is bridging the gap from CeFi to DeFi and
-          unlocking a new onchain era for its users and developer network.
-        </p>
-      </ContentSection>
-
-      {/* Navigation Cards Section - positioned right above footer */}
-      <NavigationCards className="w-full" />
-
-      {/* Footer - seamlessly connected to Developer Platform card */}
+      {/* Footer */}
       <Footer />
     </div>
   )
