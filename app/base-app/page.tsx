@@ -131,6 +131,7 @@ export default function BaseAppPage() {
           From an ecosystem perspective, Base App enables stronger network effects for the Base network by bringing together 
           end users and Web3 developers around social-finance use cases.
         </p>
+            </ContentSection>
           </div>
 
           {/* The Challenge Section */}
@@ -189,16 +190,17 @@ export default function BaseAppPage() {
         </p>
 
         {/* Zora Case Study Link */}
-        <div className="mx-auto my-12 flex max-w-[466px] items-center justify-center rounded-[15px] bg-[var(--bg-card)] py-6 px-8">
-          <Link 
-            href="https://0x.org/case-studies/zora" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:text-[var(--color-brand)] transition-colors"
-          >
-            Zora case study →
-          </Link>
-        </div>
+          <div className="mx-auto my-12 flex max-w-[466px] items-center justify-center rounded-[15px] bg-[var(--bg-card)] py-6 px-8">
+            <Link 
+              href="https://0x.org/case-studies/zora" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:text-[var(--color-brand)] transition-colors"
+            >
+              Zora case study →
+            </Link>
+          </div>
+            </ContentSection>
           </div>
 
           {/* The Solution Section */}
@@ -270,6 +272,7 @@ export default function BaseAppPage() {
         <div className="mx-auto my-8 flex h-[511px] max-w-[1092px] items-center justify-center rounded-[15px] bg-[var(--bg-card)]">
           <p className="text-center text-[22px] text-[var(--text-muted)]">[Zora coin route sankey]</p>
         </div>
+            </ContentSection>
           </div>
 
           {/* The Results Section */}
@@ -320,7 +323,8 @@ export default function BaseAppPage() {
           <li>$1.4B Coinbase total volume</li>
           <li>5.6M distinct transactions</li>
         </ul>
-      </ContentSection>
+            </ContentSection>
+          </div>
 
           {/* CTA Section */}
           <section className="py-[var(--space-16)]">
