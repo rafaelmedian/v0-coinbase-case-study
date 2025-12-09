@@ -19,9 +19,64 @@ export default function RetailDexPage() {
     <div className="min-h-screen bg-white">
       <Navigation activePage="retail-dex" />
 
+      {/* Hero Section - Full Width */}
+      <section id="hero" className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-[var(--space-16)] pb-[var(--space-12)] md:pt-[100px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full">
+                <Image
+                  src="/images/coinbase-icon.svg"
+                  alt="Coinbase"
+                  width={32}
+                  height={32}
+                />
+              </div>
+              <p className="text-[var(--text-base)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
+                Retail DEX
+              </p>
+            </div>
+
+            <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
+              Powering <span className="text-[var(--color-brand)]">onchain trades</span> across XXm users.
+            </h1>
+
+            <div className="flex flex-col gap-8">
+              <div className="border-l-4 border-[var(--color-brand)] pl-6">
+                <p className="text-[var(--text-xl)] text-[var(--text-secondary)] italic">
+                  "0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem."
+                </p>
+                <p className="mt-4 text-[var(--text-sm)] font-medium text-[var(--text-primary)]">
+                  Coinbase Engineering Team
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
+                      $1.4B
+                    </p>
+                    <p className="text-[var(--text-sm)] text-[var(--text-muted)]">Coinbase total volume</p>
+                  </div>
+                  <div>
+                    <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
+                      5.6M
+                    </p>
+                    <p className="text-[var(--text-sm)] text-[var(--text-muted)]">distinct transactions</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <AppScreenshot type="dex" className="transform lg:scale-110 lg:translate-x-4 lg:translate-y-4" />
+          </div>
+        </div>
+      </section>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)]">
-        {/* Table of Contents - Hidden on mobile, sticky on desktop */}
-        <aside className="hidden lg:block lg:col-span-3 pt-[140px] sticky top-0 h-screen overflow-y-auto">
+        {/* Table of Contents - Sticky on desktop */}
+        <aside className="hidden lg:block lg:col-span-3 sticky top-8 h-[calc(100vh-2rem)] overflow-y-auto pt-8">
           <TableOfContents 
             items={[
               { id: "hero", label: "Overview" },
@@ -36,62 +91,7 @@ export default function RetailDexPage() {
         </aside>
 
         {/* Main Content Area */}
-        <main className="lg:col-span-9 pt-[var(--space-16)] md:pt-[100px]">
-          {/* Hero Section */}
-          <section id="hero" className="pb-[var(--space-12)]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full">
-                    <Image
-                      src="/images/coinbase-icon.svg"
-                      alt="Coinbase"
-                      width={32}
-                      height={32}
-                    />
-                  </div>
-                  <p className="text-[var(--text-base)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
-                    Retail DEX
-                  </p>
-                </div>
-
-                <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
-                  Powering <span className="text-[var(--color-brand)]">onchain trades</span> across XXm users.
-                </h1>
-
-                <div className="flex flex-col gap-8">
-                  <div className="border-l-4 border-[var(--color-brand)] pl-6">
-                    <p className="text-[var(--text-xl)] text-[var(--text-secondary)] italic">
-                      "0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem."
-                    </p>
-                    <p className="mt-4 text-[var(--text-sm)] font-medium text-[var(--text-primary)]">
-                      Coinbase Engineering Team
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-6">
-                     <div>
-                       <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
-                         $1.4B
-                       </p>
-                       <p className="text-[var(--text-sm)] text-[var(--text-muted)]">Coinbase total volume</p>
-                     </div>
-                     <div>
-                       <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
-                         5.6M
-                       </p>
-                       <p className="text-[var(--text-sm)] text-[var(--text-muted)]">distinct transactions</p>
-                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-center lg:justify-end">
-                <AppScreenshot type="dex" className="transform lg:scale-110 lg:translate-x-4 lg:translate-y-4" />
-              </div>
-            </div>
-          </section>
-
+        <main className="lg:col-span-9 pb-[var(--space-16)]">
           {/* Introduction Section */}
           <div id="introduction">
             <ContentSection label="Introduction" className="space-y-6">
