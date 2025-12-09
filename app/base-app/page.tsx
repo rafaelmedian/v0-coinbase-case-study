@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Image from "next/image"
 import Navigation from "@/components/navigation"
-import PageHero from "@/components/page-hero"
+import { AppScreenshot } from "@/components/app-screenshot"
 import { ContentSection } from "@/components/ui/content-section"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { Footer } from "@/components/ui/footer"
 import { StatCard } from "@/components/ui/stat-card"
+import { TableOfContents } from "@/components/ui/table-of-contents"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -18,40 +19,80 @@ export default function BaseAppPage() {
     <div className="min-h-screen bg-white">
       <Navigation activePage="base-app" />
 
-      <PageHero
-        title="Base App"
-        headline={
-          <>
-            Powering <span className="text-[var(--color-brand)]">SocialFi and Zora creator coins</span> on Base.
-          </>
-        }
-        icon={
-          <Image
-            src="/images/base-app-icon.svg"
-            alt="Base App"
-            width={85}
-            height={85}
-            className="rounded-full"
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)]">
+        {/* Table of Contents - Hidden on mobile, sticky on desktop */}
+        <aside className="hidden lg:block lg:col-span-3 pt-[140px] sticky top-0 h-screen overflow-y-auto">
+          <TableOfContents 
+            items={[
+              { id: "hero", label: "Overview" },
+              { id: "experience", label: "Consumer Experience" },
+              { id: "challenge", label: "The Challenge" },
+              { id: "solution", label: "The Solution" },
+              { id: "results", label: "The Results" },
+            ]} 
           />
-        }
-        stats={[
-          { value: "$1.4B", label: "Coinbase total volume" },
-          { value: "5.6M", label: "distinct transactions" },
-        ]}
-        bulletStats={[
-          "2M+ distinct token pairs",
-          "$1.4B Coinbase total volume",
-          "5.6M distinct transactions"
-        ]}
-        quote={{
-          text: "The 0x team is at the forefront of best execution and routing for the largest apps in the industry.",
-          author: "Jacob Horne",
-          role: "Co-Founder of Zora"
-        }}
-      />
+        </aside>
 
-      {/* A Unified Consumer Experience Section */}
-      <ContentSection label="A Unified Consumer Experience" className="space-y-6">
+        {/* Main Content Area */}
+        <main className="lg:col-span-9 pt-[var(--space-16)] md:pt-[100px]">
+          {/* Hero Section */}
+          <section id="hero" className="pb-[var(--space-12)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 flex items-center justify-center bg-blue-600 rounded-full">
+                    <Image
+                      src="/images/base-app-icon.svg"
+                      alt="Base App"
+                      width={32}
+                      height={32}
+                    />
+                  </div>
+                  <p className="text-[var(--text-base)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
+                    Base App
+                  </p>
+                </div>
+
+                <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
+                  Powering <span className="text-[var(--color-brand)]">SocialFi and Zora creator coins</span> on Base.
+                </h1>
+
+                <div className="flex flex-col gap-8">
+                  <div className="border-l-4 border-[var(--color-brand)] pl-6">
+                    <p className="text-[var(--text-xl)] text-[var(--text-secondary)] italic">
+                      "The 0x team is at the forefront of best execution and routing for the largest apps in the industry."
+                    </p>
+                    <p className="mt-4 text-[var(--text-sm)] font-medium text-[var(--text-primary)]">
+                      Jacob Horne, Co-Founder of Zora
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6">
+                     <div>
+                       <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
+                         $1.4B
+                       </p>
+                       <p className="text-[var(--text-sm)] text-[var(--text-muted)]">Coinbase total volume</p>
+                     </div>
+                     <div>
+                       <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
+                         5.6M
+                       </p>
+                       <p className="text-[var(--text-sm)] text-[var(--text-muted)]">distinct transactions</p>
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-center lg:justify-end">
+                <AppScreenshot type="base" className="transform lg:scale-110 lg:translate-x-4 lg:translate-y-4" />
+              </div>
+            </div>
+          </section>
+
+          {/* A Unified Consumer Experience Section */}
+          <div id="experience">
+            <ContentSection label="A Unified Consumer Experience" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           The Base App is an all-in-one Web3 consumer experience that brings non-native users into the Base ecosystem. 
           <strong className="text-[var(--text-primary)]"> 0x</strong> swap infrastructure supports its onchain mechanics 
@@ -90,10 +131,11 @@ export default function BaseAppPage() {
           From an ecosystem perspective, Base App enables stronger network effects for the Base network by bringing together 
           end users and Web3 developers around social-finance use cases.
         </p>
-      </ContentSection>
+          </div>
 
-      {/* The Challenge Section */}
-      <ContentSection label="The Challenge" className="space-y-6">
+          {/* The Challenge Section */}
+          <div id="challenge">
+            <ContentSection label="The Challenge" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           A core part of the Base App social experience are <strong className="text-[var(--text-primary)]">Zora coins</strong>. 
           Every creator profile, and each individual post, becomes an ERC-20 token that enables novel ways to monetize 
@@ -157,10 +199,11 @@ export default function BaseAppPage() {
             Zora case study →
           </Link>
         </div>
-      </ContentSection>
+          </div>
 
-      {/* The Solution Section */}
-      <ContentSection label="The Solution" className="space-y-6">
+          {/* The Solution Section */}
+          <div id="solution">
+            <ContentSection label="The Solution" className="space-y-6">
         {/* Base App UI Placeholder */}
         <div className="mx-auto my-8 flex h-[511px] max-w-[1092px] items-center justify-center rounded-[15px] bg-[var(--bg-card)]">
           <p className="text-center text-[22px] text-[var(--text-muted)]">[Graphic: Base App UI]</p>
@@ -227,10 +270,11 @@ export default function BaseAppPage() {
         <div className="mx-auto my-8 flex h-[511px] max-w-[1092px] items-center justify-center rounded-[15px] bg-[var(--bg-card)]">
           <p className="text-center text-[22px] text-[var(--text-muted)]">[Zora coin route sankey]</p>
         </div>
-      </ContentSection>
+          </div>
 
-      {/* The Results Section */}
-      <ContentSection label="The Results" className="space-y-8">
+          {/* The Results Section */}
+          <div id="results">
+            <ContentSection label="The Results" className="space-y-8">
         {/* Stats Grid */}
         <div className="space-y-6">
           {/* Row 1 - Full width */}
@@ -278,28 +322,29 @@ export default function BaseAppPage() {
         </ul>
       </ContentSection>
 
-      {/* CTA Section */}
-      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
-        <div className="bg-[var(--bg-card)] rounded-[20px] p-8 md:p-12 text-center max-w-[898px] mx-auto">
-          <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)] mb-8">
-            0x provides hundreds of crypto teams with essential tools for faster trading, better prices, and superior UX. 
-            We can help you scale to meet customer demand, no matter how complex the challenge. Speak to our team about 
-            custom routing today.
-          </p>
-          <Link
-            href="/start-building"
-            className="inline-flex items-center justify-center rounded-[15px] bg-[var(--bg-surface)] px-12 py-4 text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:bg-[var(--border-light)] transition-colors"
-          >
-            Book a call
-          </Link>
-        </div>
-      </section>
+          {/* CTA Section */}
+          <section className="py-[var(--space-16)]">
+            <div className="bg-[var(--bg-card)] rounded-[20px] p-8 md:p-12 text-center max-w-[898px] mx-auto">
+              <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)] mb-8">
+                0x provides hundreds of crypto teams with essential tools for faster trading, better prices, and superior UX. 
+                We can help you scale to meet customer demand, no matter how complex the challenge. Speak to our team about 
+                custom routing today.
+              </p>
+              <Link
+                href="/start-building"
+                className="inline-flex items-center justify-center rounded-[15px] bg-[var(--bg-surface)] px-12 py-4 text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:bg-[var(--border-light)] transition-colors"
+              >
+                Book a call
+              </Link>
+            </div>
+          </section>
 
-      {/* Navigation Cards */}
-      <NavigationCards />
+          {/* Navigation Cards */}
+          <NavigationCards />
+        </main>
+      </div>
 
-      {/* Footer */}
-      <Footer className="-mt-8" />
+      <Footer />
     </div>
   )
 }

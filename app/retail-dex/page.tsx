@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import Image from "next/image"
 import Link from "next/link"
 import Navigation from "@/components/navigation"
-import PageHero from "@/components/page-hero"
+import { AppScreenshot } from "@/components/app-screenshot"
 import { ContentSection } from "@/components/ui/content-section"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { Footer } from "@/components/ui/footer"
 import { StatCard } from "@/components/ui/stat-card"
+import { TableOfContents } from "@/components/ui/table-of-contents"
 
 export const metadata: Metadata = {
   title: 'DEX Trading | 0x Coinbase Case Study',
@@ -18,40 +19,82 @@ export default function RetailDexPage() {
     <div className="min-h-screen bg-white">
       <Navigation activePage="retail-dex" />
 
-      <PageHero
-        title="Retail DEX"
-        headline={
-          <>
-            Powering <span className="text-[var(--color-brand)]">onchain trades</span> across XXm users.
-          </>
-        }
-        icon={
-          <Image
-            src="/images/coinbase-icon.svg"
-            alt="Coinbase"
-            width={85}
-            height={85}
-            className="rounded-full"
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)]">
+        {/* Table of Contents - Hidden on mobile, sticky on desktop */}
+        <aside className="hidden lg:block lg:col-span-3 pt-[140px] sticky top-0 h-screen overflow-y-auto">
+          <TableOfContents 
+            items={[
+              { id: "hero", label: "Overview" },
+              { id: "introduction", label: "Introduction" },
+              { id: "challenge", label: "The Challenge" },
+              { id: "coverage", label: "Coverage" },
+              { id: "execution", label: "Execution" },
+              { id: "solution", label: "The Solution" },
+              { id: "results", label: "The Results" },
+            ]} 
           />
-        }
-        stats={[
-          { value: "$1.4B", label: "Coinbase total volume" },
-          { value: "5.6M", label: "distinct transactions" },
-        ]}
-        bulletStats={[
-          "2M+ distinct token pairs",
-          "$1.4B Coinbase total volume",
-          "5.6M distinct transactions"
-        ]}
-        quote={{
-          text: "0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.",
-          author: "Coinbase Team",
-          role: "Engineering"
-        }}
-      />
+        </aside>
 
-      {/* Introduction Section */}
-      <ContentSection label="Introduction" className="space-y-6">
+        {/* Main Content Area */}
+        <main className="lg:col-span-9 pt-[var(--space-16)] md:pt-[100px]">
+          {/* Hero Section */}
+          <section id="hero" className="pb-[var(--space-12)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full">
+                    <Image
+                      src="/images/coinbase-icon.svg"
+                      alt="Coinbase"
+                      width={32}
+                      height={32}
+                    />
+                  </div>
+                  <p className="text-[var(--text-base)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
+                    Retail DEX
+                  </p>
+                </div>
+
+                <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
+                  Powering <span className="text-[var(--color-brand)]">onchain trades</span> across XXm users.
+                </h1>
+
+                <div className="flex flex-col gap-8">
+                  <div className="border-l-4 border-[var(--color-brand)] pl-6">
+                    <p className="text-[var(--text-xl)] text-[var(--text-secondary)] italic">
+                      "0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem."
+                    </p>
+                    <p className="mt-4 text-[var(--text-sm)] font-medium text-[var(--text-primary)]">
+                      Coinbase Engineering Team
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6">
+                     <div>
+                       <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
+                         $1.4B
+                       </p>
+                       <p className="text-[var(--text-sm)] text-[var(--text-muted)]">Coinbase total volume</p>
+                     </div>
+                     <div>
+                       <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
+                         5.6M
+                       </p>
+                       <p className="text-[var(--text-sm)] text-[var(--text-muted)]">distinct transactions</p>
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-center lg:justify-end">
+                <AppScreenshot type="dex" className="transform lg:scale-110 lg:translate-x-4 lg:translate-y-4" />
+              </div>
+            </div>
+          </section>
+
+          {/* Introduction Section */}
+          <div id="introduction">
+            <ContentSection label="Introduction" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           With over <strong className="text-[var(--text-primary)]">120 million total users</strong> and 
           <strong className="text-[var(--text-primary)]"> 8.7 million monthly transacting users</strong>, 
@@ -64,8 +107,9 @@ export default function RetailDexPage() {
         </p>
       </ContentSection>
 
-      {/* The Challenge Section */}
-      <ContentSection label="The Challenge" className="space-y-6">
+          {/* The Challenge Section */}
+          <div id="challenge">
+            <ContentSection label="The Challenge" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           As the crypto ecosystem has grown, millions of new assets are launching onchain every day as the barrier
           to entry for launching new tokens has been eliminated, creating a flourishing onchain token ecosystem.
@@ -111,10 +155,11 @@ export default function RetailDexPage() {
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           This represents both a <strong className="text-[var(--text-primary)]">major challenge and opportunity</strong> for Coinbase.
         </p>
-      </ContentSection>
+          </div>
 
-      {/* Coverage Section */}
-      <ContentSection label="Coverage" className="space-y-8">
+          {/* Coverage Section */}
+          <div id="coverage">
+            <ContentSection label="Coverage" className="space-y-8">
         <h2 className="text-[clamp(1.75rem,4vw,2.8rem)] leading-[1.2] text-[var(--text-primary)]">
           Coverage for millions of tokens across dozens of chains
         </h2>
@@ -194,10 +239,11 @@ export default function RetailDexPage() {
         <div className="mx-auto my-8 flex h-[300px] max-w-[1092px] items-center justify-center rounded-[15px] bg-[var(--bg-card)]">
           <p className="text-center text-[var(--text-muted)]">[TOKEN GRAPHIC: TOPLINE MONTHLY TOKENS ISSUED]</p>
         </div>
-      </ContentSection>
+          </div>
 
-      {/* Execution Section */}
-      <ContentSection label="Execution" className="space-y-8">
+          {/* Execution Section */}
+          <div id="execution">
+            <ContentSection label="Execution" className="space-y-8">
         <div className="space-y-6 text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           <p>
             At the same time, Coinbase has come to be known for the power of its trading experience. Historically, 
@@ -240,10 +286,11 @@ export default function RetailDexPage() {
             ))}
           </div>
         </div>
-      </ContentSection>
+          </div>
 
-      {/* The Solution Section */}
-      <ContentSection label="The Solution" className="space-y-8">
+          {/* The Solution Section */}
+          <div id="solution">
+            <ContentSection label="The Solution" className="space-y-8">
         <h2 className="text-[clamp(1.75rem,4vw,2.8rem)] leading-[1.2] text-[var(--text-primary)]">
           Coinbase's drive to deliver best-in-class swaps with the widest token coverage led them to 0x.
         </h2>
@@ -263,8 +310,8 @@ export default function RetailDexPage() {
         </div>
       </ContentSection>
 
-      {/* Wide Token Coverage Section */}
-      <ContentSection label="Wide Token Coverage" className="space-y-12">
+          {/* Wide Token Coverage Section */}
+          <ContentSection label="Wide Token Coverage" className="space-y-12">
         <h2 className="text-[clamp(1.75rem,4vw,2.8rem)] leading-[1.2] text-[var(--text-primary)]">Wide token coverage for users</h2>
         
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -328,8 +375,8 @@ export default function RetailDexPage() {
         </div>
       </ContentSection>
 
-      {/* Advanced DEX Routing Section */}
-      <ContentSection label="Advanced DEX Routing">
+          {/* Advanced DEX Routing Section */}
+          <ContentSection label="Advanced DEX Routing">
         <div className="rounded-[15px] bg-[var(--bg-card)] p-12">
           <p className="text-center text-[clamp(1.25rem,3vw,1.875rem)] leading-[1.2] text-[var(--text-primary)]">SANKEY</p>
           <div className="mt-8 flex items-center justify-center">
@@ -338,8 +385,8 @@ export default function RetailDexPage() {
         </div>
       </ContentSection>
 
-      {/* Institutional-grade Infrastructure Section */}
-      <ContentSection label="Institutional-Grade Infrastructure">
+          {/* Institutional-grade Infrastructure Section */}
+          <ContentSection label="Institutional-Grade Infrastructure">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="rounded-[15px] bg-[var(--bg-card)] p-8">
             <div className="mb-4 flex items-start gap-3">
@@ -393,8 +440,9 @@ export default function RetailDexPage() {
         </div>
       </ContentSection>
 
-      {/* The Results Section */}
-      <ContentSection label="The Results" className="space-y-8">
+          {/* The Results Section */}
+          <div id="results">
+            <ContentSection label="The Results" className="space-y-8">
         {/* App UI Placeholder */}
         <div className="rounded-[15px] bg-[var(--bg-card)] p-12">
           <p className="mb-8 text-center text-[22px] text-[var(--text-muted)]">
@@ -434,28 +482,29 @@ export default function RetailDexPage() {
         </div>
       </ContentSection>
 
-      {/* CTA Section */}
-      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
-        <div className="bg-[var(--bg-card)] rounded-[20px] p-8 md:p-12 text-center max-w-[898px] mx-auto">
-          <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)] mb-8">
-            0x provides hundreds of crypto teams with essential tools for faster trading, better prices, and superior UX. 
-            We can help you scale to meet customer demand, no matter how complex the challenge. Speak to our team about 
-            custom routing today.
-          </p>
-          <Link
-            href="/start-building"
-            className="inline-flex items-center justify-center rounded-[15px] bg-[var(--bg-surface)] px-12 py-4 text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:bg-[var(--border-light)] transition-colors"
-          >
-            Book a call
-          </Link>
-        </div>
-      </section>
+          {/* CTA Section */}
+          <section className="py-[var(--space-16)]">
+            <div className="bg-[var(--bg-card)] rounded-[20px] p-8 md:p-12 text-center max-w-[898px] mx-auto">
+              <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)] mb-8">
+                0x provides hundreds of crypto teams with essential tools for faster trading, better prices, and superior UX. 
+                We can help you scale to meet customer demand, no matter how complex the challenge. Speak to our team about 
+                custom routing today.
+              </p>
+              <Link
+                href="/start-building"
+                className="inline-flex items-center justify-center rounded-[15px] bg-[var(--bg-surface)] px-12 py-4 text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:bg-[var(--border-light)] transition-colors"
+              >
+                Book a call
+              </Link>
+            </div>
+          </section>
 
-      {/* Navigation Cards */}
-      <NavigationCards />
+          {/* Navigation Cards */}
+          <NavigationCards />
+        </main>
+      </div>
 
-      {/* Footer */}
-      <Footer className="-mt-8" />
+      <Footer />
     </div>
   )
 }
