@@ -105,7 +105,8 @@ export default function RetailDexPage() {
           Coinbase also offers additional services, including a fee-based plan with Coinbase One and professional
           asset trading with Coinbase Advanced, in total serving over 120 million users.
         </p>
-      </ContentSection>
+            </ContentSection>
+          </div>
 
           {/* The Challenge Section */}
           <div id="challenge">
@@ -155,6 +156,7 @@ export default function RetailDexPage() {
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           This represents both a <strong className="text-[var(--text-primary)]">major challenge and opportunity</strong> for Coinbase.
         </p>
+            </ContentSection>
           </div>
 
           {/* Coverage Section */}
@@ -239,6 +241,7 @@ export default function RetailDexPage() {
         <div className="mx-auto my-8 flex h-[300px] max-w-[1092px] items-center justify-center rounded-[15px] bg-[var(--bg-card)]">
           <p className="text-center text-[var(--text-muted)]">[TOKEN GRAPHIC: TOPLINE MONTHLY TOKENS ISSUED]</p>
         </div>
+            </ContentSection>
           </div>
 
           {/* Execution Section */}
@@ -286,6 +289,7 @@ export default function RetailDexPage() {
             ))}
           </div>
         </div>
+            </ContentSection>
           </div>
 
           {/* The Solution Section */}
@@ -308,7 +312,8 @@ export default function RetailDexPage() {
             <strong className="text-[var(--text-primary)]"> 9 million users</strong>.
           </p>
         </div>
-      </ContentSection>
+            </ContentSection>
+          </div>
 
           {/* Wide Token Coverage Section */}
           <ContentSection label="Wide Token Coverage" className="space-y-12">
@@ -480,7 +485,8 @@ export default function RetailDexPage() {
             - moving Coinbase closer to its vision of becoming an "everything" app for crypto.
           </p>
         </div>
-      </ContentSection>
+            </ContentSection>
+          </div>
 
           {/* CTA Section */}
           <section className="py-[var(--space-16)]">
