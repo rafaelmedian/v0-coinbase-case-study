@@ -106,6 +106,7 @@ export default function DeveloperPlatformPage() {
           scalability and composition: builders can pick and combine CDP tools using a single API key and leverage
           Coinbase's global reach, regulatory controls, and infrastructure reliability.
         </p>
+            </ContentSection>
           </div>
 
           {/* The Challenge Section */}
@@ -252,6 +253,7 @@ export default function DeveloperPlatformPage() {
           Since launch, Swap API has been integrated into X apps through the Coinbase Developer Platform, and has
           powered <strong className="text-[var(--text-primary)]">$1.4B in volume</strong> across <strong className="text-[var(--text-primary)]">5.6M transactions</strong>.
         </p>
+            </ContentSection>
           </div>
 
           {/* Conclusion Section */}
