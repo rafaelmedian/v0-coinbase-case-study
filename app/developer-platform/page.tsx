@@ -76,7 +76,7 @@ export default function DeveloperPlatformPage() {
       </section>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)]">
-        {/* Table of Contents - Sticky on desktop */}
+        {/* Table of Contents - Hidden on mobile, sticky on desktop */}
         <aside className="hidden lg:block lg:col-span-3 sticky top-8 h-[calc(100vh-2rem)] overflow-y-auto pt-8">
           <TableOfContents 
             items={[
