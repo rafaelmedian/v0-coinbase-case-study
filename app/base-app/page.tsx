@@ -35,13 +35,13 @@ export default function BaseAppPage() {
           />
         }
         stats={[
-          { value: "$XB", label: "in onchain volume" },
-          { value: "Xm", label: "total transactions" },
+          { value: "$1.4B", label: "Coinbase total volume" },
+          { value: "5.6M", label: "distinct transactions" },
         ]}
         bulletStats={[
-          "$B in trading volume",
-          "XM transactions",
-          "Xk users during Beta"
+          "2M+ distinct token pairs",
+          "$1.4B Coinbase total volume",
+          "5.6M distinct transactions"
         ]}
         quote={{
           text: "The 0x team is at the forefront of best execution and routing for the largest apps in the industry.",
@@ -234,18 +234,12 @@ export default function BaseAppPage() {
         {/* Stats Grid */}
         <div className="space-y-6">
           {/* Row 1 - Full width */}
-          <StatCard value="20M+" label="tokens supported" />
+          <StatCard value="2M+" label="distinct token pairs" />
 
           {/* Row 2 - Two columns */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <StatCard value="99%" label="uptime" />
-            <StatCard value="<500ms" label="median response time" />
-          </div>
-
-          {/* Row 3 - Right aligned */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div></div>
-            <StatCard value="$B" label="in trading volume" />
+            <StatCard value="5.6M" label="distinct transactions" />
+            <StatCard value="$1.4B" label="Coinbase total volume" />
           </div>
         </div>
 
@@ -279,8 +273,8 @@ export default function BaseAppPage() {
             </a>
             ]
           </li>
-          <li>$XM Zora coin trading volume on Base</li>
-          <li>Xk Zora coin transactions on Base</li>
+          <li>$1.4B Coinbase total volume</li>
+          <li>5.6M distinct transactions</li>
         </ul>
       </ContentSection>
 

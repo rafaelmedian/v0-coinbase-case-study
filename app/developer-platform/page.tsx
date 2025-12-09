@@ -35,13 +35,13 @@ export default function DeveloperPlatformPage() {
           />
         }
         stats={[
-          { value: "$XB", label: "in onchain volume" },
-          { value: "Xm", label: "total transactions" },
+          { value: "$1.4B", label: "Coinbase total volume" },
+          { value: "5.6M", label: "distinct transactions" },
         ]}
         bulletStats={[
-          "$B in trading volume",
-          "XM transactions",
-          "Xk developers onboarded"
+          "2M+ distinct token pairs",
+          "$1.4B Coinbase total volume",
+          "5.6M distinct transactions"
         ]}
         quote={{
           text: "CDP Swap API enables developers to build fully integrated, production-grade workflows in minutes.",
@@ -109,18 +109,12 @@ export default function DeveloperPlatformPage() {
         {/* Stats Grid */}
         <div className="space-y-6">
           {/* Row 1 - Full width */}
-          <StatCard value="20M+" label="tokens supported" />
+          <StatCard value="2M+" label="distinct token pairs" />
 
           {/* Row 2 - Two columns */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <StatCard value="99%" label="uptime" />
-            <StatCard value="<500ms" label="median response time" />
-          </div>
-
-          {/* Row 3 - Right aligned */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div></div>
-            <StatCard value="$B" label="in trading volume" />
+            <StatCard value="5.6M" label="distinct transactions" />
+            <StatCard value="$1.4B" label="Coinbase total volume" />
           </div>
         </div>
 
@@ -210,7 +204,7 @@ export default function DeveloperPlatformPage() {
 
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           Since launch, Swap API has been integrated into X apps through the Coinbase Developer Platform, and has
-          powered <strong className="text-[var(--text-primary)]">$XM in volume</strong> across <strong className="text-[var(--text-primary)]">Xk transactions</strong>.
+          powered <strong className="text-[var(--text-primary)]">$1.4B in volume</strong> across <strong className="text-[var(--text-primary)]">5.6M transactions</strong>.
         </p>
       </ContentSection>
 
