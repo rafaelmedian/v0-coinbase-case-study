@@ -147,6 +147,7 @@ export default function DeveloperPlatformPage() {
           their apps. However, building a swap API is challenging, and requires a significant amount of resources and
           engineering overhead.
         </p>
+            </ContentSection>
           </div>
 
           {/* The Solution Section */}
@@ -180,6 +181,7 @@ export default function DeveloperPlatformPage() {
           creating new user onboarding flows, they can integrate <strong className="text-[var(--text-primary)]">lightning-fast swaps in minutes</strong>, 
           without managing complex liquidity or smart contract infrastructure.
         </p>
+            </ContentSection>
           </div>
 
           {/* The Results Section */}
@@ -281,7 +283,8 @@ export default function DeveloperPlatformPage() {
           understand more about how 0x can support decentralized trading for your business, 
           <Link href="/start-building" className="underline text-[var(--text-primary)] hover:text-[var(--color-brand)] transition-colors"> contact us</Link>.
         </p>
-      </ContentSection>
+            </ContentSection>
+          </div>
 
           {/* CTA Section */}
           <section className="py-[var(--space-16)]">
