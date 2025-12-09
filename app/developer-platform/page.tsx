@@ -2,12 +2,11 @@ import type { Metadata } from 'next'
 import Image from "next/image"
 import Link from "next/link"
 import Navigation from "@/components/navigation"
-import { AppScreenshot } from "@/components/app-screenshot"
+import PageHero from "@/components/page-hero"
 import { ContentSection } from "@/components/ui/content-section"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { Footer } from "@/components/ui/footer"
 import { StatCard } from "@/components/ui/stat-card"
-import { TableOfContents } from "@/components/ui/table-of-contents"
 
 export const metadata: Metadata = {
   title: 'Developer Platform | 0x Coinbase Case Study',
@@ -19,82 +18,41 @@ export default function DeveloperPlatformPage() {
     <div className="min-h-screen bg-white">
       <Navigation activePage="developer-platform" />
 
-      {/* Hero Section - Full Width */}
-      <section id="hero" className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-[var(--space-16)] pb-[var(--space-12)] md:pt-[100px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 flex items-center justify-center bg-[#26272b] rounded-full">
-                <Image
-                  src="/images/coinbase-icon.svg"
-                  alt="Coinbase"
-                  width={32}
-                  height={32}
-                  className="brightness-0 invert"
-                />
-              </div>
-              <p className="text-[var(--text-base)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
-                Developer Platform
-              </p>
-            </div>
-
-            <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
-              The <span className="text-[var(--color-brand)]">unified toolkit for builders</span>—everything developers need to build great apps on Base.
-            </h1>
-
-            <div className="flex flex-col gap-8">
-              <div className="border-l-4 border-[var(--color-brand)] pl-6">
-                <p className="text-[var(--text-xl)] text-[var(--text-secondary)] italic">
-                  "CDP Swap API enables developers to build fully integrated, production-grade workflows in minutes."
-                </p>
-                <p className="mt-4 text-[var(--text-sm)] font-medium text-[var(--text-primary)]">
-                  Coinbase Developer Platform
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                  <div>
-                    <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
-                      $1.4B
-                    </p>
-                    <p className="text-[var(--text-sm)] text-[var(--text-muted)]">Coinbase total volume</p>
-                  </div>
-                  <div>
-                    <p className="text-[clamp(2rem,3vw,2.5rem)] font-medium text-[var(--text-primary)] leading-none mb-1">
-                      5.6M
-                    </p>
-                    <p className="text-[var(--text-sm)] text-[var(--text-muted)]">distinct transactions</p>
-                  </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-center lg:justify-end">
-            <AppScreenshot type="cdp" className="transform lg:scale-110 lg:translate-x-4 lg:translate-y-4" />
-          </div>
-        </div>
-      </section>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)]">
-        {/* Table of Contents - Hidden on mobile, sticky on desktop */}
-        <aside className="hidden lg:block lg:col-span-3 sticky top-8 h-[calc(100vh-2rem)] overflow-y-auto pt-8">
-          <TableOfContents 
-            items={[
-              { id: "hero", label: "Overview" },
-              { id: "introduction", label: "Introduction" },
-              { id: "challenge", label: "The Challenge" },
-              { id: "solution", label: "The Solution" },
-              { id: "results", label: "The Results" },
-              { id: "conclusion", label: "Conclusion" },
-            ]} 
+      <PageHero
+        title="Developer Platform"
+        headline={
+          <>
+            The <span className="text-[var(--color-brand)]">unified toolkit for builders</span>—everything developers need to build great apps on Base.
+          </>
+        }
+        icon={
+          <Image
+            src="/images/coinbase-icon.svg"
+            alt="Coinbase"
+            width={85}
+            height={85}
+            className="rounded-full"
           />
-        </aside>
+        }
+        stats={[
+          { value: "$1.4B", label: "Coinbase total volume" },
+          { value: "5.6M", label: "distinct transactions" },
+        ]}
+        bulletStats={[
+          "2M+ distinct token pairs",
+          "$1.4B Coinbase total volume",
+          "5.6M distinct transactions"
+        ]}
+        quote={{
+          text: "CDP Swap API enables developers to build fully integrated, production-grade workflows in minutes.",
+          author: "Coinbase",
+          role: "Developer Platform"
+        }}
+        screenshotType="terminal"
+      />
 
-        {/* Main Content Area */}
-        <main className="lg:col-span-9 pb-[var(--space-16)]">
-          {/* Introduction Section */}
-          <div id="introduction">
-            <ContentSection label="Introduction" className="space-y-6">
+      {/* Introduction Section */}
+      <ContentSection label="Introduction" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           The Coinbase Developer Platform (CDP) is a <strong className="text-[var(--text-primary)]">unified infrastructure suite</strong> that 
           allows developers and enterprises to build crypto-native applications using Coinbase's trusted custody, compliance, and on-chain tooling.
@@ -106,12 +64,10 @@ export default function DeveloperPlatformPage() {
           scalability and composition: builders can pick and combine CDP tools using a single API key and leverage
           Coinbase's global reach, regulatory controls, and infrastructure reliability.
         </p>
-            </ContentSection>
-          </div>
+      </ContentSection>
 
-          {/* The Challenge Section */}
-          <div id="challenge">
-            <ContentSection label="The Challenge" className="space-y-6">
+      {/* The Challenge Section */}
+      <ContentSection label="The Challenge" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           As part of its effort to build an onchain ecosystem for users, Coinbase launched <strong className="text-[var(--text-primary)]">Base chain in 2023</strong>. 
           Base serves as a low-cost, developer-friendly chain to build apps onchain and a home for Coinbase's onchain products.
@@ -147,12 +103,10 @@ export default function DeveloperPlatformPage() {
           their apps. However, building a swap API is challenging, and requires a significant amount of resources and
           engineering overhead.
         </p>
-            </ContentSection>
-          </div>
+      </ContentSection>
 
-          {/* The Solution Section */}
-          <div id="solution">
-            <ContentSection label="The Solution" className="space-y-6">
+      {/* The Solution Section */}
+      <ContentSection label="The Solution" className="space-y-6">
         {/* Stats Grid */}
         <div className="space-y-6">
           {/* Row 1 - Full width */}
@@ -181,12 +135,10 @@ export default function DeveloperPlatformPage() {
           creating new user onboarding flows, they can integrate <strong className="text-[var(--text-primary)]">lightning-fast swaps in minutes</strong>, 
           without managing complex liquidity or smart contract infrastructure.
         </p>
-            </ContentSection>
-          </div>
+      </ContentSection>
 
-          {/* The Results Section */}
-          <div id="results">
-            <ContentSection label="The Results" className="space-y-6">
+      {/* The Results Section */}
+      <ContentSection label="The Results" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           In June, Coinbase Developer Platform introduced <strong className="text-[var(--text-primary)]">Swap API</strong> - a simple, 
           developer-friendly way to embed production-grade token swaps in onchain apps with just a few lines of code.
@@ -255,12 +207,10 @@ export default function DeveloperPlatformPage() {
           Since launch, Swap API has been integrated into X apps through the Coinbase Developer Platform, and has
           powered <strong className="text-[var(--text-primary)]">$1.4B in volume</strong> across <strong className="text-[var(--text-primary)]">5.6M transactions</strong>.
         </p>
-            </ContentSection>
-          </div>
+      </ContentSection>
 
-          {/* Conclusion Section */}
-          <div id="conclusion">
-            <ContentSection label="Conclusion" className="space-y-6">
+      {/* Conclusion Section */}
+      <ContentSection label="Conclusion" className="space-y-6">
         <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
           As the Coinbase team looked to expand into the burgeoning onchain economy, their search for a swap provider
           with expertise in DEX markets and deep understanding of API infrastructure, reliability, and enterprise-grade
@@ -283,32 +233,30 @@ export default function DeveloperPlatformPage() {
           understand more about how 0x can support decentralized trading for your business, 
           <Link href="/start-building" className="underline text-[var(--text-primary)] hover:text-[var(--color-brand)] transition-colors"> contact us</Link>.
         </p>
-            </ContentSection>
-          </div>
+      </ContentSection>
 
-          {/* CTA Section */}
-          <section className="py-[var(--space-16)]">
-            <div className="bg-[var(--bg-card)] rounded-[20px] p-8 md:p-12 text-center max-w-[898px] mx-auto">
-              <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)] mb-8">
-                0x provides hundreds of crypto teams with essential tools for faster trading, better prices, and superior UX. 
-                We can help you scale to meet customer demand, no matter how complex the challenge. Speak to our team about 
-                custom integrations today.
-              </p>
-              <Link
-                href="/start-building"
-                className="inline-flex items-center justify-center rounded-[15px] bg-[var(--bg-surface)] px-12 py-4 text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:bg-[var(--border-light)] transition-colors"
-              >
-                Book a call
-              </Link>
-            </div>
-          </section>
+      {/* CTA Section */}
+      <section className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-[var(--space-16)]">
+        <div className="bg-[var(--bg-card)] rounded-[20px] p-8 md:p-12 text-center max-w-[898px] mx-auto">
+          <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)] mb-8">
+            0x provides hundreds of crypto teams with essential tools for faster trading, better prices, and superior UX. 
+            We can help you scale to meet customer demand, no matter how complex the challenge. Speak to our team about 
+            custom integrations today.
+          </p>
+          <Link
+            href="/start-building"
+            className="inline-flex items-center justify-center rounded-[15px] bg-[var(--bg-surface)] px-12 py-4 text-[clamp(1.5rem,4vw,3.75rem)] leading-[1.2] text-[var(--text-primary)] hover:bg-[var(--border-light)] transition-colors"
+          >
+            Book a call
+          </Link>
+        </div>
+      </section>
 
-          {/* Navigation Cards */}
-          <NavigationCards />
-        </main>
-      </div>
+      {/* Navigation Cards */}
+      <NavigationCards />
 
-      <Footer />
+      {/* Footer */}
+      <Footer className="-mt-8" />
     </div>
   )
 }
