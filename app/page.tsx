@@ -4,9 +4,6 @@ import { Footer } from "@/components/ui/footer"
 import { NavigationCards } from "@/components/ui/navigation-cards"
 import { DottedPattern } from "@/components/ui/dotted-pattern"
 import { AnimatedCounter } from "@/components/ui/animated-counter"
-import { PutYourAppOnchain } from "@/components/sections/put-your-app-onchain"
-import { ScaleWith0x } from "@/components/sections/scale-with-0x"
-import { BookACall } from "@/components/sections/book-a-call"
 
 export default function HomePage() {
   return (
@@ -213,10 +210,30 @@ export default function HomePage() {
         </div>
       </ContentSection>
 
-      {/* Put Your App Onchain (Closing & CTA) */}
-      <PutYourAppOnchain />
-      <ScaleWith0x />
-      <BookACall />
+      {/* Closing Paragraphs Section */}
+      <ContentSection showBorder={false} className="space-y-6 text-[22px] leading-[1.4] text-[var(--text-secondary)]">
+        <p>
+          And what unites all of these initiatives is tokens. No matter what you're building onchain, sooner or
+          later you'll need to swap tokens. Swaps are the foundation of the onchain economy, from simple trades
+          within wallets to powering more advanced functionality within DeFi apps.
+        </p>
+        <p>
+          But building enterprise-grade swaps is hard. This explosion of tokens and DEXs has brought complexity to
+          DEX routing, with a vast array of different token behaviors, liquidity models, and chain architectures to
+          solve for. Delivering swaps at enterprise-scale and reliability requires deep expertise in DEX routing,
+          liquidity and aggregation.
+        </p>
+        <p>
+          With nearly a decade of experience building DEX infrastructure, Coinbase partnered with 0x to meet this
+          challenge - helping power its onchain expansion with end-to-end onchain trading infrastructure at every
+          layer of the stack; from DEX trading for millions of tokens in the Coinbase App to custom integrations to
+          power an all-new social experience in the Base App.
+        </p>
+        <p>
+          In this case study, we will dive deep into how Coinbase is bridging the gap from CeFi to DeFi and
+          unlocking a new onchain era for its users and developer network.
+        </p>
+      </ContentSection>
 
       {/* Navigation Cards Section - positioned right above footer */}
       <NavigationCards className="w-full" />
