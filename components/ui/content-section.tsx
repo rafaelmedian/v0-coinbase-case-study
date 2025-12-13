@@ -6,6 +6,7 @@ interface ContentSectionProps {
   showBorder?: boolean
   className?: string
   id?: string
+  variant?: "sidebar" | "stacked"
 }
 
 export function ContentSection({ 
@@ -13,10 +14,39 @@ export function ContentSection({
   children, 
   showBorder = true, 
   className,
-  id 
+  id,
+  variant = "sidebar"
 }: ContentSectionProps) {
   const sectionId = id || label?.toLowerCase().replace(/\s+/g, '-')
   
+  if (variant === "stacked") {
+    return (
+      <section 
+        id={sectionId}
+        aria-labelledby={label ? `${sectionId}-label` : undefined}
+        className={cn(
+          "py-[var(--space-16)] md:py-[var(--space-20)]",
+          showBorder && "border-t border-[var(--border-subtle)]"
+        )}
+      >
+        {label && (
+          <div className="flex items-center gap-3 mb-8">
+            <span className="inline-block h-4 w-4 shrink-0 rounded-[3px] bg-[var(--color-brand)]" aria-hidden="true" />
+            <h2 
+              id={`${sectionId}-label`}
+              className="text-[clamp(1.5rem,3vw,2rem)] font-medium text-[var(--text-primary)]"
+            >
+              {label}
+            </h2>
+          </div>
+        )}
+        <div className={cn("max-w-[1080px]", className)}>
+          {children}
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section 
       id={sectionId}

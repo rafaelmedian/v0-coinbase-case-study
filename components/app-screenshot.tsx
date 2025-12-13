@@ -76,8 +76,8 @@ const DexScreenshot = () => (
 )
 
 const MobileScreenshot = () => (
-  <div className="w-full h-full flex items-center justify-center bg-gray-100">
-    <div className="w-[280px] h-[580px] bg-white rounded-[40px] shadow-xl border-[8px] border-gray-900 overflow-hidden relative">
+  <div className="w-full h-full flex items-center justify-center bg-gray-100 overflow-hidden">
+    <div className="w-[280px] h-[580px] bg-white rounded-[40px] shadow-xl border-[8px] border-gray-900 overflow-hidden relative transform scale-[0.4] sm:scale-[0.45] md:scale-[0.5] origin-center">
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-blue-600 to-blue-500 rounded-b-[30px] p-6 text-white">
         <div className="flex justify-between items-center mt-8">
           <div className="w-8 h-8 rounded-full bg-white/20" />

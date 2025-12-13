@@ -20,77 +20,76 @@ export default function RetailDexPage() {
     <div className="min-h-screen bg-white">
       <Navigation activePage="retail-dex" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)]">
-        {/* Table of Contents - Hidden on mobile, sticky on desktop */}
-        <aside className="hidden lg:block lg:col-span-3 pt-[140px] sticky top-0 h-screen overflow-y-auto">
-          <TableOfContents 
-            items={[
-              { id: "hero", label: "Overview" },
-              { id: "introduction", label: "Introduction" },
-              { id: "challenge", label: "The Challenge" },
-              { id: "coverage", label: "Coverage" },
-              { id: "execution", label: "Execution" },
-              { id: "solution", label: "The Solution" },
-              { id: "results", label: "The Results" },
-            ]} 
-          />
-        </aside>
-
-        {/* Main Content Area */}
-        <main className="lg:col-span-9 pt-[var(--space-16)] md:pt-[100px]">
-          <section id="hero" className="mb-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full">
-                    <Image
-                      src="/images/coinbase-icon.svg"
-                      alt="Coinbase"
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                  <p className="text-[clamp(1.25rem,2vw,1.5rem)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
-                    Retail DEX
-                  </p>
-                </div>
-                <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
-                  Powering <span className="text-[var(--color-brand)]">onchain trades</span> across 8.7m users.
-                </h1>
-                <p className="text-[var(--text-lg)] text-[var(--text-secondary)] leading-[1.5] mb-8">
-                  0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
-                </p>
-                
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-8 border-t border-[var(--border-subtle)] pt-8">
-                  <div>
-                    <p className="text-[clamp(2rem,3vw,2.5rem)] leading-none text-[var(--text-primary)] font-medium mb-2">
-                      $1.4B
-                    </p>
-                    <p className="text-[var(--text-sm)] text-[var(--text-muted)] uppercase tracking-wider font-medium">
-                      Coinbase total volume
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[clamp(2rem,3vw,2.5rem)] leading-none text-[var(--text-primary)] font-medium mb-2">
-                      5.6M
-                    </p>
-                    <p className="text-[var(--text-sm)] text-[var(--text-muted)] uppercase tracking-wider font-medium">
-                      distinct transactions
-                    </p>
-                  </div>
-                </div>
+      {/* Hero Section - Full Width */}
+      <section id="hero" className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] pt-[var(--space-16)] md:pt-[100px] pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full">
+                <Image
+                  src="/images/coinbase-icon.svg"
+                  alt="Coinbase"
+                  width={24}
+                  height={24}
+                />
               </div>
-
-              {/* Screenshot */}
-              <div className="relative">
-                <AppScreenshot type="dex" />
+              <p className="text-[clamp(1.25rem,2vw,1.5rem)] font-medium text-[var(--text-secondary)] uppercase tracking-wide">
+                Retail DEX
+              </p>
+            </div>
+            <h1 className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.1] text-[var(--text-primary)] mb-8 font-medium">
+              Powering <span className="text-[var(--color-brand)]">onchain trades</span> across 8.7m users.
+            </h1>
+            <p className="text-[var(--text-lg)] text-[var(--text-secondary)] leading-[1.5] mb-8">
+              0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.
+            </p>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-8 border-t border-[var(--border-subtle)] pt-8">
+              <div>
+                <p className="text-[clamp(2rem,3vw,2.5rem)] leading-none text-[var(--text-primary)] font-medium mb-2">
+                  $1.4B
+                </p>
+                <p className="text-[var(--text-sm)] text-[var(--text-muted)] uppercase tracking-wider font-medium">
+                  Coinbase total volume
+                </p>
+              </div>
+              <div>
+                <p className="text-[clamp(2rem,3vw,2.5rem)] leading-none text-[var(--text-primary)] font-medium mb-2">
+                  5.6M
+                </p>
+                <p className="text-[var(--text-sm)] text-[var(--text-muted)] uppercase tracking-wider font-medium">
+                  distinct transactions
+                </p>
               </div>
             </div>
-          </section>
+          </div>
+
+          {/* Screenshot */}
+          <div className="relative">
+            <AppScreenshot type="dex" />
+          </div>
+        </div>
+      </section>
+
+      {/* Floating Table of Contents */}
+      <TableOfContents 
+        variant="floating"
+        items={[
+          { id: "introduction", label: "Introduction" },
+          { id: "challenge", label: "The Challenge" },
+          { id: "coverage", label: "Coverage" },
+          { id: "execution", label: "Execution" },
+          { id: "solution", label: "The Solution" },
+          { id: "results", label: "The Results" },
+        ]} 
+      />
+
+      {/* Main Content Area */}
+      <main className="px-[var(--grid-padding)] lg:px-[var(--grid-padding-lg)] py-16">
 
           {/* Introduction Section */}
-          <ContentSection id="introduction" label="Introduction" className="space-y-6">
+          <ContentSection id="introduction" label="Introduction" variant="stacked" className="space-y-6">
             <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
               With over <strong className="text-[var(--text-primary)]">120 million total users</strong> and 
               <strong className="text-[var(--text-primary)]"> 8.7 million monthly transacting users</strong>, 
@@ -104,7 +103,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* The Challenge Section */}
-          <ContentSection id="challenge" label="The Challenge" className="space-y-6">
+          <ContentSection id="challenge" label="The Challenge" variant="stacked" className="space-y-6">
             <p className="text-[22px] leading-[1.3] text-[var(--text-secondary)]">
               As the crypto ecosystem has grown, millions of new assets are launching onchain every day as the barrier
               to entry for launching new tokens has been eliminated, creating a flourishing onchain token ecosystem.
@@ -153,7 +152,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* Coverage Section */}
-          <ContentSection id="coverage" label="Coverage" className="space-y-8">
+          <ContentSection id="coverage" label="Coverage" variant="stacked" className="space-y-8">
             <h2 className="text-[clamp(1.75rem,4vw,2.8rem)] leading-[1.2] text-[var(--text-primary)]">
               Coverage for millions of tokens across dozens of chains
             </h2>
@@ -236,7 +235,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* Execution Section */}
-          <ContentSection id="execution" label="Execution" className="space-y-8">
+          <ContentSection id="execution" label="Execution" variant="stacked" className="space-y-8">
             <div className="space-y-6 text-[22px] leading-[1.3] text-[var(--text-secondary)]">
               <p>
                 At the same time, Coinbase has come to be known for the power of its trading experience. Historically, 
@@ -282,7 +281,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* The Solution Section */}
-          <ContentSection id="solution" label="The Solution" className="space-y-8">
+          <ContentSection id="solution" label="The Solution" variant="stacked" className="space-y-8">
             <h2 className="text-[clamp(1.75rem,4vw,2.8rem)] leading-[1.2] text-[var(--text-primary)]">
               Coinbase's drive to deliver best-in-class swaps with the widest token coverage led them to 0x.
             </h2>
@@ -303,7 +302,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* Wide Token Coverage Section */}
-          <ContentSection id="wide-coverage" label="Wide Token Coverage" className="space-y-12">
+          <ContentSection id="wide-coverage" label="Wide Token Coverage" variant="stacked" className="space-y-12">
             <h2 className="text-[clamp(1.75rem,4vw,2.8rem)] leading-[1.2] text-[var(--text-primary)]">Wide token coverage for users</h2>
             
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -368,7 +367,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* Advanced DEX Routing Section */}
-          <ContentSection id="routing" label="Advanced DEX Routing">
+          <ContentSection id="routing" label="Advanced DEX Routing" variant="stacked">
             <div className="rounded-[15px] bg-[var(--bg-card)] p-12">
               <p className="text-center text-[clamp(1.25rem,3vw,1.875rem)] leading-[1.2] text-[var(--text-primary)]">SANKEY</p>
               <div className="mt-8 flex items-center justify-center">
@@ -378,7 +377,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* Institutional-grade Infrastructure Section */}
-          <ContentSection id="infra" label="Institutional-Grade Infrastructure">
+          <ContentSection id="infra" label="Institutional-Grade Infrastructure" variant="stacked">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="rounded-[15px] bg-[var(--bg-card)] p-8">
                 <div className="mb-4 flex items-start gap-3">
@@ -433,7 +432,7 @@ export default function RetailDexPage() {
           </ContentSection>
 
           {/* The Results Section */}
-          <ContentSection id="results" label="The Results" className="space-y-8">
+          <ContentSection id="results" label="The Results" variant="stacked" className="space-y-8">
             {/* App UI Placeholder */}
             <div className="rounded-[15px] bg-[var(--bg-card)] p-12">
               <p className="mb-8 text-center text-[22px] text-[var(--text-muted)]">
@@ -490,7 +489,6 @@ export default function RetailDexPage() {
             </div>
           </section>
         </main>
-      </div>
 
       <NavigationCards />
       <Footer className="-mt-8" />
