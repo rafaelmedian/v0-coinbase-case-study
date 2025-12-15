@@ -1,6 +1,6 @@
 export function ThreeWaysSection() {
   return (
-    <section className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden py-[76px] px-[132px]">
+    <section id="why-0x" className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden py-[76px] px-[132px] scroll-mt-[50px]">
       <div className="flex flex-col gap-8 ml-[calc(41.67%-90px)]">
         {/* Header */}
         <h2 className="text-[44px] leading-[1.2] text-[#161719]">

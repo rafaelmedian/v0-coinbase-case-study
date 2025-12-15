@@ -1,6 +1,6 @@
 export function PartnerSection() {
   return (
-    <section className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden py-[76px] px-[132px]">
+    <section id="onchain" className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden py-[76px] px-[132px] scroll-mt-[50px]">
       <div className="flex gap-2">
         {/* Left - Placeholder */}
         <div className="w-[527px] h-[296px] overflow-hidden shrink-0">
@@ -21,7 +21,7 @@ export function PartnerSection() {
                 <div className="shrink-0 w-8 h-8">
                   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
                     <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2"/>
-                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="white" strokeWidth="2"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" stroke="white" strokeWidth="2"/>
                   </svg>
                 </div>
                 <div className="flex flex-col gap-4 text-[22px]">

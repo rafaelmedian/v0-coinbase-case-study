@@ -31,7 +31,7 @@ export function UsersOnchainSection() {
   ]
 
   return (
-    <section id="shift" className="bg-[#fafafa] py-[76px]">
+    <section id="shift" className="bg-[#fafafa] py-[76px] scroll-mt-[50px]">
       <div className="ml-[calc(41.67%+43px)] mr-[132px]">
         <div className="flex flex-col gap-8 items-end max-w-[705px]">
           {/* Header */}

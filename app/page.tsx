@@ -1,3 +1,5 @@
+"use client"
+
 import Navigation from "@/components/navigation"
 import { Footer } from "@/components/ui/footer"
 import {
@@ -11,8 +13,12 @@ import {
   PartnerSection,
   CTASection,
 } from "@/components/homepage"
+import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
 export default function HomePage() {
+  const sectionIds = ["about", "fast", "shift", "opportunity", "why-0x", "onchain", "cta"]
+  const activeSection = useScrollSpy(sectionIds, { offset: 150 })
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -25,7 +31,7 @@ export default function HomePage() {
         {/* Sticky Sidebar - positioned absolutely on left */}
         <div className="hidden lg:block absolute left-[48px] top-0 w-[calc(33.33%-87px)] h-full pointer-events-none">
           <div className="pointer-events-auto">
-            <SidebarNav />
+            <SidebarNav activeSection={activeSection} />
           </div>
         </div>
 

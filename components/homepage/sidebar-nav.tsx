@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface SidebarNavProps {
   activeSection?: string
@@ -31,6 +31,22 @@ const navSections: NavSection[] = [
 export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
   const [expandedSection, setExpandedSection] = useState<string>("about")
 
+  // Update expanded section when activeSection changes
+  useEffect(() => {
+    // Check if activeSection is a child of "about"
+    if (["fast", "base-app", "cdp"].includes(activeSection)) {
+      setExpandedSection("about")
+    } else if (activeSection === "about") {
+      setExpandedSection("about")
+    } else {
+      // For other top-level sections, we can either close "about" or keep it as is
+      // Let's close it if we move to another main section to focus attention
+      if (navSections.some(s => s.id === activeSection && s.id !== "about")) {
+        setExpandedSection("")
+      }
+    }
+  }, [activeSection])
+
   const toggleSection = (id: string) => {
     setExpandedSection(expandedSection === id ? "" : id)
   }
@@ -53,7 +69,7 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
                 <button
                   onClick={() => toggleSection(section.id)}
                   className={`w-full h-14 flex items-center justify-between px-6 rounded-[8px] text-[20px] leading-[36px] transition-all ${
-                    expandedSection === section.id
+                    expandedSection === section.id || activeSection === section.id
                       ? "bg-[#17181c] text-white"
                       : "bg-[#e4e4e7] text-black hover:bg-[#d4d4d8]"
                   }`}
@@ -77,7 +93,9 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
                       <button
                         key={child.id}
                         onClick={() => scrollToSection(child.id)}
-                        className="h-[29px] flex items-center text-[17.5px] leading-[1.2] text-[#252629] hover:text-black transition-colors text-left"
+                        className={`h-[29px] flex items-center text-[17.5px] leading-[1.2] transition-colors text-left ${
+                          activeSection === child.id ? "text-black font-medium" : "text-[#252629] hover:text-black"
+                        }`}
                       >
                         {child.label}
                       </button>

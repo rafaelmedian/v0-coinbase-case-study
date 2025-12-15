@@ -1,6 +1,6 @@
 export function BestOfBothSection() {
   return (
-    <section id="about" className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] py-[76px]">
+    <section id="about" className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] py-[76px] scroll-mt-[50px]">
       <div className="ml-[calc(41.67%+43px)] mr-[132px]">
         <div className="flex flex-col gap-8 max-w-[665px]">
           <h2 className="text-[44px] leading-[1.2] text-[#161719]">

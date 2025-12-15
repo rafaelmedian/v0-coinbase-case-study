@@ -71,7 +71,7 @@ function AnimatedStat({ value, label }: AnimatedStatProps) {
 
 export function DeveloperNetworkSection() {
   return (
-    <section className="bg-[#18181b] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden">
+    <section id="fast" className="bg-[#18181b] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden scroll-mt-[50px]">
       <div className="flex">
         {/* Left spacer for sidebar alignment */}
         <div className="hidden lg:block w-[calc(41.67%-43px)]" />

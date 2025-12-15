@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export function CTASection() {
   return (
-    <section className="bg-[#18181b] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden h-[641px] relative">
+    <section id="cta" className="bg-[#18181b] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden h-[641px] relative scroll-mt-[50px]">
       <div className="absolute left-[96px] top-[224px] flex flex-col gap-6 text-center text-white">
         <h2 className="text-[44px] leading-[1.2] w-[1273px]">
           Put your app onchain

@@ -1,6 +1,6 @@
 export function DexVolumeSection() {
   return (
-    <section id="opportunity" className="bg-white rounded-tl-[32px] rounded-tr-[32px] overflow-hidden h-[754px]">
+    <section id="opportunity" className="bg-white rounded-tl-[32px] rounded-tr-[32px] overflow-hidden h-[754px] scroll-mt-[50px]">
       <div className="ml-[calc(41.67%+43px)] mr-[132px] pt-[76px]">
         <div className="flex flex-col gap-8">
           <h2 className="text-[44px] leading-[1.2] text-[#161719]">
