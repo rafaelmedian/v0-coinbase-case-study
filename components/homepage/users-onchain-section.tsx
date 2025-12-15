@@ -2,7 +2,7 @@ export function UsersOnchainSection() {
   const benefits = [
     {
       icon: (
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="#252629" strokeWidth={2}>
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
@@ -11,8 +11,8 @@ export function UsersOnchainSection() {
     },
     {
       icon: (
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="#252629" strokeWidth={2}>
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3z" strokeLinecap="round" strokeLinejoin="round" />
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
       title: "Access DeFi without giving up self-custody",
@@ -20,9 +20,10 @@ export function UsersOnchainSection() {
     },
     {
       icon: (
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="#252629" strokeWidth={2}>
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M12 8v4M12 16h.01" strokeLinecap="round" strokeLinejoin="round" />
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
       title: "Participate in SocialFi and creator economies",
@@ -31,35 +32,37 @@ export function UsersOnchainSection() {
   ]
 
   return (
-    <section id="shift" className="bg-[#fafafa] py-[76px] scroll-mt-[50px]">
-      <div className="ml-[calc(41.67%+43px)] mr-[132px]">
-        <div className="flex flex-col gap-8 items-end max-w-[705px]">
-          {/* Header */}
-          <div className="flex flex-col gap-8 w-full">
-            <h2 className="text-[44px] leading-[1.2] text-[#161719]">
-              Users are moving onchain
-            </h2>
-            <p className="text-[22px] leading-[1.35] text-[#252629]">
-              Tokenization has exploded from a few hundred tokens to tens of millions across dozens of networks.
-            </p>
-          </div>
+    <section id="shift" className="bg-[#fafafa] py-[80px] scroll-mt-[80px]">
+      <div className="px-6 md:px-[80px] lg:px-[132px]">
+        <div className="ml-0 lg:ml-[calc(33.33%-40px)]">
+          <div className="flex flex-col gap-8 max-w-[700px]">
+            {/* Header */}
+            <div className="flex flex-col gap-4">
+              <h2 className="text-[40px] leading-[1.15] text-[#26272b]">
+                Users are moving onchain
+              </h2>
+              <p className="text-[20px] leading-[1.5] text-[#51525c]">
+                Tokenization has exploded from a few hundred tokens to tens of millions across dozens of networks.
+              </p>
+            </div>
 
-          {/* Benefits list */}
-          <div className="flex flex-col gap-4 w-full rounded-[8px] py-[6px]">
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className="bg-white flex gap-6 items-start px-4 py-[26px]"
-              >
-                <div className="shrink-0 w-8 h-8">
-                  {benefit.icon}
+            {/* Benefits list */}
+            <div className="flex flex-col gap-3">
+              {benefits.map((benefit, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-[12px] flex gap-4 items-start p-5 border border-[#e4e4e7]"
+                >
+                  <div className="shrink-0 w-10 h-10 rounded-full bg-[#0052ff] flex items-center justify-center text-white">
+                    {benefit.icon}
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-[18px] leading-[1.4] text-[#26272b] font-medium">{benefit.title}</p>
+                    <p className="text-[16px] leading-[1.5] text-[#51525c]">{benefit.description}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col text-[22px] leading-[1.35] text-[#252629] w-[578px]">
-                  <p className="mb-0">{benefit.title}</p>
-                  <p className="text-[rgba(37,38,41,0.6)]">{benefit.description}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

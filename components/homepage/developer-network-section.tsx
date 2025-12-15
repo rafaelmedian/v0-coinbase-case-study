@@ -57,12 +57,12 @@ function AnimatedStat({ value, label }: AnimatedStatProps) {
   return (
     <div
       ref={ref}
-      className="bg-[#26272b] rounded-[8px] py-[71px] px-0 flex flex-col items-center gap-[1px]"
+      className="bg-[#26272b] rounded-[12px] py-8 px-6 flex flex-col items-center justify-center min-h-[140px]"
     >
-      <p className="text-[67px] leading-[1.2] tracking-[-1.34px] text-[#fcfcfc] text-center">
+      <p className="text-[48px] leading-[1] tracking-[-1px] text-white text-center font-medium">
         {displayValue}+
       </p>
-      <p className="text-[34px] leading-[1.2] text-[#fcfcfc] text-center">
+      <p className="text-[16px] leading-[1.4] text-white/70 text-center mt-2">
         {label}
       </p>
     </div>
@@ -71,29 +71,25 @@ function AnimatedStat({ value, label }: AnimatedStatProps) {
 
 export function DeveloperNetworkSection() {
   return (
-    <section id="fast" className="bg-[#18181b] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden scroll-mt-[50px]">
-      <div className="flex">
-        {/* Left spacer for sidebar alignment */}
-        <div className="hidden lg:block w-[calc(41.67%-43px)]" />
-        
-        {/* Content */}
-        <div className="flex-1 py-[76px] pr-[132px]">
-          <div className="flex flex-col gap-12 max-w-[701px]">
+    <section id="fast" className="bg-[#18181b] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden scroll-mt-[80px]">
+      <div className="py-[80px] px-6 md:px-[80px] lg:px-[132px]">
+        <div className="ml-0 lg:ml-[calc(33.33%-40px)]">
+          <div className="flex flex-col gap-10 max-w-[800px]">
             {/* Header */}
-            <div className="flex flex-col gap-8">
-              <h2 className="text-[44px] leading-[1.2] text-[#fcfcfc]">
+            <div className="flex flex-col gap-4">
+              <h2 className="text-[40px] leading-[1.15] text-white">
                 A fast, flexible, and reliable network for developers
               </h2>
-              <p className="text-[22px] leading-[1.35] text-[#fcfcfc]">
+              <p className="text-[20px] leading-[1.5] text-white/70">
                 Fast, flexible, and reliable, 0x is the most trusted Web3 standard for exchanging tokenized value.
               </p>
             </div>
 
-            {/* Stats - Vertical Stack */}
-            <div className="flex flex-col gap-2 w-[582px]">
-              <AnimatedStat value="$1.4B" label="Volume Traded" />
-              <AnimatedStat value="2M" label="Token pairs" />
+            {/* Stats - Horizontal Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <AnimatedStat value="28" label="Networks" />
               <AnimatedStat value="5.6M" label="Transactions" />
+              <AnimatedStat value="$1.4B" label="Volume" />
             </div>
           </div>
         </div>

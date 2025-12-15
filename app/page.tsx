@@ -5,18 +5,19 @@ import { Footer } from "@/components/ui/footer"
 import {
   HeroSection,
   SidebarNav,
-  BestOfBothSection,
+  AboutCoinbaseSection,
   DeveloperNetworkSection,
   UsersOnchainSection,
   DexVolumeSection,
   ThreeWaysSection,
   PartnerSection,
   CTASection,
+  EmailSignupSection,
 } from "@/components/homepage"
 import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
 export default function HomePage() {
-  const sectionIds = ["about", "fast", "shift", "opportunity", "why-0x", "onchain", "cta"]
+  const sectionIds = ["about", "fast", "shift", "opportunity", "why-0x", "partner", "cta"]
   const activeSection = useScrollSpy(sectionIds, { offset: 150 })
 
   return (
@@ -29,7 +30,7 @@ export default function HomePage() {
       {/* Main Content with Sidebar */}
       <div className="relative">
         {/* Sticky Sidebar - positioned absolutely on left */}
-        <div className="hidden lg:block absolute left-[48px] top-0 w-[calc(33.33%-87px)] h-full pointer-events-none">
+        <div className="hidden lg:block absolute left-[48px] top-0 w-[280px] h-full pointer-events-none z-10">
           <div className="pointer-events-auto">
             <SidebarNav activeSection={activeSection} />
           </div>
@@ -37,10 +38,10 @@ export default function HomePage() {
 
         {/* Content Sections */}
         <main>
-          {/* The best of both worlds */}
-          <BestOfBothSection />
+          {/* About Coinbase */}
+          <AboutCoinbaseSection />
 
-          {/* Developer Network - Dark Section */}
+          {/* Developer Network - Dark Section with Stats */}
           <DeveloperNetworkSection />
 
           {/* Users are moving onchain */}
@@ -57,6 +58,9 @@ export default function HomePage() {
 
           {/* CTA Section */}
           <CTASection />
+
+          {/* Email Signup Section */}
+          <EmailSignupSection />
         </main>
       </div>
 

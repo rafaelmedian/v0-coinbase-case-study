@@ -1,49 +1,68 @@
 export function ThreeWaysSection() {
+  const cards = [
+    {
+      number: "01",
+      title: "Expand from hundreds to millions of tokens",
+      description: "We enabled DEX trading directly within Coinbase Exchange, allowing users to swap any token instantly from a familiar, trusted interface.",
+      bgColor: "bg-[#18181b]",
+      textColor: "text-white",
+      descColor: "text-white/70"
+    },
+    {
+      number: "02", 
+      title: "Reimagine the onchain experience",
+      description: "With 0x powering the Base App, Coinbase unites social, payments, and DeFi—so every post and creator becomes a tradable asset.",
+      bgColor: "bg-[#cab9ee]",
+      textColor: "text-[#26272b]",
+      descColor: "text-[#26272b]/70"
+    },
+    {
+      number: "03",
+      title: "Empower builders",
+      description: "As the Swap API provider for Coinbase Developer Platform (CDP), developers get everything they need to build great apps on Base.",
+      bgColor: "bg-[#dfd5f5]",
+      textColor: "text-[#26272b]",
+      descColor: "text-[#26272b]/70"
+    }
+  ]
+
   return (
-    <section id="why-0x" className="bg-[#fafafa] rounded-tl-[32px] rounded-tr-[32px] overflow-hidden py-[76px] px-[132px] scroll-mt-[50px]">
-      <div className="flex flex-col gap-8 ml-[calc(41.67%-90px)]">
-        {/* Header */}
-        <h2 className="text-[44px] leading-[1.2] text-[#161719]">
-          Three ways 0x powers Coinbase
-        </h2>
+    <section id="why-0x" className="bg-[#fafafa] py-[80px] scroll-mt-[80px]">
+      <div className="px-6 md:px-[80px] lg:px-[132px]">
+        <div className="ml-0 lg:ml-[calc(33.33%-40px)]">
+          <div className="flex flex-col gap-10 max-w-[800px]">
+            {/* Header */}
+            <h2 className="text-[40px] leading-[1.15] text-[#26272b]">
+              Three ways 0x powers Coinbase
+            </h2>
 
-        {/* Stacked Cards */}
-        <div className="relative w-[666px] py-6">
-          <div className="relative flex pr-[449px]">
-            {/* Front Card - Dark */}
-            <div className="relative z-[3] flex-1 min-w-[217px] -mr-[449px]">
-              <div className="bg-[#161719] rounded-[16px] h-[550px] flex flex-col justify-between pt-8 pb-6 px-6">
-                <h3 className="text-[34px] leading-[1.2] text-white h-8">
-                  Expand from hundreds to millions of tokens
-                </h3>
-                <div className="flex flex-col gap-6">
-                  {/* Icon */}
-                  <div className="w-8 h-8">
-                    <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-                      <path 
-                        d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3z" 
-                        stroke="white" 
-                        strokeWidth="2" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+            {/* Stacked Cards */}
+            <div className="relative">
+              <div className="flex flex-col gap-4">
+                {cards.map((card, index) => (
+                  <div
+                    key={index}
+                    className={`${card.bgColor} rounded-[20px] p-8 transition-all hover:-translate-y-1`}
+                    style={{ 
+                      marginLeft: `${index * 16}px`,
+                      position: 'relative',
+                      zIndex: cards.length - index
+                    }}
+                  >
+                    <div className="flex flex-col gap-4">
+                      <span className={`text-[14px] font-medium ${card.textColor} opacity-50`}>
+                        {card.number}
+                      </span>
+                      <h3 className={`text-[28px] leading-[1.2] ${card.textColor}`}>
+                        {card.title}
+                      </h3>
+                      <p className={`text-[18px] leading-[1.5] ${card.descColor}`}>
+                        {card.description}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-[22px] leading-[1.35] text-white h-[173px]">
-                    We enabled DEX trading directly within Coinbase Exchange, allowing users to swap any token instantly from a familiar, trusted interface.
-                  </p>
-                </div>
+                ))}
               </div>
-            </div>
-
-            {/* Middle Card - Purple */}
-            <div className="relative z-[2] flex-1 min-w-[217px] -mr-[449px]">
-              <div className="bg-[#cab9ee] rounded-[16px] h-[550px]" />
-            </div>
-
-            {/* Back Card - Light Purple */}
-            <div className="relative z-[1] flex-1 min-w-[217px] -mr-[449px]">
-              <div className="bg-[#dfd5f5] rounded-[16px] h-[550px]" />
             </div>
           </div>
         </div>

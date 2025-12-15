@@ -13,37 +13,31 @@ interface NavSection {
 }
 
 const navSections: NavSection[] = [
-  {
-    id: "about",
-    label: "About Dex Trading",
-    children: [
-      { id: "fast", label: "Fast" },
-      { id: "base-app", label: "Base App" },
-      { id: "cdp", label: "Coinbase Developer Platform" },
-    ],
-  },
+  { id: "about", label: "About Coinbase" },
   { id: "shift", label: "The shift" },
   { id: "opportunity", label: "The opportunity" },
-  { id: "why-0x", label: "Why 0x" },
-  { id: "onchain", label: "The onchain opportunity" },
+  {
+    id: "why-0x",
+    label: "Why 0x",
+    children: [
+      { id: "coverage", label: "Coverage" },
+      { id: "execution", label: "Execution" },
+      { id: "reliability", label: "Reliability" },
+    ],
+  },
+  { id: "partner", label: "Strategic partner" },
 ]
 
 export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
-  const [expandedSection, setExpandedSection] = useState<string>("about")
+  const [expandedSection, setExpandedSection] = useState<string>("")
 
   // Update expanded section when activeSection changes
   useEffect(() => {
-    // Check if activeSection is a child of "about"
-    if (["fast", "base-app", "cdp"].includes(activeSection)) {
-      setExpandedSection("about")
-    } else if (activeSection === "about") {
-      setExpandedSection("about")
-    } else {
-      // For other top-level sections, we can either close "about" or keep it as is
-      // Let's close it if we move to another main section to focus attention
-      if (navSections.some(s => s.id === activeSection && s.id !== "about")) {
-        setExpandedSection("")
-      }
+    // Check if activeSection is a child of "why-0x"
+    if (["coverage", "execution", "reliability"].includes(activeSection)) {
+      setExpandedSection("why-0x")
+    } else if (activeSection === "why-0x") {
+      setExpandedSection("why-0x")
     }
   }, [activeSection])
 
@@ -59,8 +53,8 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
   }
 
   return (
-    <div className="sticky top-[76px] pt-[76px]">
-      <nav className="flex flex-col gap-4">
+    <div className="sticky top-[80px] pt-[40px]">
+      <nav className="flex flex-col gap-2">
         {navSections.map((section) => (
           <div key={section.id}>
             {section.children ? (
@@ -68,15 +62,15 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
               <div>
                 <button
                   onClick={() => toggleSection(section.id)}
-                  className={`w-full h-14 flex items-center justify-between px-6 rounded-[8px] text-[20px] leading-[36px] transition-all ${
+                  className={`w-full h-12 flex items-center justify-between px-5 rounded-[8px] text-[16px] leading-[1.4] transition-all ${
                     expandedSection === section.id || activeSection === section.id
                       ? "bg-[#17181c] text-white"
-                      : "bg-[#e4e4e7] text-black hover:bg-[#d4d4d8]"
+                      : "bg-[#f4f4f5] text-[#26272b] hover:bg-[#e4e4e7]"
                   }`}
                 >
                   <span>{section.label}</span>
                   <svg
-                    className={`w-6 h-6 transition-transform ${
+                    className={`w-5 h-5 transition-transform ${
                       expandedSection === section.id ? "rotate-180" : ""
                     }`}
                     viewBox="0 0 24 24"
@@ -88,13 +82,13 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
                   </svg>
                 </button>
                 {expandedSection === section.id && section.children && (
-                  <div className="mt-4 bg-[#e4e4e7] rounded-[8px] px-6 py-4 flex flex-col gap-3">
+                  <div className="mt-2 bg-[#f4f4f5] rounded-[8px] px-5 py-3 flex flex-col gap-2">
                     {section.children.map((child) => (
                       <button
                         key={child.id}
                         onClick={() => scrollToSection(child.id)}
-                        className={`h-[29px] flex items-center text-[17.5px] leading-[1.2] transition-colors text-left ${
-                          activeSection === child.id ? "text-black font-medium" : "text-[#252629] hover:text-black"
+                        className={`h-[28px] flex items-center text-[15px] leading-[1.2] transition-colors text-left ${
+                          activeSection === child.id ? "text-[#0052ff] font-medium" : "text-[#51525c] hover:text-[#26272b]"
                         }`}
                       >
                         {child.label}
@@ -107,15 +101,15 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
               // Simple section
               <button
                 onClick={() => scrollToSection(section.id)}
-                className={`w-full h-14 flex items-center justify-between px-6 rounded-[8px] text-[20px] leading-[36px] transition-all ${
+                className={`w-full h-12 flex items-center justify-between px-5 rounded-[8px] text-[16px] leading-[1.4] transition-all ${
                   activeSection === section.id
                     ? "bg-[#17181c] text-white"
-                    : "bg-[#e4e4e7] text-black hover:bg-[#d4d4d8]"
+                    : "bg-[#f4f4f5] text-[#26272b] hover:bg-[#e4e4e7]"
                 }`}
               >
                 <span>{section.label}</span>
                 <svg
-                  className="w-6 h-6"
+                  className="w-5 h-5"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
