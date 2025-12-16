@@ -85,11 +85,17 @@ export function DeveloperNetworkSection() {
               </p>
             </div>
 
-            {/* Stats - Horizontal Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <AnimatedStat value="28" label="Networks" />
-              <AnimatedStat value="5.6M" label="Transactions" />
-              <AnimatedStat value="$1.4B" label="Volume" />
+            {/* Stats - 2x2 Grid Layout */}
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <AnimatedStat value="2M" label="Token pairs" />
+                <AnimatedStat value="5.6M" label="Transactions" />
+              </div>
+              <div className="flex justify-center">
+                <div className="w-full md:w-1/2">
+                  <AnimatedStat value="$1.4B" label="Volume Traded" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -97,3 +103,6 @@ export function DeveloperNetworkSection() {
     </section>
   )
 }
+
+
+
