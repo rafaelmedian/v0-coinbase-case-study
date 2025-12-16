@@ -1,4 +1,10 @@
+"use client"
+
+import { useState } from "react"
+
 export function ThreeWaysSection() {
+  const [activeCard, setActiveCard] = useState(0)
+  
   const cards = [
     {
       number: "01",
@@ -36,33 +42,53 @@ export function ThreeWaysSection() {
               Three ways 0x powers Coinbase
             </h2>
 
-            {/* Stacked Cards */}
-            <div className="relative">
-              <div className="flex flex-col gap-4">
-                {cards.map((card, index) => (
+            {/* Horizontally Stacked Cards */}
+            <div className="relative h-[550px]">
+              {cards.map((card, index) => {
+                // Calculate position based on active card
+                const isActive = index === activeCard
+                const baseOffset = index * 72
+                
+                return (
                   <div
                     key={index}
-                    className={`${card.bgColor} rounded-[20px] p-8 transition-all hover:-translate-y-1`}
+                    onClick={() => setActiveCard(index)}
+                    className={`${card.bgColor} rounded-[20px] p-8 absolute top-0 w-[520px] h-[550px] cursor-pointer transition-all duration-300 hover:translate-x-2`}
                     style={{ 
-                      marginLeft: `${index * 16}px`,
-                      position: 'relative',
-                      zIndex: cards.length - index
+                      left: `${baseOffset}px`,
+                      zIndex: isActive ? 10 : cards.length - index,
                     }}
                   >
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 h-full">
                       <span className={`text-[14px] font-medium ${card.textColor} opacity-50`}>
                         {card.number}
                       </span>
                       <h3 className={`text-[28px] leading-[1.2] ${card.textColor}`}>
                         {card.title}
                       </h3>
+                      
+                      {/* Icon */}
+                      <div className="w-8 h-8 mt-auto mb-4">
+                        <svg
+                          className={`w-full h-full ${card.textColor}`}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.5}
+                        >
+                          <path d="M12 2L2 7L12 12L22 7L12 2Z" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M2 17L12 22L22 17" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M2 12L12 17L22 12" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                      
                       <p className={`text-[18px] leading-[1.5] ${card.descColor}`}>
                         {card.description}
                       </p>
                     </div>
                   </div>
-                ))}
-              </div>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -70,3 +96,6 @@ export function ThreeWaysSection() {
     </section>
   )
 }
+
+
+
