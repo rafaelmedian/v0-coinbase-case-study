@@ -13,31 +13,52 @@ interface NavSection {
 }
 
 const navSections: NavSection[] = [
-  { id: "about", label: "About Coinbase" },
-  { id: "shift", label: "The shift" },
-  { id: "opportunity", label: "The opportunity" },
   {
-    id: "why-0x",
-    label: "Why 0x",
+    id: "about",
+    label: "About Coinbase",
     children: [
-      { id: "coverage", label: "Coverage" },
-      { id: "execution", label: "Execution" },
-      { id: "reliability", label: "Reliability" },
+      { id: "dex-trading", label: "Dex Trading" },
+      { id: "base-app", label: "Base App" },
+      { id: "dev-platform", label: "Coinbase Developer Platform" },
     ],
   },
-  { id: "partner", label: "Strategic partner" },
+  { id: "shift", label: "The shift" },
+  { id: "opportunity", label: "The opportunity" },
+  { id: "why-0x", label: "Why 0x" },
+  { id: "partner", label: "The onchain opportunity" },
 ]
 
-export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
+export function SidebarNav({ activeSection }: SidebarNavProps) {
   const [expandedSection, setExpandedSection] = useState<string>("")
+  const [visitedSections, setVisitedSections] = useState<Set<string>>(new Set())
 
-  // Update expanded section when activeSection changes
+  // Track visited sections and update expanded section when activeSection changes
   useEffect(() => {
-    // Check if activeSection is a child of "why-0x"
-    if (["coverage", "execution", "reliability"].includes(activeSection)) {
-      setExpandedSection("why-0x")
-    } else if (activeSection === "why-0x") {
-      setExpandedSection("why-0x")
+    if (activeSection) {
+      // Add current active section to visited sections
+      setVisitedSections((prev) => {
+        const newSet = new Set(prev)
+        newSet.add(activeSection)
+        return newSet
+      })
+
+      // Check if activeSection is a child of "about" or is "about" itself
+      if (["dex-trading", "base-app", "dev-platform"].includes(activeSection)) {
+        setExpandedSection("about")
+        setVisitedSections((prev) => {
+          const newSet = new Set(prev)
+          newSet.add("about")
+          return newSet
+        })
+      } else if (activeSection === "about") {
+        setExpandedSection("about")
+      } else {
+        // Collapse "about" when scrolling past it
+        setExpandedSection((prev) => prev === "about" ? "" : prev)
+      }
+    } else {
+      // Collapse "about" when no section is active
+      setExpandedSection((prev) => prev === "about" ? "" : prev)
     }
   }, [activeSection])
 
@@ -52,9 +73,26 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
     }
   }
 
+  // Helper to determine section style
+  const getSectionStyle = (sectionId: string) => {
+    const isActive = activeSection === sectionId
+    const isVisited = visitedSections.has(sectionId) && !isActive
+    
+    if (isActive) {
+      return "bg-[#17181c] text-white"
+    } else if (isVisited) {
+      return "bg-[#71717a] text-white"
+    } else {
+      return "bg-[rgba(243,243,241,0.8)] text-[#26272b] hover:bg-[#e4e4e7]"
+    }
+  }
+
   return (
-    <div className="sticky top-[80px] pt-[40px]">
-      <nav className="flex flex-col gap-2">
+    <div
+      className="absolute left-[48px] top-[40px] w-[280px] h-full"
+    >
+      <div className="sticky top-[120px] z-50">
+      <nav className="flex flex-col gap-1">
         {navSections.map((section) => (
           <div key={section.id}>
             {section.children ? (
@@ -62,15 +100,11 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
               <div>
                 <button
                   onClick={() => toggleSection(section.id)}
-                  className={`w-full h-12 flex items-center justify-between px-5 rounded-[8px] text-[16px] leading-[1.4] transition-all ${
-                    expandedSection === section.id || activeSection === section.id
-                      ? "bg-[#17181c] text-white"
-                      : "bg-[#f4f4f5] text-[#26272b] hover:bg-[#e4e4e7]"
-                  }`}
+                  className={`w-full h-12 flex items-center justify-between px-5 rounded-[8px] text-[16px] leading-[1.4] transition-all duration-200 ${getSectionStyle(section.id)}`}
                 >
                   <span>{section.label}</span>
                   <svg
-                    className={`w-5 h-5 transition-transform ${
+                    className={`w-5 h-5 transition-transform duration-200 ${
                       expandedSection === section.id ? "rotate-180" : ""
                     }`}
                     viewBox="0 0 24 24"
@@ -82,7 +116,7 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
                   </svg>
                 </button>
                 {expandedSection === section.id && section.children && (
-                  <div className="mt-2 bg-[#f4f4f5] rounded-[8px] px-5 py-3 flex flex-col gap-2">
+                  <div className="mt-2 bg-[rgba(243,243,241,0.8)] rounded-[8px] px-5 py-3 flex flex-col gap-2">
                     {section.children.map((child) => (
                       <button
                         key={child.id}
@@ -101,11 +135,7 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
               // Simple section
               <button
                 onClick={() => scrollToSection(section.id)}
-                className={`w-full h-12 flex items-center justify-between px-5 rounded-[8px] text-[16px] leading-[1.4] transition-all ${
-                  activeSection === section.id
-                    ? "bg-[#17181c] text-white"
-                    : "bg-[#f4f4f5] text-[#26272b] hover:bg-[#e4e4e7]"
-                }`}
+                className={`w-full h-12 flex items-center justify-between px-5 rounded-[8px] text-[16px] leading-[1.4] transition-all duration-200 ${getSectionStyle(section.id)}`}
               >
                 <span>{section.label}</span>
                 <svg
@@ -122,6 +152,11 @@ export function SidebarNav({ activeSection = "about" }: SidebarNavProps) {
           </div>
         ))}
       </nav>
+      </div>
     </div>
   )
 }
+
+
+
+
