@@ -30,21 +30,22 @@ export default function Navigation({ activePage }: NavigationProps) {
 
   return (
     <header 
-      className={`sticky top-0 z-50 px-6 py-2 md:px-[50px] transition-all duration-300 ${
+      className={`sticky top-0 z-50 px-6 lg:px-[50px] py-2 transition-all duration-300 ${
         isScrolled 
-          ? "bg-white/90 backdrop-blur-md" 
+          ? "bg-white/95 backdrop-blur-md" 
           : "bg-white"
       }`}
     >
       <div className="flex items-center justify-between">
         {/* Left: Logo Section */}
-        <Link href="/" className="flex items-center gap-[3.49px] transition-opacity duration-200 hover:opacity-80">
+        <Link href="/" className="flex items-baseline gap-[3.5px] transition-opacity duration-200 hover:opacity-80">
           {/* 0x Logo */}
           <svg className="h-[17px] w-[28px]" viewBox="0 0 33 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" clipRule="evenodd" d="M12.5006 1.29749C11.2745 0.432497 9.80855 8.84679e-10 8.10271 7.30822e-10C6.39688 5.76965e-10 4.93093 0.432497 3.70486 1.29749C2.47879 2.14447 1.5548 3.31582 0.932878 4.81154C0.310959 6.30726 7.24058e-10 8.01923 8.98158e-10 9.94745C1.07226e-09 11.8757 0.310959 13.5876 0.932878 15.0834C1.5548 16.5791 2.47879 17.7594 3.70486 18.6244C4.93093 19.4714 6.39688 19.8949 8.10271 19.8949C9.80855 19.8949 11.2745 19.4714 12.5006 18.6244C13.7266 17.7594 14.6506 16.5791 15.2725 15.0834C15.8945 13.5876 16.2054 11.8757 16.2054 9.94745C16.2054 8.01923 15.8945 6.30726 15.2725 4.81154C14.6506 3.31582 13.7266 2.14447 12.5006 1.29749ZM10.4116 4.62879C9.81589 3.99375 9.04627 3.67623 8.10271 3.67623C6.84111 3.67623 5.88158 4.24388 5.22412 5.37919C4.58443 6.5145 4.26459 8.03725 4.26459 9.94745C4.26459 11.1466 4.39063 12.1931 4.64273 13.0869L10.4116 4.62879ZM5.77689 15.2639C6.38281 15.9004 7.15809 16.2187 8.10271 16.2187C9.36432 16.2187 10.315 15.651 10.9547 14.5157C11.6121 13.3804 11.9408 11.8576 11.9408 9.94745C11.9408 8.74463 11.8105 7.69544 11.5498 6.79987L5.77689 15.2639Z" fill="#1D1D1D"/>
             <path d="M21.2663 12.0018L16.2554 19.4624L21.053 19.4624L23.3986 15.2455C23.5762 14.9572 23.6829 14.5788 23.7184 14.1102C23.7362 13.93 23.7717 13.7949 23.825 13.7048C23.8783 13.5966 23.9849 13.5426 24.1449 13.5426C24.3936 13.5426 24.5358 13.7048 24.5713 14.0291L24.5713 14.1102C24.6069 14.5788 24.7135 14.9572 24.8912 15.2455L27.2367 19.4624L32.0343 19.4624L27.0235 12.0018L31.6079 5.18997L26.8102 5.18997L24.8912 8.73105C24.6779 9.10948 24.5713 9.48792 24.5713 9.86635C24.5713 10.0285 24.5358 10.1637 24.4647 10.2718C24.4114 10.3799 24.3048 10.434 24.1449 10.434C23.9849 10.434 23.8694 10.3799 23.7984 10.2718C23.7451 10.1637 23.7184 10.0285 23.7184 9.86635C23.7184 9.48792 23.6118 9.10948 23.3986 8.73105L21.4795 5.18997L16.6818 5.18997L21.2663 12.0018Z" fill="#1D1D1D"/>
           </svg>
-          <span className="text-[14px] text-black/20 leading-[1.2]">&</span>
+          {/* Ampersand separator */}
+          <span className="text-[14px] text-black/20 leading-[1.2]">&amp;</span>
           {/* Coinbase Wordmark */}
           <svg className="h-[17px] w-[97px]" viewBox="0 0 202 37" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_nav_coinbase)">
@@ -56,50 +57,50 @@ export default function Navigation({ activePage }: NavigationProps) {
               </clipPath>
             </defs>
           </svg>
-          <span className="text-[18px] text-[#51525c] leading-[1.2] ml-3 hidden sm:inline">Case study &apos;25</span>
+          <span className="text-[18px] text-[#51525c] leading-[1.2] ml-2 hidden sm:inline">Case study</span>
         </Link>
 
-        {/* Center: Navigation Tabs - Desktop */}
-        <nav className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
-          {navTabs.map((tab, index) => (
-            <Link
-              key={tab.id}
-              href={tab.href}
-              className={`h-12 flex items-center justify-center px-4 text-[16px] leading-[22px] transition-all duration-200 ${
-                activePage === tab.id
-                  ? "bg-[#e4e4e7] text-[#252629]"
-                  : "bg-[#f4f4f5] text-[#252629] hover:bg-[#e4e4e7]"
-              } ${
-                index === 0 ? "rounded-l-none" : ""
-              } ${
-                index === navTabs.length - 1 ? "rounded-bl-[8px] rounded-br-[24px] rounded-tl-[8px] rounded-tr-[24px]" : "rounded-[8px]"
-              }`}
-            >
-              {tab.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Right: Navigation Tabs + Actions */}
+        <div className="flex items-center gap-2">
+          {/* Navigation Tabs - Desktop */}
+          <nav className="hidden lg:flex items-center gap-2">
+            {navTabs.map((tab, index) => (
+              <Link
+                key={tab.id}
+                href={tab.href}
+                className={`h-12 flex items-center justify-center px-4 text-[16px] leading-[22px] backdrop-blur-md transition-all duration-200 ${
+                  activePage === tab.id
+                    ? "bg-[#18181b] text-white"
+                    : "bg-[#f4f4f5] text-[#252629] hover:bg-[#e4e4e7]"
+                } ${
+                  index === 0 
+                    ? "rounded-l-[24px] rounded-r-[8px]" 
+                    : "rounded-[8px]"
+                }`}
+              >
+                {tab.label}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Right: Actions */}
-        <div className="flex items-center gap-0">
           {/* Contact Sales Button */}
           <Link 
             href="/start-building"
-            className="hidden md:flex h-12 items-center justify-center px-4 bg-black text-white text-[16px] leading-[22px] rounded-[32px] hover:bg-black/90 transition-colors"
+            className="hidden md:flex h-12 items-center justify-center px-4 bg-black text-[#fcfcfc] text-[16px] leading-[22px] rounded-[8px] hover:bg-[#252629] transition-colors"
           >
             Contact Sales
           </Link>
           
-          {/* Menu Button (three dots) */}
+          {/* Menu Button (three dots) - shaped pill */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex items-center justify-center size-12 rounded-[30px] bg-[rgba(243,243,241,0.6)] backdrop-blur-xl ml-0 hover:bg-[rgba(243,243,241,0.8)] transition-colors"
+            className="flex items-center justify-center size-12 rounded-l-[8px] rounded-r-[24px] bg-[#f4f4f5] backdrop-blur-xl hover:bg-[#e4e4e7] transition-colors"
             aria-label="Toggle menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="5" cy="12" r="2" fill="#1D1D1D"/>
-              <circle cx="12" cy="12" r="2" fill="#1D1D1D"/>
-              <circle cx="19" cy="12" r="2" fill="#1D1D1D"/>
+              <circle cx="5" cy="12" r="2" fill="#18181b"/>
+              <circle cx="12" cy="12" r="2" fill="#18181b"/>
+              <circle cx="19" cy="12" r="2" fill="#18181b"/>
             </svg>
           </button>
         </div>
@@ -129,7 +130,7 @@ export default function Navigation({ activePage }: NavigationProps) {
               </Link>
             ))}
             <Link href="/start-building" onClick={() => setIsMenuOpen(false)} className="mt-6">
-              <button className="w-full h-12 bg-black text-white text-[16px] rounded-[32px] hover:bg-black/90 transition-colors">
+              <button className="w-full h-12 bg-black text-white text-[16px] rounded-[8px] hover:bg-[#252629] transition-colors">
                 Contact Sales
               </button>
             </Link>
