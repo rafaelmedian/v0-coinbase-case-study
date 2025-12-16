@@ -27,16 +27,14 @@ export default function HomePage() {
       {/* Hero Section - Full Width */}
       <HeroSection />
 
-      {/* Main Content with Sidebar */}
+      {/* Content wrapper - TOC positioned relative to this */}
       <div className="relative">
-        {/* Sticky Sidebar - positioned absolutely on left */}
-        <div className="hidden lg:block absolute left-[48px] top-0 w-[280px] h-full pointer-events-none z-10">
-          <div className="pointer-events-auto">
-            <SidebarNav activeSection={activeSection} />
-          </div>
+        {/* TOC Sidebar - positioned relative to content wrapper */}
+        <div className="hidden lg:block">
+          <SidebarNav activeSection={activeSection} />
         </div>
 
-        {/* Content Sections */}
+        {/* Main Content */}
         <main>
           {/* About Coinbase */}
           <AboutCoinbaseSection />
