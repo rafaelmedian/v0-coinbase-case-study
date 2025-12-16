@@ -1,115 +1,196 @@
+"use client"
+
 import Image from "next/image"
+import { useState, useEffect, useCallback } from "react"
+
+// Quote data - replace images with actual GIFs/images when available
+const quotes = [
+  {
+    id: 1,
+    text: "0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem.",
+    author: "Coinbase Team",
+    role: "Product Engineering",
+    image: "/placeholder-user.jpg",
+  },
+  {
+    id: 2,
+    text: "The integration was seamless and allowed us to scale our swap infrastructure globally in weeks.",
+    author: "Brian Armstrong",
+    role: "CEO, Coinbase",
+    image: "/placeholder-user.jpg",
+  },
+  {
+    id: 3,
+    text: "0x's aggregation layer gives our users the best prices across dozens of liquidity sources.",
+    author: "Product Team",
+    role: "Coinbase Wallet",
+    image: "/placeholder-user.jpg",
+  },
+]
+
+const ROTATION_INTERVAL = 7000 // 7 seconds
 
 export function HeroSection() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const goToQuote = useCallback((index: number) => {
+    if (index === currentIndex) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentIndex(index)
+      setProgress(0)
+      setTimeout(() => setIsTransitioning(false), 50)
+    }, 200)
+  }, [currentIndex])
+
+  const nextQuote = useCallback(() => {
+    goToQuote((currentIndex + 1) % quotes.length)
+  }, [currentIndex, goToQuote])
+
+  // Auto-advance timer
+  useEffect(() => {
+    if (isPaused) return
+
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          nextQuote()
+          return 0
+        }
+        return prev + (100 / (ROTATION_INTERVAL / 50))
+      })
+    }, 50)
+
+    return () => clearInterval(progressInterval)
+  }, [isPaused, nextQuote])
+
+  const currentQuote = quotes[currentIndex]
+
   return (
-    <section className="relative pt-[80px] pb-[60px] px-6 md:px-[50px]">
+    <section className="relative pt-[80px] pb-[60px] px-6 md:px-[50px] overflow-hidden">
       <div className="max-w-[1200px] mx-auto">
         {/* Main Headline */}
-        <h1 className="text-[clamp(36px,5vw,64px)] leading-[1.1] text-center text-[#26272b] max-w-[900px] mx-auto mb-8">
+        <h1 className="text-[clamp(2.5rem,8vw,5.25rem)] leading-[1.2] tracking-[-0.04em] text-center text-[#26272b] max-w-[900px] mx-auto mb-10">
           Delivering the end-to-end{" "}
+          <br className="hidden md:block" />
           <span className="text-[#0052ff]">on-chain infra</span>
+          <br className="hidden md:block" />
           {" "}running Coinbase.
         </h1>
 
-        {/* Quote Box */}
-        <div className="bg-[#f1f1f3] rounded-[20px] p-6 max-w-[520px] mx-auto mb-12">
-          <div className="flex flex-col gap-4 items-center">
-            <p className="text-[18px] leading-[1.4] text-[#26272b] text-center">
-              &ldquo;0x has one of the most extensive and reliable DEX API services in the Web3 ecosystem, and is a core partner powering our onchain trading experience.&rdquo;
+        {/* Quote Card */}
+        <div 
+          className="relative bg-[#f4f4f5] rounded-[16px] p-6 max-w-[480px] mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div 
+            className={`flex flex-col gap-4 items-center transition-all duration-300 ${
+              isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
+            }`}
+          >
+            {/* Quote Text */}
+            <p className="text-[16px] leading-[1.5] text-[#3f3f46] text-center">
+              &ldquo;{currentQuote.text}&rdquo;
             </p>
+            
+            {/* Author Info */}
             <div className="flex items-center gap-3">
-              <div className="w-[40px] h-[40px] rounded-[12px] bg-[#0052ff] overflow-hidden flex items-center justify-center">
+              <div className="w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[#0052ff] to-[#00d4ff] overflow-hidden ring-2 ring-white shadow-md">
                 <Image
-                  src="/images/coinbase-icon.svg"
-                  alt="Coinbase"
-                  width={24}
-                  height={24}
-                  className="brightness-0 invert"
+                  src={currentQuote.image}
+                  alt={currentQuote.author}
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-[14px] leading-[1.2] text-[#252629]/60">
-                Coinbase Team
-              </span>
+              <div className="flex flex-col">
+                <span className="text-[14px] font-medium leading-[1.2] text-[#18181b]">
+                  {currentQuote.author}
+                </span>
+                <span className="text-[12px] leading-[1.2] text-[#71717a]">
+                  {currentQuote.role}
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Phone Mockup */}
-        <div className="flex justify-center">
-          <div className="relative w-[320px] h-[580px]">
-            <PhoneMockup />
-          </div>
+        {/* Timer Pills - Outside below the card */}
+        <div className="flex items-center justify-center gap-3 mt-6">
+          {quotes.map((quote, index) => (
+            <button
+              key={quote.id}
+              onClick={() => {
+                goToQuote(index)
+                setIsPaused(false)
+              }}
+              className="group relative h-[6px] rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0052ff] focus-visible:ring-offset-2"
+              style={{ width: index === currentIndex ? '48px' : '24px' }}
+              aria-label={`Go to quote ${index + 1}`}
+              aria-current={index === currentIndex ? 'true' : 'false'}
+            >
+              {/* Background pill */}
+              <div className="absolute inset-0 bg-[#e4e4e7] rounded-full" />
+              
+              {/* Progress fill */}
+              <div 
+                className="absolute inset-y-0 left-0 bg-[#18181b] rounded-full transition-all"
+                style={{ 
+                  width: index === currentIndex ? `${progress}%` : index < currentIndex ? '100%' : '0%',
+                  transitionDuration: index === currentIndex ? '50ms' : '300ms'
+                }}
+              />
+              
+              {/* Hover effect */}
+              <div className="absolute inset-0 bg-[#0052ff] opacity-0 group-hover:opacity-20 rounded-full transition-opacity" />
+            </button>
+          ))}
         </div>
+      </div>
+
+      {/* Decorative pixel grid - bottom right */}
+      <div className="absolute bottom-[40px] right-[60px] hidden lg:block">
+        <PixelDecoration />
       </div>
     </section>
   )
 }
 
-function PhoneMockup() {
+function PixelDecoration() {
+  // Create a 6x6 grid with some cells filled in blue with varying opacities
+  const grid = [
+    [0, 0, 0, 0, 0.15, 0.25],
+    [0, 0, 0, 0.2, 0.4, 0.6],
+    [0, 0, 0.15, 0.35, 0.55, 0.75],
+    [0, 0.1, 0.3, 0.5, 0.7, 0.9],
+    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    [0, 0.3, 0.5, 0.7, 0.9, 1],
+  ]
+
   return (
-    <div className="w-full h-full bg-white rounded-[40px] shadow-2xl border-[8px] border-gray-900 overflow-hidden relative">
-      {/* Status bar */}
-      <div className="absolute top-0 left-0 right-0 h-8 bg-white flex items-center justify-center">
-        <div className="w-20 h-5 bg-black rounded-full" />
-      </div>
-      
-      {/* App header */}
-      <div className="absolute top-8 left-0 right-0 h-14 bg-white border-b border-gray-100 flex items-center justify-between px-4">
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#1d1d1d" strokeWidth={2}>
-          <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <span className="font-medium text-sm text-gray-900">DEX Trading</span>
-        <div className="w-8 h-8 rounded-full bg-gray-100" />
-      </div>
-
-      {/* Swap interface */}
-      <div className="absolute top-[88px] left-0 right-0 bottom-20 bg-white p-4 space-y-3">
-        {/* From token */}
-        <div className="bg-gray-50 rounded-2xl p-4">
-          <p className="text-xs text-gray-500 mb-2">From</p>
-          <div className="flex justify-between items-center">
-            <span className="text-2xl font-medium text-gray-900">1,000</span>
-            <div className="flex items-center gap-2 bg-white rounded-full px-3 py-2 border border-gray-200">
-              <div className="w-5 h-5 rounded-full bg-blue-500" />
-              <span className="font-medium text-sm">USDC</span>
-            </div>
-          </div>
+    <div className="flex flex-col gap-[3px]">
+      {grid.map((row, rowIndex) => (
+        <div key={rowIndex} className="flex gap-[3px]">
+          {row.map((opacity, colIndex) => (
+            <div
+              key={colIndex}
+              className="w-[10px] h-[10px] rounded-[2px]"
+              style={{
+                backgroundColor: opacity > 0 ? `rgba(0, 82, 255, ${opacity})` : 'transparent',
+              }}
+            />
+          ))}
         </div>
-
-        {/* Swap arrow */}
-        <div className="flex justify-center -my-1">
-          <div className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth={2}>
-              <path d="M12 5v14M19 12l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
-
-        {/* To token */}
-        <div className="bg-gray-50 rounded-2xl p-4">
-          <p className="text-xs text-gray-500 mb-2">To</p>
-          <div className="flex justify-between items-center">
-            <span className="text-2xl font-medium text-gray-900">0.41</span>
-            <div className="flex items-center gap-2 bg-white rounded-full px-3 py-2 border border-gray-200">
-              <div className="w-5 h-5 rounded-full bg-[#627eea]" />
-              <span className="font-medium text-sm">ETH</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Swap button */}
-        <button className="w-full py-4 bg-[#0052ff] text-white rounded-2xl text-base font-medium mt-4">
-          Preview Swap
-        </button>
-      </div>
-
-      {/* Bottom nav */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-white border-t border-gray-100 flex justify-around items-center px-6">
-        <div className="w-6 h-6 rounded bg-gray-200" />
-        <div className="w-6 h-6 rounded bg-[#0052ff]" />
-        <div className="w-6 h-6 rounded bg-gray-200" />
-        <div className="w-6 h-6 rounded bg-gray-200" />
-      </div>
+      ))}
     </div>
   )
 }
+
+
+
+
