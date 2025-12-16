@@ -87,19 +87,29 @@
   --grid-gap: 24px;
   --grid-gap-lg: 32px;
   
-  /* Type Scale */
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-base: 16px;
-  --text-md: 18px;
-  --text-lg: 22px;
-  --text-xl: 28px;
-  --text-2xl: 35px;
-  --text-3xl: 44px;
-  --text-4xl: 55px;
-  --text-5xl: 69px;
-  --text-6xl: 86px;
-  --text-7xl: 108px;
+  /* ===========================================
+     RESPONSIVE TYPOGRAPHY SYSTEM
+     =========================================== 
+     
+     Breakpoints:
+     - Mobile: < 760px (default)
+     - Regular: 760px - 1023px
+     - Large: 1024px+
+     
+     Display Headings (H1-H4)
+     Body Text (Large, Text, Label)
+  */
+  
+  /* Mobile Display Sizes (< 760px) - Default */
+  --h1-size: 2.5rem;     /* 40px */
+  --h2-size: 2.25rem;    /* 36px */
+  --h3-size: 1.7rem;     /* 27.2px */
+  --h4-size: 1.5rem;     /* 24px - inferred */
+  
+  /* Mobile Body Sizes (< 760px) - Default */
+  --text-large: 1.5rem;   /* 24px */
+  --text-body: 1.25rem;   /* 20px */
+  --text-label: 1rem;     /* 16px */
   
   /* Line Heights */
   --leading-tight: 0.95;
@@ -133,6 +143,33 @@
   /* Section Spacing */
   --section-padding: 80px;
   --section-padding-lg: 112px;
+}
+
+/* Regular Display Sizes (760px - 1023px) */
+@media (min-width: 760px) {
+  :root {
+    /* Display Headings */
+    --h1-size: 5.5rem;     /* 88px */
+    --h2-size: 3.8rem;     /* 60.8px */
+    --h3-size: 2.5rem;     /* 40px */
+    --h4-size: 2rem;       /* 32px */
+    
+    /* Body Sizes (same for 760px+) */
+    --text-large: 1.375rem;  /* 22px */
+    --text-body: 1.09rem;    /* 17.44px */
+    --text-label: 0.85rem;   /* 13.6px */
+  }
+}
+
+/* Large Display Sizes (1024px+) */
+@media (min-width: 1024px) {
+  :root {
+    /* Display Headings */
+    --h1-size: 5.25rem;    /* 84px */
+    --h2-size: 4.125rem;   /* 66px */
+    --h3-size: 2.75rem;    /* 44px */
+    --h4-size: 2.125rem;   /* 34px */
+  }
 }
 
 .dark {
@@ -220,47 +257,47 @@
     font-feature-settings: "zero" 1;
   }
   
-  /* Typography */
+  /* Typography - Using Responsive CSS Variables */
   h1 {
-    font-size: 64px;
-    line-height: 1.1;
+    font-size: var(--h1-size);
+    line-height: 1.2;         /* 120% */
     font-weight: 400;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;  /* -4% */
   }
   h2 {
-    font-size: 48px;
-    line-height: 1.15;
+    font-size: var(--h2-size);
+    line-height: 1.1;
     font-weight: 400;
     letter-spacing: -0.01em;
   }
   h3 {
-    font-size: 36px;
-    line-height: 1.2;
+    font-size: var(--h3-size);
+    line-height: 1.15;
     font-weight: 400;
   }
   h4 {
-    font-size: 30px;
-    line-height: 1.25;
+    font-size: var(--h4-size);
+    line-height: 1.2;
     font-weight: 400;
   }
   h5 {
-    font-size: 24px;
+    font-size: var(--text-large);
     line-height: 1.25;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
   h6 {
-    font-size: 18px;
+    font-size: var(--text-body);
     line-height: 1.3;
     font-weight: 500;
   }
   p {
-    font-size: 22px;
+    font-size: var(--text-body);
     line-height: 1.4;
   }
   small {
-    font-size: 14px;
+    font-size: var(--text-label);
     line-height: 1.5;
   }
   
@@ -299,7 +336,57 @@
   animation: slide-down 0.2s ease-out forwards;
 }
 
-/* Typography Utilities */
+/* ===========================================
+   TYPOGRAPHY UTILITY CLASSES
+   =========================================== */
+
+/* Display Heading Utilities */
+.display-h1 {
+  font-size: var(--h1-size);
+  line-height: 1.2;           /* 120% */
+  font-weight: 400;
+  letter-spacing: -0.04em;    /* -4% */
+}
+
+.display-h2 {
+  font-size: var(--h2-size);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.display-h3 {
+  font-size: var(--h3-size);
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.display-h4 {
+  font-size: var(--h4-size);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+/* Body Text Utilities */
+.body-large {
+  font-size: var(--text-large);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.body-text {
+  font-size: var(--text-body);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.body-label {
+  font-size: var(--text-label);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Legacy Typography Utilities (kept for backwards compatibility) */
 .text-display {
   font-weight: 100;
   letter-spacing: -0.02em;
@@ -329,7 +416,7 @@
   letter-spacing: 0.05em;
   line-height: 1.5;
   text-transform: uppercase;
-  font-size: var(--text-sm);
+  font-size: var(--text-label);
 }
 
 /* Developer Platform Card */
