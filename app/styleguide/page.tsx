@@ -40,20 +40,64 @@ const fonts = [
   { name: "PolySans Median", weight: "600", cssWeight: "font-semibold", description: "Used for emphasis and buttons" },
 ]
 
-// Typography scale data
-const typography = [
-  { size: "140px", weight: "font-normal", name: "Hero Stats", example: "$XB", description: "PageHero stat values" },
-  { size: "76px", weight: "font-thin", name: "Stat Card Numbers", example: "20M+", description: "StatCard component values" },
-  { size: "64px", weight: "font-normal", name: "H1 / Hero Quote", example: "Hero Quote", description: "Main page headings, PageHero quote" },
-  { size: "48px", weight: "font-normal", name: "H2 / Page Title", example: "Page Title", description: "PageHero title, section titles" },
-  { size: "45px", weight: "font-normal", name: "Section Headings", example: "Section Heading", description: "Large section headings" },
-  { size: "36px", weight: "font-normal", name: "H3", example: "Heading 3", description: "Tertiary headings" },
-  { size: "30px", weight: "font-normal", name: "H4 / Card Headings", example: "Card Heading", description: "FeatureCard titles, list items" },
-  { size: "24px", weight: "font-normal", name: "H5 / Labels", example: "SECTION LABEL", description: "Uppercase section labels" },
-  { size: "22px", weight: "font-normal", name: "Body / Paragraphs", example: "Body text for paragraphs and descriptions", description: "Primary body copy" },
-  { size: "18px", weight: "font-medium", name: "H6 / Navigation", example: "NAVIGATION ITEM", description: "Navigation links, small headings" },
-  { size: "14px", weight: "font-normal", name: "Small / Captions", example: "Small text and captions", description: "Labels, captions, metadata" },
-]
+// Responsive Typography Data
+const displaySizes = {
+  large: {
+    label: "1440 Large Display",
+    description: "Screen widths 1024px and wider",
+    breakpoint: "≥1024px",
+    headings: [
+      { level: "H1", size: "5.25rem", px: "84px", lineHeight: "120%", letterSpacing: "-4%" },
+      { level: "H2", size: "4.125rem", px: "66px" },
+      { level: "H3", size: "2.75rem", px: "44px" },
+      { level: "H4", size: "2.125rem", px: "34px" },
+    ]
+  },
+  regular: {
+    label: "1024 Regular Display",
+    description: "Screen widths 760px to 1023px",
+    breakpoint: "760px–1023px",
+    headings: [
+      { level: "H1", size: "5.5rem", px: "88px", lineHeight: "120%", letterSpacing: "-4%" },
+      { level: "H2", size: "3.8rem", px: "60.8px" },
+      { level: "H3", size: "2.5rem", px: "40px" },
+      { level: "H4", size: "2rem", px: "32px" },
+    ]
+  },
+  mobile: {
+    label: "760 Mobile Display",
+    description: "Screen widths less than 760px",
+    breakpoint: "<760px",
+    headings: [
+      { level: "H1", size: "2.5rem", px: "40px", lineHeight: "120%", letterSpacing: "-4%" },
+      { level: "H2", size: "2.25rem", px: "36px" },
+      { level: "H3", size: "1.7rem", px: "27.2px" },
+    ]
+  }
+}
+
+const bodySizes = {
+  desktop: {
+    label: "Display Body Sizes",
+    description: "Screen widths 760px and larger",
+    breakpoint: "≥760px",
+    sizes: [
+      { name: "Large", size: "1.375rem", px: "22px" },
+      { name: "Text", size: "1.09rem", px: "17.44px" },
+      { name: "Label", size: "0.85rem", px: "13.6px" },
+    ]
+  },
+  mobile: {
+    label: "Mobile Body Sizes",
+    description: "Screen widths less than 760px",
+    breakpoint: "<760px",
+    sizes: [
+      { name: "Large", size: "1.5rem", px: "24px" },
+      { name: "Text", size: "1.25rem", px: "20px" },
+      { name: "Label", size: "1rem", px: "16px" },
+    ]
+  }
+}
 
 // Spacing scale
 const spacing = [4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80]
@@ -66,8 +110,8 @@ export default function StyleguidePage() {
       {/* Header */}
       <div className="border-b border-[#f2f2f2] bg-[#f4f4f5] px-6 py-16 lg:px-20">
         <div className="mx-auto max-w-[1440px]">
-          <h1 className="mb-4 text-[64px] font-thin leading-none text-[#26272b]">Styleguide</h1>
-          <p className="text-[22px] leading-[1.3] text-[#5e5e5e]">
+          <h1 className="mb-4 font-normal leading-none text-[#26272b]">Styleguide</h1>
+          <p className="body-large text-[#5e5e5e]">
             Design system documentation for the 0x + Coinbase case study
           </p>
         </div>
@@ -76,8 +120,265 @@ export default function StyleguidePage() {
       <main className="mx-auto max-w-[1440px] px-6 py-16 lg:px-20">
         <div className="space-y-24">
 
-          {/* ==================== COLORS ==================== */}
+          {/* ==================== TYPOGRAPHY SYSTEM ==================== */}
           <section>
+            <SectionHeader label="Typography System" className="mb-8" />
+            
+            {/* Overview Box */}
+            <div className="mb-12 rounded-lg bg-[#f4f4f5] p-6">
+              <p className="body-text text-[#5e5e5e]">
+                <strong className="text-[#26272b]">Responsive Typography</strong> — This design system uses CSS custom properties 
+                that automatically adjust based on viewport width. Three breakpoints define the type scale: 
+                <span className="mx-1 rounded bg-[#26272b] px-2 py-0.5 text-sm text-white">&lt;760px</span> (mobile),
+                <span className="mx-1 rounded bg-[#26272b] px-2 py-0.5 text-sm text-white">760px–1023px</span> (regular), and
+                <span className="mx-1 rounded bg-[#26272b] px-2 py-0.5 text-sm text-white">≥1024px</span> (large).
+              </p>
+            </div>
+
+            {/* Display Headings Section */}
+            <div className="mb-16">
+              <h3 className="mb-8 text-[30px] font-medium text-[#26272b]">Display Headings</h3>
+              
+              <div className="space-y-12">
+                {/* Large Display */}
+                <div className="rounded-lg border border-[#e5e5e5] overflow-hidden">
+                  <div className="bg-[#f4f4f5] px-6 py-4 border-b border-[#e5e5e5]">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[20px] font-medium text-[#26272b]">{displaySizes.large.label}</h4>
+                        <p className="text-sm text-[#5e5e5e]">{displaySizes.large.description}</p>
+                      </div>
+                      <span className="rounded-full bg-[#0052ff] px-3 py-1 text-sm font-medium text-white">
+                        {displaySizes.large.breakpoint}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-[80px_1fr_120px] gap-4 items-center border-b border-[#f2f2f2] pb-2 mb-4">
+                      <span className="text-sm font-medium text-[#898e99]">Level</span>
+                      <span className="text-sm font-medium text-[#898e99]">Preview</span>
+                      <span className="text-sm font-medium text-[#898e99] text-right">Size</span>
+                    </div>
+                    {displaySizes.large.headings.map((h) => (
+                      <div key={h.level} className="grid grid-cols-[80px_1fr_120px] gap-4 items-center py-4 border-b border-[#f2f2f2] last:border-0">
+                        <span className="text-lg font-medium text-[#26272b]">{h.level}</span>
+                        <span className="text-[#26272b] truncate" style={{ fontSize: h.size, lineHeight: 1 }}>
+                          The industry
+                        </span>
+                        <span className="text-right">
+                          <span className="block text-lg font-medium text-[#26272b]">{h.size}</span>
+                          <span className="text-sm text-[#898e99]">{h.px}</span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Regular Display */}
+                <div className="rounded-lg border border-[#e5e5e5] overflow-hidden">
+                  <div className="bg-[#f4f4f5] px-6 py-4 border-b border-[#e5e5e5]">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[20px] font-medium text-[#26272b]">{displaySizes.regular.label}</h4>
+                        <p className="text-sm text-[#5e5e5e]">{displaySizes.regular.description}</p>
+                      </div>
+                      <span className="rounded-full bg-[#5e5e5e] px-3 py-1 text-sm font-medium text-white">
+                        {displaySizes.regular.breakpoint}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-[80px_1fr_120px] gap-4 items-center border-b border-[#f2f2f2] pb-2 mb-4">
+                      <span className="text-sm font-medium text-[#898e99]">Level</span>
+                      <span className="text-sm font-medium text-[#898e99]">Preview</span>
+                      <span className="text-sm font-medium text-[#898e99] text-right">Size</span>
+                    </div>
+                    {displaySizes.regular.headings.map((h) => (
+                      <div key={h.level} className="grid grid-cols-[80px_1fr_120px] gap-4 items-center py-4 border-b border-[#f2f2f2] last:border-0">
+                        <span className="text-lg font-medium text-[#26272b]">{h.level}</span>
+                        <span className="text-[#26272b] truncate" style={{ fontSize: h.size, lineHeight: 1 }}>
+                          The industry
+                        </span>
+                        <span className="text-right">
+                          <span className="block text-lg font-medium text-[#26272b]">{h.size}</span>
+                          <span className="text-sm text-[#898e99]">{h.px}</span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mobile Display */}
+                <div className="rounded-lg border border-[#e5e5e5] overflow-hidden">
+                  <div className="bg-[#f4f4f5] px-6 py-4 border-b border-[#e5e5e5]">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[20px] font-medium text-[#26272b]">{displaySizes.mobile.label}</h4>
+                        <p className="text-sm text-[#5e5e5e]">{displaySizes.mobile.description}</p>
+                      </div>
+                      <span className="rounded-full bg-[#898e99] px-3 py-1 text-sm font-medium text-white">
+                        {displaySizes.mobile.breakpoint}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="grid grid-cols-[80px_1fr_120px] gap-4 items-center border-b border-[#f2f2f2] pb-2 mb-4">
+                      <span className="text-sm font-medium text-[#898e99]">Level</span>
+                      <span className="text-sm font-medium text-[#898e99]">Preview</span>
+                      <span className="text-sm font-medium text-[#898e99] text-right">Size</span>
+                    </div>
+                    {displaySizes.mobile.headings.map((h) => (
+                      <div key={h.level} className="grid grid-cols-[80px_1fr_120px] gap-4 items-center py-4 border-b border-[#f2f2f2] last:border-0">
+                        <span className="text-lg font-medium text-[#26272b]">{h.level}</span>
+                        <span className="text-[#26272b] truncate" style={{ fontSize: h.size, lineHeight: 1 }}>
+                          The industry
+                        </span>
+                        <span className="text-right">
+                          <span className="block text-lg font-medium text-[#26272b]">{h.size}</span>
+                          <span className="text-sm text-[#898e99]">{h.px}</span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Body Text Section */}
+            <div className="mb-16">
+              <h3 className="mb-8 text-[30px] font-medium text-[#26272b]">Body Text</h3>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Desktop Body */}
+                <div className="rounded-lg border border-[#e5e5e5] overflow-hidden">
+                  <div className="bg-[#f4f4f5] px-6 py-4 border-b border-[#e5e5e5]">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[18px] font-medium text-[#26272b]">{bodySizes.desktop.label}</h4>
+                        <p className="text-sm text-[#5e5e5e]">{bodySizes.desktop.description}</p>
+                      </div>
+                      <span className="rounded-full bg-[#0052ff] px-3 py-1 text-xs font-medium text-white">
+                        {bodySizes.desktop.breakpoint}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6 space-y-6">
+                    {bodySizes.desktop.sizes.map((s) => (
+                      <div key={s.name} className="flex items-center justify-between border-b border-[#f2f2f2] pb-4 last:border-0 last:pb-0">
+                        <div className="flex items-center gap-4">
+                          <span className="w-16 text-sm font-medium text-[#898e99]">{s.name}</span>
+                          <span className="text-[#26272b]" style={{ fontSize: s.size }}>
+                            New internet
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <span className="block text-sm font-medium text-[#26272b]">{s.size}</span>
+                          <span className="text-xs text-[#898e99]">{s.px}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mobile Body */}
+                <div className="rounded-lg border border-[#e5e5e5] overflow-hidden">
+                  <div className="bg-[#f4f4f5] px-6 py-4 border-b border-[#e5e5e5]">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[18px] font-medium text-[#26272b]">{bodySizes.mobile.label}</h4>
+                        <p className="text-sm text-[#5e5e5e]">{bodySizes.mobile.description}</p>
+                      </div>
+                      <span className="rounded-full bg-[#898e99] px-3 py-1 text-xs font-medium text-white">
+                        {bodySizes.mobile.breakpoint}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6 space-y-6">
+                    {bodySizes.mobile.sizes.map((s) => (
+                      <div key={s.name} className="flex items-center justify-between border-b border-[#f2f2f2] pb-4 last:border-0 last:pb-0">
+                        <div className="flex items-center gap-4">
+                          <span className="w-16 text-sm font-medium text-[#898e99]">{s.name}</span>
+                          <span className="text-[#26272b]" style={{ fontSize: s.size }}>
+                            New internet
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <span className="block text-sm font-medium text-[#26272b]">{s.size}</span>
+                          <span className="text-xs text-[#898e99]">{s.px}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Preview */}
+            <div>
+              <h3 className="mb-8 text-[30px] font-medium text-[#26272b]">Live Preview</h3>
+              <p className="mb-6 body-text text-[#5e5e5e]">
+                Resize your browser to see these headings respond to the breakpoints.
+              </p>
+              
+              <div className="rounded-lg border border-[#e5e5e5] p-8 space-y-8 bg-white">
+                <div className="border-b border-[#f2f2f2] pb-6">
+                  <span className="mb-2 inline-block rounded bg-[#0052ff] px-2 py-1 text-xs font-medium text-white">H1</span>
+                  <h1 className="text-[#26272b]">The industry</h1>
+                </div>
+                <div className="border-b border-[#f2f2f2] pb-6">
+                  <span className="mb-2 inline-block rounded bg-[#0052ff] px-2 py-1 text-xs font-medium text-white">H2</span>
+                  <h2 className="text-[#26272b]">The industry</h2>
+                </div>
+                <div className="border-b border-[#f2f2f2] pb-6">
+                  <span className="mb-2 inline-block rounded bg-[#0052ff] px-2 py-1 text-xs font-medium text-white">H3</span>
+                  <h3 className="text-[#26272b]">The industry</h3>
+                </div>
+                <div className="border-b border-[#f2f2f2] pb-6">
+                  <span className="mb-2 inline-block rounded bg-[#0052ff] px-2 py-1 text-xs font-medium text-white">H4</span>
+                  <h4 className="text-[#26272b]">New internet</h4>
+                </div>
+                <div className="border-b border-[#f2f2f2] pb-6">
+                  <span className="mb-2 inline-block rounded bg-[#5e5e5e] px-2 py-1 text-xs font-medium text-white">Large</span>
+                  <p className="body-large text-[#26272b]">New internet</p>
+                </div>
+                <div className="border-b border-[#f2f2f2] pb-6">
+                  <span className="mb-2 inline-block rounded bg-[#5e5e5e] px-2 py-1 text-xs font-medium text-white">Text</span>
+                  <p className="body-text text-[#26272b]">New internet</p>
+                </div>
+                <div>
+                  <span className="mb-2 inline-block rounded bg-[#5e5e5e] px-2 py-1 text-xs font-medium text-white">Label</span>
+                  <p className="body-label text-[#26272b]">New internet</p>
+                </div>
+              </div>
+            </div>
+
+            {/* CSS Variables Reference */}
+            <div className="mt-12">
+              <h3 className="mb-6 text-[30px] font-medium text-[#26272b]">CSS Variables</h3>
+              <div className="rounded-lg bg-[#26272b] p-6 overflow-x-auto">
+                <pre className="text-sm text-white font-mono leading-relaxed">
+{`/* Display Headings */
+--h1-size     /* Mobile: 2.5rem | Regular: 5.5rem | Large: 5.25rem (84px) */
+              /* line-height: 120%, letter-spacing: -4% */
+--h2-size     /* Mobile: 2.25rem  | Regular: 3.8rem | Large: 4.125rem */
+--h3-size     /* Mobile: 1.7rem   | Regular: 2.5rem | Large: 2.75rem */
+--h4-size     /* Mobile: 1.5rem   | Regular: 2rem   | Large: 2.125rem */
+
+/* Body Text */
+--text-large  /* Mobile: 1.5rem   | Desktop: 1.375rem */
+--text-body   /* Mobile: 1.25rem  | Desktop: 1.09rem */
+--text-label  /* Mobile: 1rem     | Desktop: 0.85rem */
+
+/* Utility Classes */
+.display-h1, .display-h2, .display-h3, .display-h4
+.body-large, .body-text, .body-label`}
+                </pre>
+              </div>
+            </div>
+          </section>
+
+          {/* ==================== COLORS ==================== */}
+          <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Colors" className="mb-8" />
             
             <div className="space-y-12">
@@ -156,7 +457,7 @@ export default function StyleguidePage() {
             <SectionHeader label="Fonts" className="mb-8" />
             
             <div className="mb-8 rounded-lg bg-[#f4f4f5] p-6">
-              <p className="text-[18px] text-[#5e5e5e]">
+              <p className="body-text text-[#5e5e5e]">
                 <strong className="text-[#26272b]">PolySans</strong> is the primary font family used throughout the 0x brand.
                 Place font files in <code className="rounded bg-[#26272b] px-2 py-1 text-sm text-white">/public/fonts/</code>
               </p>
@@ -180,30 +481,6 @@ export default function StyleguidePage() {
                     ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789
                   </p>
                   <p className="mt-4 text-sm text-[#898e99]">{font.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ==================== TYPOGRAPHY ==================== */}
-          <section className="border-t border-[#f2f2f2] pt-16">
-            <SectionHeader label="Typography Scale" className="mb-8" />
-            
-            <div className="space-y-8">
-              {typography.map((item) => (
-                <div key={item.size} className="border-b border-[#f2f2f2] pb-8">
-                  <div className="mb-2 flex items-center gap-4">
-                    <span className="rounded bg-[#0052ff] px-2 py-1 text-xs font-medium text-white">{item.size}</span>
-                    <span className="text-sm font-medium text-[#26272b]">{item.name}</span>
-                    <span className="text-sm text-[#898e99]">{item.weight}</span>
-                  </div>
-                  <p
-                    className={`${item.weight} mb-2 text-[#26272b]`}
-                    style={{ fontSize: item.size, lineHeight: 1.1 }}
-                  >
-                    {item.example}
-                  </p>
-                  <p className="text-sm text-[#5e5e5e]">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -280,7 +557,7 @@ export default function StyleguidePage() {
               {/* Section Header Component */}
               <div>
                 <h3 className="mb-6 text-[30px] leading-[1.2] text-[#26272b]">Section Header</h3>
-                <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
+                <p className="mb-4 body-text text-[#5e5e5e]">
                   Blue square indicator with uppercase label for section navigation.
                 </p>
                 <div className="space-y-4 rounded-lg bg-[#f4f4f5] p-8">
@@ -293,7 +570,7 @@ export default function StyleguidePage() {
               {/* Feature Card Component */}
               <div>
                 <h3 className="mb-6 text-[30px] leading-[1.2] text-[#26272b]">Feature Card</h3>
-                <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
+                <p className="mb-4 body-text text-[#5e5e5e]">
                   Gray rounded card with blue indicator, title, and description.
                 </p>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -311,7 +588,7 @@ export default function StyleguidePage() {
               {/* Stat Card Component */}
               <div>
                 <h3 className="mb-6 text-[30px] leading-[1.2] text-[#26272b]">Stat Card</h3>
-                <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
+                <p className="mb-4 body-text text-[#5e5e5e]">
                   Large rounded pill displaying a stat with label.
                 </p>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -324,7 +601,7 @@ export default function StyleguidePage() {
               {/* Challenge Item Component */}
               <div>
                 <h3 className="mb-6 text-[30px] leading-[1.2] text-[#26272b]">Challenge Item</h3>
-                <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
+                <p className="mb-4 body-text text-[#5e5e5e]">
                   List item with blue circle indicator for feature lists.
                 </p>
                 <div className="max-w-2xl rounded-lg bg-[#f4f4f5] p-8">
@@ -341,24 +618,28 @@ export default function StyleguidePage() {
               {/* Page Hero Component */}
               <div>
                 <h3 className="mb-6 text-[30px] leading-[1.2] text-[#26272b]">Page Hero</h3>
-                <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
-                  Hero section with title, quote, icon, and stats.
+                <p className="mb-4 body-text text-[#5e5e5e]">
+                  Hero section with title, headline, icon, and stats.
                 </p>
-                <div className="overflow-hidden rounded-lg">
+                <div className="overflow-hidden rounded-lg border border-[#e5e5e5]">
                   <PageHero
                     title="DEX Trading"
-                    quote="Insert quote placeholder text here about Coinbase Dex trading"
-                    bgColor="#c8d4fa"
-                    textColor="#1d1d1d"
+                    headline="Insert headline placeholder text here about Coinbase DEX trading"
                     icon={
-                      <div className="flex h-[85px] w-[85px] items-center justify-center rounded-full bg-[#0052ff]">
-                        <div className="h-10 w-10 rounded-full border-4 border-white"></div>
+                      <div className="flex h-full w-full items-center justify-center rounded-full bg-[#0052ff]">
+                        <div className="h-5 w-5 rounded-full border-2 border-white"></div>
                       </div>
                     }
                     stats={[
                       { value: "$XB", label: "in onchain volume" },
                       { value: "Xm", label: "total transactions" },
+                      { value: "130+", label: "liquidity sources" },
                     ]}
+                    quote={{
+                      text: "Insert quote placeholder text here about Coinbase DEX trading experience.",
+                      author: "Author Name",
+                      role: "Role at Company"
+                    }}
                   />
                 </div>
               </div>
@@ -369,7 +650,7 @@ export default function StyleguidePage() {
           {/* ==================== FOOTER COMPONENT ==================== */}
           <section className="border-t border-[#f2f2f2] pt-16">
             <SectionHeader label="Footer" className="mb-8" />
-            <p className="mb-4 text-[22px] leading-[1.3] text-[#5e5e5e]">
+            <p className="mb-4 body-text text-[#5e5e5e]">
               Dark footer with newsletter signup section.
             </p>
           </section>
@@ -382,4 +663,3 @@ export default function StyleguidePage() {
     </div>
   )
 }
-
